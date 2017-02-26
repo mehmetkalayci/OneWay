@@ -81,7 +81,7 @@ public class GameView extends View{
 
     /***
      * Koordinatları pointList'e atar
-
+     * */
     void addPoints() {
         pointList.add(new Tuple<Point, ArrayList<Point>>(
                 new Point(500,100),
@@ -128,9 +128,8 @@ public class GameView extends View{
                         new Point(800,700)
                 ))
         ));
-
     }
-     */
+
 
     /***
      * Verilen koordinatlardaki Point ve gidebileceği yerleri döndürür
