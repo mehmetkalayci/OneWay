@@ -29,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
         calligrapher.setFont(this, FONT, true);
 
 
-        Button btnPlay = (Button) findViewById(R.id.btnPlay);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
+        Button btnExit = (Button) findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TEST", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
+
 
 
     }
