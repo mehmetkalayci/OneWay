@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="levels">
+        <item>{"name":\"Level 1\","points":[{"x":500,"y":100,"subpoints":[{"x":200,"y":300},{"x":800,"y":300}]},{"x":800,"y":300,"subpoints":[{"x":500,"y":100},{"x":800,"y":700},{"x":200,"y":700},{"x":200,"y":300}]}],"moveNumber":8,"score":100,"time":60}</item>
+    </string-array>
+</resources>
