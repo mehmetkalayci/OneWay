@@ -59,6 +59,7 @@ public class GameView extends View{
     Paint textPaint = new Paint();
 
     Path path = new Path();
+    Path guidePath=new Path();
     Line line = new Line(0, 0);
 
     // Oyun kontrol değişkenleri tanımı
@@ -136,6 +137,9 @@ public class GameView extends View{
                 float sx=(float)(levels.getLevels(levelNumber).points.get(i).subpoints.get(a).x*ballance);
                 float sy=(float)(levels.getLevels(levelNumber).points.get(i).subpoints.get(a).y*ballance);
                 subPoint.add(new Point(sx,sy));
+                guidePath.moveTo(x,y);
+                guidePath.lineTo(sx,sy);
+
             }
 
             pointList.add(new Tuple<Point, ArrayList<Point>>(
@@ -203,8 +207,11 @@ public class GameView extends View{
         }
 
         // Path çiz
+        paint.setStrokeWidth((int)ballance*5);
         canvas.drawPath(path, paint);
-
+        paint.setStrokeWidth((int)ballance*1);
+        canvas.drawPath(guidePath, paint);
+        paint.setStrokeWidth((int)ballance*5);
         /*Game Text Başlangıç*/
         textPaint.setTextSize((int)ballance*50);
         canvas.drawText(name,canvas.getWidth()/2-80,80,textPaint);
