@@ -8,9 +8,9 @@ public class Subpoint {
 
     @SerializedName("x")
     @Expose
-    public Integer x;
+    public Float x;
     @SerializedName("y")
     @Expose
-    public Integer y;
+    public Float y;
 
 }
