@@ -48,8 +48,8 @@ public class GameView extends View{
     String name;
 
     //WIDTH
-    double width = 0;
-    double ballance = 0;
+    float width = 0;
+    float ballance = 0;
 
 
     // Grafik tanımı
@@ -65,6 +65,7 @@ public class GameView extends View{
     boolean isPointTouched = false;
     boolean isGameOver = false;
 
+    // Oynanan level
     Level currentLevel = levelHelper.getLevel(level);
 
     public GameView(Context context, AttributeSet attrs) {
@@ -92,7 +93,7 @@ public class GameView extends View{
     void setupPaints() {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth((int)ballance*5);
+        paint.setStrokeWidth((int)ballance * 5);
         paint.setColor(Color.rgb(255, 255, 255));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -110,17 +111,17 @@ public class GameView extends View{
      * Koordinatları pointList'e atar
      * */
     void addPoints() {
-        List<Point> subPoint=new ArrayList<>();
+        List<Point> subPoint = new ArrayList<>();
         for(int i = 0; i < currentLevel.points.size(); i++)
         {
-            float x = (float)(currentLevel.points.get(i).x*ballance);
-            float y = (float)(currentLevel.points.get(i).y*ballance);
-            Point point=new Point(x,y);
+            float x = currentLevel.points.get(i).x * ballance;
+            float y = currentLevel.points.get(i).y * ballance;
+            Point point = new Point(x,y);
 
             for(int j = 0; j < currentLevel.points.get(i).subpoints.size(); j++)
             {
-                float sx = (float)(currentLevel.points.get(i).subpoints.get(j).x*ballance);
-                float sy = (float)(currentLevel.points.get(i).subpoints.get(j).y*ballance);
+                float sx = currentLevel.points.get(i).subpoints.get(j).x*ballance;
+                float sy = currentLevel.points.get(i).subpoints.get(j).y*ballance;
                 subPoint.add(new Point(sx, sy));
                 guidePath.moveTo(x, y);
                 guidePath.lineTo(sx, sy);
@@ -197,7 +198,7 @@ public class GameView extends View{
         canvas.drawPath(guidePath, paint);
         paint.setStrokeWidth((int)ballance * 5);
 
-        /*Game Text Başlangıç*/
+        /* Game Text Başlangıç */
         textPaint.setTextSize((int)ballance * 50);
         canvas.drawText(name,canvas.getWidth() / 2 - 80, 80, textPaint);
         textPaint.setTextSize((int)ballance * 40);
