@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Level {
 
+    @SerializedName("levelid")
+    @Expose
+    public int levelid;
     @SerializedName("name")
     @Expose
     public String name;

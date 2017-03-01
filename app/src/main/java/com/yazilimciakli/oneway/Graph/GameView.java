@@ -12,12 +12,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.yazilimciakli.oneway.GameActivity;
-import com.yazilimciakli.oneway.Level.GetLevels;
-import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameView extends View{
@@ -28,7 +27,7 @@ public class GameView extends View{
     ArrayList<Point> playerList = new ArrayList<>();
 
     //Levelleri getirmekte kullanılır
-    GetLevels levels=new GetLevels(getContext());
+    LevelHelper levelHelper = new LevelHelper(getContext());
 
     // Seçili noktanın değerini tutar
     Tuple<Point, ArrayList<Point>> lastPoint = null;
@@ -66,6 +65,7 @@ public class GameView extends View{
     boolean isPointTouched = false;
     boolean isGameOver = false;
 
+    Level currentLevel = levelHelper.getLevel(level);
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -73,30 +73,18 @@ public class GameView extends View{
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
 
-        level=GameActivity.LEVEL;
-        width=GameActivity.WIDTH;
-        ballance=width/480;
+        level = GameActivity.LEVEL;
+        width = GameActivity.WIDTH;
+        ballance = width / 480;
 
-        addPoints(level);
+
+        addPoints();
         setupPaints();
 
-        moveNumber=levels.getLevels(level).moveNumber;
-
-        score=levels.getLevels(level).score;
-        time=levels.getLevels(level).time;
-        name=levels.getLevels(level).name;
-
-    }
-
-
-    ArrayList<Tuple<Point, ArrayList<Point>>> getLevels(int levelId) {
-
-        ArrayList<Tuple<Point, ArrayList<Point>>> tempList = new ArrayList<>();
-
-        List<String> levels = Arrays.asList(this.getResources().getStringArray(R.array.levels));
-        String currentLevel = levels.get(levelId);
-
-        return tempList;
+        moveNumber = currentLevel.moveNumber;
+        score = currentLevel.score;
+        time = currentLevel.time;
+        name = currentLevel.name;
     }
 
     /***
@@ -107,7 +95,6 @@ public class GameView extends View{
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth((int)ballance*5);
         paint.setColor(Color.rgb(255, 255, 255));
-
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
 
@@ -123,23 +110,21 @@ public class GameView extends View{
     /***
      * Koordinatları pointList'e atar
      * */
-    void addPoints(int levelNumber) {
-
+    void addPoints() {
         List<Point> subPoint=new ArrayList<>();
-        for(int i=0;i<levels.getLevels(levelNumber).points.size();i++)
+        for(int i = 0; i < currentLevel.points.size(); i++)
         {
-            float x=(float)(levels.getLevels(levelNumber).points.get(i).x*ballance);
-            float y=(float)(levels.getLevels(levelNumber).points.get(i).y*ballance);
+            float x = (float)(currentLevel.points.get(i).x*ballance);
+            float y = (float)(currentLevel.points.get(i).y*ballance);
             Point point=new Point(x,y);
 
-            for(int a=0;a<levels.getLevels(levelNumber).points.get(i).subpoints.size();a++)
+            for(int j = 0; j < currentLevel.points.get(i).subpoints.size(); j++)
             {
-                float sx=(float)(levels.getLevels(levelNumber).points.get(i).subpoints.get(a).x*ballance);
-                float sy=(float)(levels.getLevels(levelNumber).points.get(i).subpoints.get(a).y*ballance);
-                subPoint.add(new Point(sx,sy));
-                guidePath.moveTo(x,y);
-                guidePath.lineTo(sx,sy);
-
+                float sx = (float)(currentLevel.points.get(i).subpoints.get(j).x*ballance);
+                float sy = (float)(currentLevel.points.get(i).subpoints.get(j).y*ballance);
+                subPoint.add(new Point(sx, sy));
+                guidePath.moveTo(x, y);
+                guidePath.lineTo(sx, sy);
             }
 
             pointList.add(new Tuple<Point, ArrayList<Point>>(
@@ -207,28 +192,29 @@ public class GameView extends View{
         }
 
         // Path çiz
-        paint.setStrokeWidth((int)ballance*5);
+        paint.setStrokeWidth((int)ballance * 5);
         canvas.drawPath(path, paint);
-        paint.setStrokeWidth((int)ballance*1);
+        paint.setStrokeWidth((int)ballance * 1);
         canvas.drawPath(guidePath, paint);
-        paint.setStrokeWidth((int)ballance*5);
+        paint.setStrokeWidth((int)ballance * 5);
+
         /*Game Text Başlangıç*/
-        textPaint.setTextSize((int)ballance*50);
-        canvas.drawText(name,canvas.getWidth()/2-80,80,textPaint);
-        textPaint.setTextSize((int)ballance*40);
+        textPaint.setTextSize((int)ballance * 50);
+        canvas.drawText(name,canvas.getWidth() / 2 - 80, 80, textPaint);
+        textPaint.setTextSize((int)ballance * 40);
 
         //Text
         String timeText="Time";
         String moveText="Move";
 
-        canvas.drawText(timeText,20,60,textPaint);
-        canvas.drawText(moveText,(int) width-(int)ballance*60,60,textPaint);
-        textPaint.setTextSize((int)ballance*30);
+        canvas.drawText(timeText, 20, 60, textPaint);
+        canvas.drawText(moveText,(int) width - (int)ballance * 60, 60, textPaint);
+        textPaint.setTextSize((int)ballance * 30);
         textPaint.getTextAlign();
 
-        canvas.drawText(String.valueOf(time),timeText.length()/2*15,120,textPaint);
-        canvas.drawText(String.valueOf(moveNumber),(int) canvas.getWidth()-moveText.length()/2*15,120,textPaint);
-        /*Game Text Bitiş*/
+        canvas.drawText(String.valueOf(time), timeText.length() / 2 * 15, 120, textPaint);
+        canvas.drawText(String.valueOf(moveNumber), (int)canvas.getWidth() - moveText.length() / 2 * 15, 120, textPaint);
+        /* Game Text Bitiş */
 
         // Seçilince çıkan çizgiyi çiz
         //paint.setARGB(90, 255, 0, 0);

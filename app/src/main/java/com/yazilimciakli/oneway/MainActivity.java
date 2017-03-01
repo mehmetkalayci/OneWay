@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, FONT, true);
 
+
+
         Button btnPlay=(Button) findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
