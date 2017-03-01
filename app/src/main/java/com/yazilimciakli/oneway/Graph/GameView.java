@@ -44,6 +44,9 @@ public class GameView extends View{
     //level tanımı
     int level = 0;
 
+    //Touch Tolerance tanımı
+    float touchTolerance=0;
+
     //Level Başlığı tanımı
     String name;
 
@@ -78,6 +81,8 @@ public class GameView extends View{
         width = GameActivity.WIDTH;
         ballance = width / 480;
 
+        touchTolerance = ballance*20;
+
         addPoints();
         setupPaints();
 
@@ -93,7 +98,7 @@ public class GameView extends View{
     void setupPaints() {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth((int)ballance * 5);
+        paint.setStrokeWidth(ballance*5);
         paint.setColor(Color.rgb(255, 255, 255));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
@@ -141,7 +146,6 @@ public class GameView extends View{
      * @return Tuple<Point, ArrayList<Point>>
      */
     Tuple<Point, ArrayList<Point>> findPoint(float x, float y) {
-        int touchTolerance = 35;
 
         for (Tuple<Point, ArrayList<Point>> point : pointList) {
             if (Math.abs(x - point.item1.getX()) <= touchTolerance && Math.abs(y - point.item1.getY()) <= touchTolerance) {
@@ -188,32 +192,34 @@ public class GameView extends View{
 
         // Pointleri çiz
         for (Tuple<Point, ArrayList<Point>> point: pointList) {
-            canvas.drawCircle(point.item1.getX(), point.item1.getY(), (int)ballance*15, paint);
+            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance*15, paint);
         }
 
         // Path çiz
-        paint.setStrokeWidth((int)ballance * 5);
+        paint.setStrokeWidth(ballance*5);
         canvas.drawPath(path, paint);
-        paint.setStrokeWidth((int)ballance * 1);
+        paint.setStrokeWidth(ballance*2);
+        paint.setAlpha(10);
         canvas.drawPath(guidePath, paint);
-        paint.setStrokeWidth((int)ballance * 5);
+        paint.setStrokeWidth(ballance*5);
+        paint.setAlpha(255);
 
         /* Game Text Başlangıç */
-        textPaint.setTextSize((int)ballance * 50);
-        canvas.drawText(name,canvas.getWidth() / 2 - 80, 80, textPaint);
-        textPaint.setTextSize((int)ballance * 40);
+        textPaint.setTextSize(ballance * 50);
+        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance*35), ballance*45, textPaint);
+        textPaint.setTextSize(ballance * 40);
 
         //Text
-        String timeText="Time";
+        String timeText="time";
         String moveText="Move";
 
-        canvas.drawText(timeText, 20, 60, textPaint);
-        canvas.drawText(moveText,(int) width - (int)ballance * 60, 60, textPaint);
-        textPaint.setTextSize((int)ballance * 30);
+        canvas.drawText(timeText, ballance*20, ballance*45, textPaint);
+        canvas.drawText(moveText, width - ballance * 60, ballance*45, textPaint);
+        textPaint.setTextSize(ballance * 30);
         textPaint.getTextAlign();
 
-        canvas.drawText(String.valueOf(time), timeText.length() / 2 * 15, 120, textPaint);
-        canvas.drawText(String.valueOf(moveNumber), (int)canvas.getWidth() - moveText.length() / 2 * 15, 120, textPaint);
+        canvas.drawText(String.valueOf(time), ballance*20, ballance*75, textPaint);
+        canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance*75, textPaint);
         /* Game Text Bitiş */
 
         // Seçilince çıkan çizgiyi çiz

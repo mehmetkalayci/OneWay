@@ -6,11 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 public class GameActivity extends AppCompatActivity {
 
     public static int LEVEL = 0;
-    public static int WIDTH = 1080;
+    public static final int WIDTH = 1080;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //Toast.makeText(this, screenPoint.x+"", Toast.LENGTH_SHORT).show();
+
+
     }
 }
