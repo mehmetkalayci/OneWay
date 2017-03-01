@@ -39,17 +39,17 @@ public class GameView extends View{
     int time;
 
     //Puan Tanımı
-    int score=0;
+    int score = 0;
 
     //level tanımı
-    int level=0;
+    int level = 0;
 
     //Level Başlığı tanımı
     String name;
 
     //WIDTH
-    double width=0;
-    double ballance=0;
+    double width = 0;
+    double ballance = 0;
 
 
     // Grafik tanımı
@@ -58,7 +58,7 @@ public class GameView extends View{
     Paint textPaint = new Paint();
 
     Path path = new Path();
-    Path guidePath=new Path();
+    Path guidePath = new Path();
     Line line = new Line(0, 0);
 
     // Oyun kontrol değişkenleri tanımı
@@ -76,7 +76,6 @@ public class GameView extends View{
         level = GameActivity.LEVEL;
         width = GameActivity.WIDTH;
         ballance = width / 480;
-
 
         addPoints();
         setupPaints();

@@ -1,7 +1,6 @@
 package com.yazilimciakli.oneway.Utils;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.yazilimciakli.oneway.Level.Level;
