@@ -9,7 +9,7 @@ import android.graphics.Typeface;
  * Created by Admin on 2.03.2017.
  */
 
-public class PaintHelper extends Paint {
+public class PaintHelper {
 
     Typeface plain;
     float ballance;
@@ -83,5 +83,4 @@ public class PaintHelper extends Paint {
         paint.getTextAlign();
         return paint;
     }
-
 }

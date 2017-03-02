@@ -19,7 +19,7 @@ public class LevelHelper {
     }
 
     public Level getLevel(int levelId) {
-        return gson.fromJson(levelList.get(0), Level.class);
+        return gson.fromJson(levelList.get(levelId), Level.class);
     }
 
     public int getLevelSize() {
