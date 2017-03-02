@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +47,7 @@ public class GameView extends View{
     int level = 0;
 
     //Touch Tolerance tanımı
-    float touchTolerance=0;
+    float touchTolerance = 0;
 
     //Level Başlığı tanımı
     String name;
@@ -77,11 +79,13 @@ public class GameView extends View{
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
 
+
+
         level = GameActivity.LEVEL;
         width = GameActivity.WIDTH;
         ballance = width / 480;
 
-        touchTolerance = ballance*20;
+        touchTolerance = ballance * 20;
 
         addPoints();
         setupPaints();
@@ -187,39 +191,70 @@ public class GameView extends View{
         return status;
     }
 
+    /***
+     * Girilen metnin, belirtilen paint nesnesiyle çizildiğinde oluşan genişliğini verir.
+     * @param text Genişliği hesaplanacak metnini girin
+     * @param paint Metni çizeceğiniz Paint nesnesini girin
+     * @return Toplam genişlik
+     */
+    float getSizeOfText(String text, Paint paint) {
+        float[] sizeOfLetters = new float[text.length()];
+        paint.getTextWidths(text, sizeOfLetters);
+
+        float sum = 0;
+        for (float size : sizeOfLetters) {
+            sum += size;
+        }
+        return sum;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
         // Pointleri çiz
         for (Tuple<Point, ArrayList<Point>> point: pointList) {
-            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance*15, paint);
+            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance * 15, paint);
         }
 
         // Path çiz
-        paint.setStrokeWidth(ballance*5);
+        paint.setStrokeWidth(ballance * 5);
         canvas.drawPath(path, paint);
-        paint.setStrokeWidth(ballance*2);
+        paint.setStrokeWidth(ballance * 2);
         paint.setAlpha(10);
         canvas.drawPath(guidePath, paint);
-        paint.setStrokeWidth(ballance*5);
+        paint.setStrokeWidth(ballance * 5);
         paint.setAlpha(255);
 
         /* Game Text Başlangıç */
         textPaint.setTextSize(ballance * 50);
-        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance*35), ballance*45, textPaint);
+        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance * 35), ballance * 45, textPaint);
+
+
+
+
+
+        // Text
+        String timeText = "Time";
+        String moveText = "Move";
+
+        time = 0;
+
         textPaint.setTextSize(ballance * 40);
+        canvas.drawText(timeText, ballance * 20, ballance * 45, textPaint);
+        canvas.drawText(moveText, width - ballance * 60, ballance * 45, textPaint);
 
-        //Text
-        String timeText="time";
-        String moveText="Move";
+        // Yazının ortasını bulduk getSizeOfText(timeText, textPaint) / 2 ve nesnenin ortasını aldık (ballance * 20 / 2)
+        float timeXCoordinate = getSizeOfText(timeText, textPaint) / 2;
+        float moveXCoordinate = getSizeOfText(moveText, textPaint) / 2;
 
-        canvas.drawText(timeText, ballance*20, ballance*45, textPaint);
-        canvas.drawText(moveText, width - ballance * 60, ballance*45, textPaint);
+
         textPaint.setTextSize(ballance * 30);
-        textPaint.getTextAlign();
+        //textPaint.getTextAlign();
+        //canvas.drawText(String.valueOf(time), ballance * 20, ballance * 75, textPaint);
+        //canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance * 75, textPaint);
+        canvas.drawText(String.valueOf(time), timeXCoordinate, ballance * 75, textPaint);
+        canvas.drawText(String.valueOf(moveNumber), width - moveXCoordinate, ballance * 75, textPaint);
 
-        canvas.drawText(String.valueOf(time), ballance*20, ballance*75, textPaint);
-        canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance*75, textPaint);
         /* Game Text Bitiş */
 
         // Seçilince çıkan çizgiyi çiz
@@ -307,5 +342,4 @@ public class GameView extends View{
         invalidate();
         return true;
     }
-
 }
