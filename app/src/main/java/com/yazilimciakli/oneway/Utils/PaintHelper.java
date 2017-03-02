@@ -1,0 +1,87 @@
+package com.yazilimciakli.oneway.Utils;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+
+/**
+ * Created by Admin on 2.03.2017.
+ */
+
+public class PaintHelper extends Paint {
+
+    Typeface plain;
+    float ballance;
+
+    public PaintHelper(Context context,float getBallance)
+    {
+        plain = Typeface.createFromAsset(context.getResources().getAssets(),"fonts/Mathlete-Bulky.otf");
+        ballance=getBallance;
+    }
+    public Paint circlePaint()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(ballance*5);
+        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        return paint;
+    }
+    public Paint pathLine()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(ballance*5);
+        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        return paint;
+    }
+    public Paint guideLine()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(ballance*2);
+        paint.setColor(Color.argb(10,255, 255, 255));
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        return paint;
+    }
+    public Paint borderText()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setFakeBoldText(true);
+        paint.setTypeface(plain);
+        paint.setTextSize(ballance * 40);
+        return paint;
+    }
+    public Paint titleText()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setFakeBoldText(true);
+        paint.setTypeface(plain);
+        paint.setTextSize(ballance * 50);
+        return paint;
+    }
+    public Paint borderMiddleText()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setFakeBoldText(true);
+        paint.setTypeface(plain);
+        paint.setTextSize(ballance * 30);
+        paint.getTextAlign();
+        return paint;
+    }
+
+}
