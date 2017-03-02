@@ -3,9 +3,7 @@ package com.yazilimciakli.oneway.Graph;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +12,7 @@ import android.widget.Toast;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
+import com.yazilimciakli.oneway.Utils.PaintHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
 
 import java.util.ArrayList;
@@ -56,9 +55,7 @@ public class GameView extends View{
 
 
     // Grafik tanımı
-    Paint paint = new Paint();
-    //Text Paint
-    Paint textPaint = new Paint();
+    PaintHelper paint;
 
     Path path = new Path();
     Path guidePath = new Path();
@@ -77,40 +74,21 @@ public class GameView extends View{
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
 
+
         level = GameActivity.LEVEL;
         width = GameActivity.WIDTH;
         ballance = width / 480;
 
-        touchTolerance = ballance*20;
+        paint = new PaintHelper(getContext(),ballance);
 
+        touchTolerance = ballance*20;
         addPoints();
-        setupPaints();
 
         moveNumber = currentLevel.moveNumber;
         score = currentLevel.score;
         time = currentLevel.time;
         name = currentLevel.name;
     }
-
-    /***
-     * Paint değişkeninin genel özelliklerini atar
-     */
-    void setupPaints() {
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(ballance*5);
-        paint.setColor(Color.rgb(255, 255, 255));
-        paint.setStrokeJoin(Paint.Join.ROUND);
-        paint.setStrokeCap(Paint.Cap.ROUND);
-
-        Typeface plain = Typeface.createFromAsset(getResources().getAssets(),"fonts/Mathlete-Bulky.otf");
-
-        textPaint.setAntiAlias(true);
-        textPaint.setColor(Color.rgb(255, 255, 255));
-        textPaint.setFakeBoldText(true);
-        textPaint.setTypeface(plain);
-    }
-
 
     /***
      * Koordinatları pointList'e atar
@@ -192,39 +170,30 @@ public class GameView extends View{
 
         // Pointleri çiz
         for (Tuple<Point, ArrayList<Point>> point: pointList) {
-            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance*15, paint);
+            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance*15, paint.circlePaint());
         }
 
         // Path çiz
-        paint.setStrokeWidth(ballance*5);
-        canvas.drawPath(path, paint);
-        paint.setStrokeWidth(ballance*2);
-        paint.setAlpha(10);
-        canvas.drawPath(guidePath, paint);
-        paint.setStrokeWidth(ballance*5);
-        paint.setAlpha(255);
+        canvas.drawPath(path, paint.pathLine());
+        canvas.drawPath(guidePath, paint.guideLine());
 
         /* Game Text Başlangıç */
-        textPaint.setTextSize(ballance * 50);
-        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance*35), ballance*45, textPaint);
-        textPaint.setTextSize(ballance * 40);
+        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance*35), ballance*45, paint.titleText());
 
         //Text
         String timeText="time";
         String moveText="Move";
 
-        canvas.drawText(timeText, ballance*20, ballance*45, textPaint);
-        canvas.drawText(moveText, width - ballance * 60, ballance*45, textPaint);
-        textPaint.setTextSize(ballance * 30);
-        textPaint.getTextAlign();
+        canvas.drawText(timeText, ballance*20, ballance*45, paint.borderText());
+        canvas.drawText(moveText, width - ballance * 60, ballance*45, paint.borderText());
 
-        canvas.drawText(String.valueOf(time), ballance*20, ballance*75, textPaint);
-        canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance*75, textPaint);
+        canvas.drawText(String.valueOf(time), ballance*20, ballance*75, paint.borderMiddleText());
+        canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance*75, paint.borderMiddleText());
         /* Game Text Bitiş */
 
         // Seçilince çıkan çizgiyi çiz
         //paint.setARGB(90, 255, 0, 0);
-        canvas.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), paint);
+        canvas.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), paint.circlePaint());
     }
 
     @Override
