@@ -41,6 +41,17 @@ public class PaintHelper {
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
     }
+    public Paint pathLittleAlpa()
+    {
+        Paint paint=new Paint();
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(ballance*5);
+        paint.setColor(Color.argb(10,255, 255, 255));
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+        return paint;
+    }
     public Paint guideLine()
     {
         Paint paint=new Paint();

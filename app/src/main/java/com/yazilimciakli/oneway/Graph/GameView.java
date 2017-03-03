@@ -39,6 +39,7 @@ public class GameView extends View implements Runnable{
 
     //Zaman Tanımı
     int time;
+    int timerCount=0;
 
     //Puan Tanımı
     int score = 0;
@@ -204,6 +205,9 @@ public class GameView extends View implements Runnable{
         canvas.drawPath(path, paint.pathLine());
         canvas.drawPath(guidePath, paint.guideLine());
 
+        canvas.drawLine(ballance*40,canvas.getHeight()-(ballance*40),width-(ballance*40)-timerCount,canvas.getHeight()-(ballance*40), paint.pathLine());
+        canvas.drawLine(ballance*40,canvas.getHeight()-(ballance*40),width-(ballance*40),canvas.getHeight()-(ballance*40), paint.pathLittleAlpa());
+
         /* Game Text Başlangıç */
         canvas.drawText(name,(canvas.getWidth() / 2)-(ballance * 35), ballance * 45, paint.titleText());
 
@@ -320,6 +324,7 @@ public class GameView extends View implements Runnable{
         if(isGameOver==false)
         {
             time--;
+            timerCount+=(width-((ballance*40)*2))/currentLevel.time;
             this.invalidate();
             mHandler.postDelayed(this, 1000);
         }
