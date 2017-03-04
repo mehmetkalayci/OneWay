@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">One\n Touch-Go</string>
+
+    <string name="levelName">Bölüm %1$s</string>
+    <string name="btnPlay">Oyna</string>
+    <string name="btnSettings">Ayarlar</string>
+    <string name="btnExit">Çıkış</string>
+    <string name="moveText">Kalan</string>
+    <string name="timeText">Süre</string>
+    <string name="winMessage">Kazandınız!</string>
+    <string name="gameOverMessage">Oyun Bitti :(</string>
+</resources>

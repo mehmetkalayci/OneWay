@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">One Way</string>
+    <string name="app_name">One\n Touch-Go</string>
+
+    <string name="levelName">Level %1$s</string>
+    <string name="timeText">Time</string>
+    <string name="moveText">Move</string>
+    <string name="btnSettings">Settings</string>
+    <string name="btnExit">Exit</string>
+    <string name="btnPlay">Play</string>
+    <string name="winMessage">You Win!</string>
+    <string name="gameOverMessage">Game Over :(</string>
 </resources>

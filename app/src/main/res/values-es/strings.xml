@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">One\n Touch-Go</string>
+    <string name="btnExit">Salir</string>
+    <string name="btnPlay">Jugar</string>
+    <string name="levelName">Nivel %1$s</string>
+    <string name="btnSettings">Configuración</string>
+    <string name="winMessage">¡Enhorabuena!</string>
+    <string name="timeText">Tiempo</string>
+    <string name="gameOverMessage">Fin de la partida :(</string>
+    <string name="moveText">Movimiento </string>
+</resources>

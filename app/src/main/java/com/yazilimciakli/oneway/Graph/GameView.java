@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
@@ -20,7 +21,7 @@ import com.yazilimciakli.oneway.Utils.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameView extends View implements Runnable{
+public class GameView extends View implements Runnable {
 
 
     // pointListesi, oyuncuListesi tanımları
@@ -35,32 +36,37 @@ public class GameView extends View implements Runnable{
 
     // Hamle tanımı
     int moveNumber = 0;
-    int moveCon = 0;
+    int userMove = 0;
 
     //Zaman Tanımı
     int time;
-    int timerCount=0;
+    int timerCount = 0;
 
     //Puan Tanımı
     int score = 0;
 
-    //level tanımı
+    //Level tanımı
     int level = 0;
 
     //Touch Tolerance tanımı
     float touchTolerance = 0;
 
     //Level Başlığı tanımı
-    String name;
+    String levelName;
+    String timeText = getResources().getString(R.string.timeText);
+    String moveText = getResources().getString(R.string.moveText);
+    String winMessage = getResources().getString(R.string.winMessage);
+    String gameOverMessage = getResources().getString(R.string.gameOverMessage);
 
     //WIDTH
     float width = 0;
-    float ballance = 0;
+    float screenRatio = 0;
 
 
     // Grafik tanımı
     PaintHelper paint;
 
+    // Kullanıcıya ait path, kullanıcının göreceği yola ait guidePath ve kullanıcının çizdiği çizgi line olarak tanımlandı
     Path path = new Path();
     Path guidePath = new Path();
     Line line = new Line(0, 0);
@@ -82,46 +88,43 @@ public class GameView extends View implements Runnable{
 
         level = GameActivity.LEVEL;
         width = GameActivity.WIDTH;
-        ballance = width / 480;
+        screenRatio = width / 480;
 
-        paint=new PaintHelper(getContext(),ballance);
+        paint = new PaintHelper(getContext(), screenRatio);
 
-        touchTolerance = ballance * 20;
+        touchTolerance = screenRatio * 20;
 
-        mHandler.postDelayed(this,1000);
+        mHandler.postDelayed(this, 1000);
 
         addPoints();
 
         moveNumber = currentLevel.moveNumber;
-        moveCon=currentLevel.moveNumber;
+        userMove = currentLevel.moveNumber;
         score = currentLevel.score;
         time = currentLevel.time;
-        name = currentLevel.name;
+        levelName = String.format(getResources().getString(R.string.levelName), currentLevel.name);
     }
-
 
     /***
      * Koordinatları pointList'e atar
-     * */
+     */
     void addPoints() {
         List<Point> subPoint = new ArrayList<>();
-        for(int i = 0; i < currentLevel.points.size(); i++)
-        {
-            float x = currentLevel.points.get(i).x * ballance;
-            float y = currentLevel.points.get(i).y * ballance;
-            Point point = new Point(x,y);
+        for (int i = 0; i < currentLevel.points.size(); i++) {
+            float x = currentLevel.points.get(i).x * screenRatio;
+            float y = currentLevel.points.get(i).y * screenRatio;
+            Point point = new Point(x, y);
 
-            for(int j = 0; j < currentLevel.points.get(i).subpoints.size(); j++)
-            {
-                float sx = currentLevel.points.get(i).subpoints.get(j).x*ballance;
-                float sy = currentLevel.points.get(i).subpoints.get(j).y*ballance;
+            for (int j = 0; j < currentLevel.points.get(i).subpoints.size(); j++) {
+                float sx = currentLevel.points.get(i).subpoints.get(j).x * screenRatio;
+                float sy = currentLevel.points.get(i).subpoints.get(j).y * screenRatio;
                 subPoint.add(new Point(sx, sy));
                 guidePath.moveTo(x, y);
                 guidePath.lineTo(sx, sy);
             }
 
             pointList.add(new Tuple<Point, ArrayList<Point>>(
-                    point,new ArrayList<Point>(subPoint)
+                    point, new ArrayList<Point>(subPoint)
             ));
             subPoint.clear();
         }
@@ -129,6 +132,7 @@ public class GameView extends View implements Runnable{
 
     /***
      * Verilen koordinatlardaki Point ve gidebileceği yerleri döndürür
+     *
      * @param x X koordinatını girin
      * @param y Y koordinatını girin
      * @return Tuple<Point, ArrayList<Point>>
@@ -140,7 +144,7 @@ public class GameView extends View implements Runnable{
                 return point;
             }
         }
-        return  null;
+        return null;
     }
 
     /***
@@ -152,22 +156,23 @@ public class GameView extends View implements Runnable{
         lastPoint = null;
         isPointTouched = false;
         playerList.clear();
-        moveCon=currentLevel.moveNumber;
+        userMove = currentLevel.moveNumber;
     }
 
     /***
      * Gidilen rotada önceden çizilmiş bir yol olup olmadığını kontrol eder. (Bir çizgiden ikinci kez geçilmesini engeller.)
+     *
      * @param tempItem Hedef Point
      * @param lastItem Başlangıç Point
      * @return Gidilen rotada önceden çizilmiş bir yol varsa true döndürür
      */
     boolean wasThereLine(Point tempItem, Point lastItem) {
-        boolean status  = false;
+        boolean status = false;
 
         for (int i = 0; i < playerList.size(); i++) {
-            int j = i+1;
+            int j = i + 1;
             if (j < playerList.size()) {
-                if ((playerList.get(i).equals(lastItem)  && playerList.get(j).equals(tempItem)) ||  (playerList.get(i).equals(tempItem)  && playerList.get(j).equals(lastItem))){
+                if ((playerList.get(i).equals(lastItem) && playerList.get(j).equals(tempItem)) || (playerList.get(i).equals(tempItem) && playerList.get(j).equals(lastItem))) {
                     return true;
                 }
             }
@@ -178,7 +183,8 @@ public class GameView extends View implements Runnable{
 
     /***
      * Girilen metnin, belirtilen paint nesnesiyle çizildiğinde oluşan genişliğini verir.
-     * @param text Genişliği hesaplanacak metnini girin
+     *
+     * @param text  Genişliği hesaplanacak metnini girin
      * @param paint Metni çizeceğiniz Paint nesnesini girin
      * @return Toplam genişlik
      */
@@ -197,55 +203,46 @@ public class GameView extends View implements Runnable{
     protected void onDraw(Canvas canvas) {
 
         // Pointleri çiz
-        for (Tuple<Point, ArrayList<Point>> point: pointList) {
-            canvas.drawCircle(point.item1.getX(), point.item1.getY(), ballance * 15, paint.circlePaint());
+        for (Tuple<Point, ArrayList<Point>> point : pointList) {
+            canvas.drawCircle(point.item1.getX(), point.item1.getY(), screenRatio * 15, paint.circlePaint());
         }
 
         // Path çiz
         canvas.drawPath(path, paint.pathLine());
         canvas.drawPath(guidePath, paint.guideLine());
 
-        canvas.drawLine(ballance*40,canvas.getHeight()-(ballance*40),width-(ballance*40)-timerCount,canvas.getHeight()-(ballance*40), paint.pathLine());
-        canvas.drawLine(ballance*40,canvas.getHeight()-(ballance*40),width-(ballance*40),canvas.getHeight()-(ballance*40), paint.pathLittleAlpa());
+        // Time Progressbar
+        canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40) - timerCount, canvas.getHeight() - (screenRatio * 40), paint.pathLine());
+        canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40), canvas.getHeight() - (screenRatio * 40), paint.pathLittleAlpa());
 
-        /* Game Text Başlangıç */
-        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance * 35), ballance * 45, paint.titleText());
+        /********* Game Text Başlangıç *********/
+        canvas.drawText(levelName, (canvas.getWidth() / 2) - (screenRatio * 35), screenRatio * 45, paint.titleText());
+        canvas.drawText(timeText, screenRatio * 20, screenRatio * 45, paint.borderText());
+        canvas.drawText(moveText, width - screenRatio * 60, screenRatio * 45, paint.borderText());
 
-
-        // Text
-        String timeText = "Time";
-        String moveText = "Move";
-
-        canvas.drawText(timeText, ballance * 20, ballance * 45, paint.borderText());
-        canvas.drawText(moveText, width - ballance * 60, ballance * 45, paint.borderText());
-
-        // Yazının ortasını bulduk getSizeOfText(timeText, textPaint) / 2 ve nesnenin ortasını aldık (ballance * 20 / 2)
         float timeXCoordinate = getSizeOfText(timeText, paint.borderText()) / 2;
         float moveXCoordinate = getSizeOfText(moveText, paint.borderText()) / 2;
 
-        float timeXbottom=getSizeOfText(String.valueOf(time), paint.borderMiddleText())/2;
-        float moveXbottom=getSizeOfText(String.valueOf(moveCon), paint.borderMiddleText())/2;
+        float timeXbottom = getSizeOfText(String.valueOf(time), paint.borderMiddleText()) / 2;
+        float moveXbottom = getSizeOfText(String.valueOf(userMove), paint.borderMiddleText()) / 2;
 
-        //textPaint.getTextAlign();
-        //canvas.drawText(String.valueOf(time), ballance * 20, ballance * 75, textPaint);
-        //canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance * 75, textPaint);
-        canvas.drawText(String.valueOf(time), (ballance*20)+timeXCoordinate-timeXbottom, ballance * 75, paint.borderMiddleText());
-        canvas.drawText(String.valueOf(moveCon), width -((ballance * 60)- moveXCoordinate+moveXbottom), ballance * 75, paint.borderMiddleText());
+        canvas.drawText(String.valueOf(time), (screenRatio * 20) + timeXCoordinate - timeXbottom, screenRatio * 75, paint.borderMiddleText());
+        canvas.drawText(String.valueOf(userMove), width - ((screenRatio * 60) - moveXCoordinate + moveXbottom), screenRatio * 75, paint.borderMiddleText());
+        /********* /Game Text Bitiş *********/
 
-        // Seçilince çıkan çizgiyi çiz
-        //paint.setARGB(90, 255, 0, 0);
+
+        // Parmağın bulunduğu yere çizgi çiz
         canvas.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), paint.circlePaint());
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         // Oyun bittiyse çizmeyi engelle
         if (isGameOver) {
             return false;
         }
 
-        // Parmağın bulunduğu X-Y konumunu al
+        // Parmağın bulunduğu X,Y konumunu al
         float x = event.getX();
         float y = event.getY();
         // Parmağın bulunduğu konumdaki Point'i bulur
@@ -253,7 +250,7 @@ public class GameView extends View implements Runnable{
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(tempPoint != null) {
+                if (tempPoint != null) {
 
                     // Çizgi başlangıç konumunu, belirlenen point'e göre ayarlar
                     line.setX1(tempPoint.item1.getX());
@@ -276,7 +273,6 @@ public class GameView extends View implements Runnable{
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isPointTouched) {
-
                     // Çizgiyi boyutlandırır
                     line.setX2(x);
                     line.setY2(y);
@@ -297,16 +293,14 @@ public class GameView extends View implements Runnable{
                         line.setY2(lastPoint.item1.getY());
 
                         // Yol çiz
-                        moveCon--;
+                        userMove--;
                         path.lineTo(tempPoint.item1.getX(), tempPoint.item1.getY());
                         // Oyunu bitirdiyse
-                        if (moveNumber == playerList.size()-1) {
+                        if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
-                            Toast.makeText(getContext(), "You Win!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), winMessage, Toast.LENGTH_SHORT).show();
                         }
                     }
-
-
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -321,17 +315,15 @@ public class GameView extends View implements Runnable{
 
     @Override
     public void run() {
-        if(isGameOver==false)
-        {
+        if (!isGameOver) {
             time--;
-            timerCount+=(width-((ballance*40)*2))/currentLevel.time;
-            this.invalidate();
+            timerCount += (width - ((screenRatio * 40) * 2)) / currentLevel.time;
+            invalidate();
             mHandler.postDelayed(this, 1000);
         }
-        if(time==0)
-        {
-            isGameOver=true;
-            Toast.makeText(getContext(), "Game Over :(", Toast.LENGTH_SHORT).show();
+        if (time == 0) {
+            isGameOver = true;
+            Toast.makeText(getContext(), gameOverMessage, Toast.LENGTH_SHORT).show();
         }
     }
 }

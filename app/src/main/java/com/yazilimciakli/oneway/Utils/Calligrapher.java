@@ -19,6 +19,7 @@ public class Calligrapher {
 
     /**
      * Constructor for creating calligrapher object
+     *
      * @param context Android Context
      */
     public Calligrapher(Context context) {
@@ -29,20 +30,22 @@ public class Calligrapher {
 
     /**
      * Set font to every view that supports typeface of the given activity layout
-     * @param activity Target activity
-     * @param fontPath Font file source path (Font must be in the assets directory of the application)
+     *
+     * @param activity         Target activity
+     * @param fontPath         Font file source path (Font must be in the assets directory of the application)
      * @param includeActionbar Flag to determine if the Actionbar title font need to be changed or not
      */
     public void setFont(Activity activity, String fontPath, boolean includeActionbar) {
         Typeface typeface = cacheFont(fontPath);
-        View rootView = includeActionbar ? activity.getWindow().getDecorView(): ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+        View rootView = includeActionbar ? activity.getWindow().getDecorView() : ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
         traverseView(rootView, typeface);
     }
 
 
     /**
      * Set font to target view and it's child (if any)
-     * @param view Target view
+     *
+     * @param view     Target view
      * @param fontPath Font file source path (Font must be in the assets directory of the application)
      */
     public void setFont(View view, String fontPath) {
@@ -53,7 +56,8 @@ public class Calligrapher {
 
     /**
      * Traverse view recursively from the given target view
-     * @param view Target view
+     *
+     * @param view     Target view
      * @param typeface Typeface which needs to be set from the given target view to it's children
      */
     private void traverseView(View view, Typeface typeface) {
@@ -74,6 +78,7 @@ public class Calligrapher {
 
     /**
      * Creates a cached copy of a typeface from the given path
+     *
      * @param fontPath Path from where a Typeface needs to be created
      * @return Cached copy of the typeface built from the font path
      */
