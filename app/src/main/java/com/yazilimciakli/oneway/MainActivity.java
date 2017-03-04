@@ -26,14 +26,12 @@ public class MainActivity extends AppCompatActivity {
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, FONT, true);
 
-
-
         Button btnPlay=(Button) findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getApplicationContext(),GameActivity.class);
+                intent.setClass(getApplicationContext(),LevelActivity.class);
                 startActivity(intent);
             }
         });

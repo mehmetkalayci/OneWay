@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
@@ -34,29 +33,21 @@ public class GameView extends View implements Runnable{
     Tuple<Point, ArrayList<Point>> lastPoint = null;
 
     // Hamle tanımı
-    int moveNumber = 0;
-    int moveCon = 0;
+    int moveCount = 0;
 
     //Zaman Tanımı
     int time;
     int timerCount=0;
 
-    //Puan Tanımı
-    int score = 0;
-
     //level tanımı
-    int level = 0;
+    private int mlevel;
 
     //Touch Tolerance tanımı
     float touchTolerance = 0;
 
-    //Level Başlığı tanımı
-    String name;
-
-    //WIDTH
-    float width = 0;
+    //WIDTH,HEIGHT
+    float width;
     float ballance = 0;
-
 
     // Grafik tanımı
     PaintHelper paint;
@@ -70,35 +61,40 @@ public class GameView extends View implements Runnable{
     boolean isGameOver = false;
 
     // Oynanan level
-    Level currentLevel = levelHelper.getLevel(level);
+    Level currentLevel;
 
+    //Zamanlayıcı tanımlama
     Handler mHandler = new Handler();
 
     public GameView(Context context, AttributeSet attrs) {
+
         super(context, attrs);
+
         setFocusable(true);
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
 
-        level = GameActivity.LEVEL;
-        width = GameActivity.WIDTH;
-        ballance = width / 480;
-
-        paint=new PaintHelper(getContext(),ballance);
-
-        touchTolerance = ballance * 20;
-
+        currentLevel= levelHelper.getLevel(mlevel);
         mHandler.postDelayed(this,1000);
-
-        addPoints();
-
-        moveNumber = currentLevel.moveNumber;
-        moveCon=currentLevel.moveNumber;
-        score = currentLevel.score;
+        moveCount=currentLevel.moveNumber;
         time = currentLevel.time;
-        name = currentLevel.name;
     }
 
+    public void setLevel(int level) {
+        this.mlevel = level;
+        currentLevel= levelHelper.getLevel(mlevel);
+        addPoints();
+        invalidate();
+        requestLayout();
+    }
+    public void setWidth(float width) {
+        this.width = width;
+        ballance = width / 480;
+        paint=new PaintHelper(getContext(),ballance);
+        touchTolerance = ballance * 20;
+        invalidate();
+        requestLayout();
+    }
 
     /***
      * Koordinatları pointList'e atar
@@ -152,7 +148,7 @@ public class GameView extends View implements Runnable{
         lastPoint = null;
         isPointTouched = false;
         playerList.clear();
-        moveCon=currentLevel.moveNumber;
+        moveCount=currentLevel.moveNumber;
     }
 
     /***
@@ -209,7 +205,7 @@ public class GameView extends View implements Runnable{
         canvas.drawLine(ballance*40,canvas.getHeight()-(ballance*40),width-(ballance*40),canvas.getHeight()-(ballance*40), paint.pathLittleAlpa());
 
         /* Game Text Başlangıç */
-        canvas.drawText(name,(canvas.getWidth() / 2)-(ballance * 35), ballance * 45, paint.titleText());
+        canvas.drawText(currentLevel.name,(width / 2)-(ballance * 35), ballance * 45, paint.titleText());
 
 
         // Text
@@ -224,13 +220,13 @@ public class GameView extends View implements Runnable{
         float moveXCoordinate = getSizeOfText(moveText, paint.borderText()) / 2;
 
         float timeXbottom=getSizeOfText(String.valueOf(time), paint.borderMiddleText())/2;
-        float moveXbottom=getSizeOfText(String.valueOf(moveCon), paint.borderMiddleText())/2;
+        float moveXbottom=getSizeOfText(String.valueOf(moveCount), paint.borderMiddleText())/2;
 
         //textPaint.getTextAlign();
         //canvas.drawText(String.valueOf(time), ballance * 20, ballance * 75, textPaint);
         //canvas.drawText(String.valueOf(moveNumber), width - ballance * 60, ballance * 75, textPaint);
         canvas.drawText(String.valueOf(time), (ballance*20)+timeXCoordinate-timeXbottom, ballance * 75, paint.borderMiddleText());
-        canvas.drawText(String.valueOf(moveCon), width -((ballance * 60)- moveXCoordinate+moveXbottom), ballance * 75, paint.borderMiddleText());
+        canvas.drawText(String.valueOf(moveCount), width -((ballance * 60)- moveXCoordinate+moveXbottom), ballance * 75, paint.borderMiddleText());
 
         // Seçilince çıkan çizgiyi çiz
         //paint.setARGB(90, 255, 0, 0);
@@ -297,15 +293,14 @@ public class GameView extends View implements Runnable{
                         line.setY2(lastPoint.item1.getY());
 
                         // Yol çiz
-                        moveCon--;
+                        moveCount--;
                         path.lineTo(tempPoint.item1.getX(), tempPoint.item1.getY());
                         // Oyunu bitirdiyse
-                        if (moveNumber == playerList.size()-1) {
+                        if (currentLevel.moveNumber == playerList.size()-1) {
                             isGameOver = true;
                             Toast.makeText(getContext(), "You Win!", Toast.LENGTH_SHORT).show();
                         }
                     }
-
 
                 }
                 break;
