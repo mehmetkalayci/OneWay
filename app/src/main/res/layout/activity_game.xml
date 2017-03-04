@@ -5,12 +5,9 @@
     android:layout_height="match_parent"
     tools:context="com.yazilimciakli.oneway.GameActivity">
 
-
-
     <com.yazilimciakli.oneway.Graph.GameView
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 
 </RelativeLayout>
