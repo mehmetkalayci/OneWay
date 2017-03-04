@@ -38,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnSetting=(Button) findViewById(R.id.btnSettings);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         Button btnExit = (Button) findViewById(R.id.btnExit);
         btnExit.setOnClickListener(new View.OnClickListener() {

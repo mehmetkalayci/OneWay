@@ -13,6 +13,7 @@ public class PaintHelper {
     public PaintHelper(Context context, float getBallance) {
         plain = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Mathlete-Bulky.otf");
         screenRatio = getBallance;
+        if(screenRatio>2.25){screenRatio=(float) 2.25;}
     }
 
     public Paint circlePaint() {
