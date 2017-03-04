@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
@@ -76,7 +75,7 @@ public class GameView extends View implements Runnable {
     boolean isGameOver = false;
 
     // Oynanan level
-    Level currentLevel = levelHelper.getLevel(level);
+    Level currentLevel;
 
     Handler mHandler = new Handler();
 
@@ -86,25 +85,28 @@ public class GameView extends View implements Runnable {
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
 
-        level = GameActivity.LEVEL;
-        width = GameActivity.WIDTH;
-        screenRatio = width / 480;
-
-        paint = new PaintHelper(getContext(), screenRatio);
-
-        touchTolerance = screenRatio * 20;
-
         mHandler.postDelayed(this, 1000);
-
-        addPoints();
-
+    }
+    public void setLevel(int level) {
+        this.level = level;
+        currentLevel= levelHelper.getLevel(level);
         moveNumber = currentLevel.moveNumber;
         userMove = currentLevel.moveNumber;
         score = currentLevel.score;
         time = currentLevel.time;
         levelName = String.format(getResources().getString(R.string.levelName), currentLevel.name);
+        addPoints();
+        invalidate();
+        requestLayout();
     }
-
+    public void setWidth(float width) {
+        this.width = width;
+        screenRatio = width / 480;
+        paint=new PaintHelper(getContext(),screenRatio);
+        touchTolerance = screenRatio * 20;
+        invalidate();
+        requestLayout();
+    }
     /***
      * Koordinatları pointList'e atar
      */
