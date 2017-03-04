@@ -20,9 +20,9 @@ public class GameActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         int width = metrics.widthPixels;
-        Intent data=getIntent();
-        Integer veri=data.getIntExtra("level",0);
-        view=(GameView) findViewById(R.id.view);
+        Intent data = getIntent();
+        Integer veri = data.getIntExtra("level", 0);
+        view = (GameView) findViewById(R.id.view);
         view.setWidth(width);
         view.setLevel(veri);
     }

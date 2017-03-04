@@ -17,11 +17,10 @@
         <item name="android:clickable">true</item>
 
         <item name="android:padding">15dp</item>
-        <item name="android:minWidth">150dp</item>
+        <item name="android:minWidth">130dp</item>
 
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:textSize">36dip</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32dp</item>
     </style>
 
 

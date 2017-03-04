@@ -12,23 +12,26 @@ public class LevelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
-        Button btn1=(Button)(findViewById(R.id.level1));
-        Button btn2=(Button)(findViewById(R.id.level2));
+
+        Button btn1 = (Button) (findViewById(R.id.level1));
+        Button btn2 = (Button) (findViewById(R.id.level2));
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getApplicationContext(),GameActivity.class);
-                intent.putExtra("level",0);
+                intent.setClass(getApplicationContext(), GameActivity.class);
+                intent.putExtra("level", 0);
                 startActivity(intent);
             }
         });
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getApplicationContext(),GameActivity.class);
-                intent.putExtra("level",1);
+                intent.setClass(getApplicationContext(), GameActivity.class);
+                intent.putExtra("level", 1);
                 startActivity(intent);
             }
         });

@@ -15,11 +15,11 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".LevelActivity"
+            android:name=".SettingsActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".LevelActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".MainActivity" android:screenOrientation="portrait">

@@ -87,9 +87,10 @@ public class GameView extends View implements Runnable {
 
         mHandler.postDelayed(this, 1000);
     }
+
     public void setLevel(int level) {
         this.level = level;
-        currentLevel= levelHelper.getLevel(level);
+        currentLevel = levelHelper.getLevel(level);
         moveNumber = currentLevel.moveNumber;
         userMove = currentLevel.moveNumber;
         score = currentLevel.score;
@@ -99,14 +100,16 @@ public class GameView extends View implements Runnable {
         invalidate();
         requestLayout();
     }
+
     public void setWidth(float width) {
         this.width = width;
         screenRatio = width / 480;
-        paint=new PaintHelper(getContext(),screenRatio);
+        paint = new PaintHelper(getContext(), screenRatio);
         touchTolerance = screenRatio * 20;
         invalidate();
         requestLayout();
     }
+
     /***
      * Koordinatları pointList'e atar
      */
@@ -218,20 +221,19 @@ public class GameView extends View implements Runnable {
         canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40), canvas.getHeight() - (screenRatio * 40), paint.pathLittleAlpa());
 
         /********* Game Text Başlangıç *********/
-        float moveTextSize=getSizeOfText(moveText, paint.borderText());
+        float moveTextSize = getSizeOfText(moveText, paint.borderText());
         float timeXCoordinate = getSizeOfText(timeText, paint.borderText()) / 2;
         float moveXCoordinate = moveTextSize / 2;
 
         canvas.drawText(levelName, (canvas.getWidth() / 2) - (screenRatio * 35), screenRatio * 45, paint.titleText());
         canvas.drawText(timeText, screenRatio * 20, screenRatio * 45, paint.borderText());
-        canvas.drawText(moveText, width - moveTextSize-(screenRatio * 20), screenRatio * 45, paint.borderText());
-
+        canvas.drawText(moveText, width - moveTextSize - (screenRatio * 20), screenRatio * 45, paint.borderText());
 
         float timeXbottom = getSizeOfText(String.valueOf(time), paint.borderMiddleText()) / 2;
         float moveXbottom = getSizeOfText(String.valueOf(userMove), paint.borderMiddleText()) / 2;
 
         canvas.drawText(String.valueOf(time), (screenRatio * 20) + timeXCoordinate - timeXbottom, screenRatio * 75, paint.borderMiddleText());
-        canvas.drawText(String.valueOf(userMove), width - (moveTextSize+(screenRatio * 20) - moveXCoordinate + moveXbottom), screenRatio * 75, paint.borderMiddleText());
+        canvas.drawText(String.valueOf(userMove), width - (moveTextSize + (screenRatio * 20) - moveXCoordinate + moveXbottom), screenRatio * 75, paint.borderMiddleText());
         /********* /Game Text Bitiş *********/
 
 

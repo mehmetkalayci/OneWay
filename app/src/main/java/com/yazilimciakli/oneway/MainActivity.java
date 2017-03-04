@@ -11,7 +11,7 @@ import com.yazilimciakli.oneway.Utils.Calligrapher;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String FONT = "fonts/Mathlete-Bulky.otf";
+    public static String FONT = "fonts/Atma.ttf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnSetting=(Button) findViewById(R.id.btnSettings);
+        Button btnSetting = (Button) findViewById(R.id.btnSettings);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

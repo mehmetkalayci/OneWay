@@ -11,9 +11,11 @@ public class PaintHelper {
     float screenRatio;
 
     public PaintHelper(Context context, float getBallance) {
-        plain = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Mathlete-Bulky.otf");
+        plain = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Atma.ttf");
         screenRatio = getBallance;
-        if(screenRatio>2.25){screenRatio=(float) 2.25;}
+        if (screenRatio > 2.25) {
+            screenRatio = (float) 2.25;
+        }
     }
 
     public Paint circlePaint() {
@@ -66,7 +68,7 @@ public class PaintHelper {
         paint.setColor(Color.rgb(255, 255, 255));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
-        paint.setTextSize(screenRatio * 40);
+        paint.setTextSize(screenRatio * 20);
         return paint;
     }
 
@@ -76,7 +78,7 @@ public class PaintHelper {
         paint.setColor(Color.rgb(255, 255, 255));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
-        paint.setTextSize(screenRatio * 50);
+        paint.setTextSize(screenRatio * 30);
         return paint;
     }
 
@@ -86,7 +88,7 @@ public class PaintHelper {
         paint.setColor(Color.rgb(255, 255, 255));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
-        paint.setTextSize(screenRatio * 30);
+        paint.setTextSize(screenRatio * 20);
         paint.getTextAlign();
         return paint;
     }
