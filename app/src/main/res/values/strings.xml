@@ -9,4 +9,6 @@
     <string name="btnPlay">Play</string>
     <string name="winMessage">You Win!</string>
     <string name="gameOverMessage">Game Over :(</string>
+
+    <string name="selectLevel">Select Level</string>
 </resources>
