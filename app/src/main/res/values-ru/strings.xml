@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">One\n Touch-Go</string>
+    <string name="gameOverMessage">Игра закончена :(</string>
+    <string name="btnExit">Выход</string>
+</resources>
