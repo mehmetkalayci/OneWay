@@ -17,11 +17,11 @@ public class LevelItem extends BaseAdapter {
     String titles[];
     LayoutInflater inflater;
 
-    public LevelItem(Context context,String[] title)
-    {
-        titles=title;
-        cntx=context;
+    public LevelItem(Context context, String[] title) {
+        titles = title;
+        cntx = context;
     }
+
     @Override
     public int getCount() {
         return titles.length;
@@ -41,15 +41,15 @@ public class LevelItem extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         TextView title;
-        ImageView str1,str2,str3;
+        ImageView str1, str2, str3;
 
         inflater = (LayoutInflater) cntx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.level_item, parent, false);
         title = (TextView) itemView.findViewById(R.id.levelText);
 
-        str1=(ImageView) itemView.findViewById(R.id.star1);
-        str2=(ImageView) itemView.findViewById(R.id.star2);
-        str3=(ImageView) itemView.findViewById(R.id.star3);
+        str1 = (ImageView) itemView.findViewById(R.id.star1);
+        str2 = (ImageView) itemView.findViewById(R.id.star2);
+        str3 = (ImageView) itemView.findViewById(R.id.star3);
 
         str1.setImageResource(R.drawable.ic_star_gold_48dp);
         str2.setImageResource(R.drawable.ic_star_gold_48dp);

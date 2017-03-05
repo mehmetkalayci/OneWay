@@ -1,11 +1,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
     android:orientation="vertical"
-    app:srcCompat="@drawable/ic_levelitem"
     android:id="@+id/imageView"
     android:background="@drawable/ic_levelitem"
     android:weightSum="1">

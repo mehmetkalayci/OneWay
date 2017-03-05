@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.yazilimciakli.oneway.Controls.LevelItem;
+import com.yazilimciakli.oneway.Utils.LevelHelper;
 
 public class LevelActivity extends AppCompatActivity {
 
@@ -12,30 +16,24 @@ public class LevelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
+        LevelHelper currentLevel=new LevelHelper(getBaseContext());
 
-        /*
-        Button btn1 = (Button) (findViewById(R.id.level1));
-        Button btn2 = (Button) (findViewById(R.id.level2));
-
-        btn1.setOnClickListener(new View.OnClickListener() {
+        String[]  title=new String[currentLevel.getLevelSize()];
+        for(int i=0;i<currentLevel.getLevelSize();i++)
+        {
+            title[i]=currentLevel.getLevel(i).name;
+        }
+        LevelItem levelitem=new LevelItem(getBaseContext(),title);
+        GridView gridView=(GridView) findViewById(R.id.grid);
+        gridView.setAdapter(levelitem);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), GameActivity.class);
-                intent.putExtra("level", 0);
+                intent.putExtra("level", position);
                 startActivity(intent);
             }
         });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), GameActivity.class);
-                intent.putExtra("level", 1);
-                startActivity(intent);
-            }
-        });
-        */
     }
 }
