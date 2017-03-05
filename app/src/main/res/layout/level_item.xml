@@ -1,23 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#6a6a6a">
+    app:srcCompat="@drawable/ic_levelitem"
+    android:id="@+id/imageView"
+    android:background="@drawable/ic_levelitem"
+    android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
         android:id="@+id/levelText"
         android:layout_gravity="center_horizontal"
         android:textColor="#282828"
-        android:textSize="74dp" />
+        android:textSize="70dp"
+        android:text="1" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:translationY="-10dp">
 
         <ImageView
             android:layout_width="25dp"
