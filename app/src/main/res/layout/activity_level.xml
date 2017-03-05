@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#282828"
-    android:padding="20dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#282828">
 
-<!--
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/level1"
-        android:layout_weight="1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/level2"
-        android:layout_weight="1" />-->
-
-
-        <GridView
-            android:id="@+id/grid"
+        <TextView
+            android:id="@+id/lblSelectLevel"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="auto_fit"
-            android:columnWidth="80dp"
-            android:horizontalSpacing="10dp"
-            android:verticalSpacing="10dp"
-            android:stretchMode="columnWidth"
-            android:gravity="center" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            android:paddingTop="50dp"
+            android:text="SELECT LEVEL"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/levelPager"
+            android:layout_width="fill_parent"
+            android:layout_height="450dp"
+            android:layout_weight="1" />
+
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
 </RelativeLayout>

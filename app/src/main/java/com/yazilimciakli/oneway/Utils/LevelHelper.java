@@ -25,4 +25,8 @@ public class LevelHelper {
     public int getLevelSize() {
         return levelList.size();
     }
+
+    public List<String> limit(int start, int end) {
+        return this.levelList.subList(start, end);
+    }
 }
