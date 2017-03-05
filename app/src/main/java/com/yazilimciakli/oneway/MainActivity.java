@@ -1,9 +1,16 @@
 package com.yazilimciakli.oneway;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
 
@@ -18,9 +25,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.progressbar);
+
+
+
+
 
         WebView webView = (WebView) findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) {
+                    progressDialog.dismiss();
+                }
+            }
+        });
         webView.loadUrl("file:///android_asset/bg/index.html");
 
 

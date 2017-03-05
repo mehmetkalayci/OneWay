@@ -39,7 +39,7 @@ public class GameView extends View implements Runnable {
     int userMove = 0;
 
     //Zaman Tanımı
-    int time=0;
+    int time = 0;
     int timerCount = 0;
 
     //Puan Tanımı
@@ -96,9 +96,9 @@ public class GameView extends View implements Runnable {
     public void setLevel(int level) {
         this.level = level;
         currentLevel = levelHelper.getLevel(level);
-        time=currentLevel.time;
-        moveNumber=currentLevel.moveNumber;
-        userMove=currentLevel.moveNumber;
+        time = currentLevel.time;
+        moveNumber = currentLevel.moveNumber;
+        userMove = currentLevel.moveNumber;
         levelName = String.format(getResources().getString(R.string.levelName), currentLevel.name);
 
         mHandler.postDelayed(this, 1000);

@@ -13,7 +13,7 @@ public class LevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
 
-        /*
+
         Button btn1 = (Button) (findViewById(R.id.level1));
         Button btn2 = (Button) (findViewById(R.id.level2));
 
@@ -36,6 +36,6 @@ public class LevelActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        */
+
     }
 }
