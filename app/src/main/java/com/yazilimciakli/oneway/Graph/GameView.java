@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class GameView extends View implements Runnable {
     int userMove = 0;
 
     //Zaman Tanımı
-    int time;
+    int time=0;
     int timerCount = 0;
 
     //Puan Tanımı
@@ -79,25 +80,29 @@ public class GameView extends View implements Runnable {
 
     Handler mHandler = new Handler();
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        mHandler.removeCallbacks(this);
+        return super.dispatchKeyEvent(event);
+    }
+
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFocusable(true);
         setFocusableInTouchMode(true);
         setBackgroundColor(Color.rgb(31, 31, 33));
-
-        mHandler.postDelayed(this, 1000);
     }
 
     public void setLevel(int level) {
         this.level = level;
         currentLevel = levelHelper.getLevel(level);
-        moveNumber = currentLevel.moveNumber;
-        userMove = currentLevel.moveNumber;
-        score = currentLevel.score;
-        time = currentLevel.time;
+        time=currentLevel.time;
+        moveNumber=currentLevel.moveNumber;
+        userMove=currentLevel.moveNumber;
         levelName = String.format(getResources().getString(R.string.levelName), currentLevel.name);
+
+        mHandler.postDelayed(this, 1000);
         addPoints();
-        invalidate();
         requestLayout();
     }
 
