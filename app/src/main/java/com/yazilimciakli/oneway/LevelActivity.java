@@ -7,8 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.yazilimciakli.oneway.Controls.LevelAdapter;
+import com.google.gson.Gson;
 import com.yazilimciakli.oneway.Controls.GridFragment;
+import com.yazilimciakli.oneway.Controls.LevelAdapter;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.ViewPagerAdapter;
@@ -42,13 +43,42 @@ public class LevelActivity extends AppCompatActivity {
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
         LevelHelper levelHelper = new LevelHelper(this);
-        List<String> page1 = levelHelper.limit(0, 11);
-        List<String> page2 = levelHelper.limit(11, 22);
 
-
+        int objectCount = 9;
+        double pageCount = Math.ceil((double) levelHelper.getLevelSize() / (double) objectCount);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(GridFragment.newInstance(page1));
-        viewPagerAdapter.addFragment(GridFragment.newInstance(levelItems));
+
+        int begin = 0;
+        int next = objectCount;
+        for (int a = 0; a < pageCount; a++) {
+
+            /*Bir sayfa için gerekli başlangıç*/
+
+            List<String> stringList = levelHelper.limit(begin, next);
+            List<Level> levelList = new ArrayList<>();
+            Gson gson = new Gson();
+
+            for (int i = 0; i < stringList.size(); i++) {
+                levelList.add(i, gson.fromJson(stringList.get(i), Level.class));
+            }
+
+            LevelAdapter page = new LevelAdapter(this, levelList);
+            viewPagerAdapter.addFragment(GridFragment.newInstance(page));
+
+            /*Bir sayfa için gerekli Bitiş*/
+
+            begin += objectCount;
+
+            if (levelHelper.getLevelSize() - (objectCount * (a + 1)) < 9) {
+
+                next = levelHelper.getLevelSize();
+
+            } else {
+
+                next = (objectCount * (a + 1) + objectCount);
+
+            }
+        }
 
         levelPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(levelPager);

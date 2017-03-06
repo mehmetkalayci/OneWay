@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
-import com.yazilimciakli.oneway.Utils.LevelHelper;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class LevelAdapter extends BaseAdapter {
     Typeface typeface;
     List<Level> levelList;
 
-    public LevelAdapter(Context context, List<Level> levelList) {
+    public LevelAdapter(Context context,List<Level> levelList) {
         this.context = context;
         this.levelList = levelList;
         typeface = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Atma.ttf");
