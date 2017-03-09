@@ -45,7 +45,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 5);
-        paint.setColor(Color.argb(10, 255, 255, 255));
+        paint.setColor(Color.argb(50, 255, 255, 255));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
@@ -56,7 +56,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 2);
-        paint.setColor(Color.argb(10, 255, 255, 255));
+        paint.setColor(Color.argb(50, 255, 255, 255));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;

@@ -9,4 +9,6 @@
     <string name="timeText">Tiempo</string>
     <string name="gameOverMessage">Fin de la partida :(</string>
     <string name="moveText">Movimiento </string>
+    <string name="selectLevel">Selecciona el Nivel</string> <!-- tam doğru olmayabilir -->
+    <string name="progressbar_text">Cargando...</string> <!-- tam doğru olmayabilir -->
 </resources>

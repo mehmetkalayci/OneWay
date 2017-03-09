@@ -60,7 +60,7 @@ public class LevelAdapter extends BaseAdapter {
 
         star1.setImageResource(R.drawable.ic_star_gold_48dp);
         star2.setImageResource(R.drawable.ic_star_gold_48dp);
-        //str3.setImageResource(R.drawable.ic_star_gold_48dp);
+        star3.setImageResource(R.drawable.ic_star_gold_48dp);
 
         title.setText(levelList.get(position).name);
         return itemView;

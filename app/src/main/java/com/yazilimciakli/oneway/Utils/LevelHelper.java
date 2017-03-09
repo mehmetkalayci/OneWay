@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,8 +27,13 @@ public class LevelHelper {
         return levelList.size();
     }
 
-    public List<String> limit(int start, int end) {
-        return this.levelList.subList(start, end);
+    public List<Level> getLevels() {
+        List<Level> levels = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < levelList.size(); i++) {
+            levels.add(getLevel(index++));
+        }
+        return levels;
     }
 
 

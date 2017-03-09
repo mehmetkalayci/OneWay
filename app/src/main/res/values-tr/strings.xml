@@ -10,4 +10,6 @@
     <string name="timeText">Süre</string>
     <string name="winMessage">Kazandınız!</string>
     <string name="gameOverMessage">Oyun Bitti :(</string>
+    <string name="selectLevel">Bölüm Seçin</string>
+    <string name="progressbar_text">Yükleniyor...</string>
 </resources>

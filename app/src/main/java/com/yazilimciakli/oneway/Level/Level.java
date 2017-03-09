@@ -27,4 +27,15 @@ public class Level {
     @Expose
     public Integer time;
 
+    @Override
+    public String toString() {
+        return "Level{" +
+                "levelid=" + levelid +
+                ", name='" + name + '\'' +
+                ", points=" + points +
+                ", moveNumber=" + moveNumber +
+                ", score=" + score +
+                ", time=" + time +
+                '}';
+    }
 }

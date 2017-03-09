@@ -15,7 +15,6 @@
         android:numColumns="3"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:smoothScrollbar="false"
         android:stretchMode="columnWidth"
         android:verticalSpacing="5dp" />
 </LinearLayout>

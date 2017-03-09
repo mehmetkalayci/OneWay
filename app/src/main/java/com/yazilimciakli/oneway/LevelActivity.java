@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -42,42 +43,23 @@ public class LevelActivity extends AppCompatActivity {
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
-        LevelHelper levelHelper = new LevelHelper(this);
-
-        int objectCount = 9;
-        double pageCount = Math.ceil((double) levelHelper.getLevelSize() / (double) objectCount);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        int begin = 0;
-        int next = objectCount;
-        for (int a = 0; a < pageCount; a++) {
+        LevelHelper levelHelper = new LevelHelper(this);
 
-            /*Bir sayfa için gerekli başlangıç*/
+        double page;
+        double perPage = 9;
+        double totalItems = levelHelper.getLevelSize();
+        double totalPage = Math.ceil(totalItems / perPage);
 
-            List<String> stringList = levelHelper.limit(begin, next);
-            List<Level> levelList = new ArrayList<>();
-            Gson gson = new Gson();
+        for (page = 1; page <= totalPage; page++) {
+            int limit = (int) ((page - 1) * perPage);
 
-            for (int i = 0; i < stringList.size(); i++) {
-                levelList.add(i, gson.fromJson(stringList.get(i), Level.class));
-            }
+            List<Level> tempLevels = new ArrayList<>();
+            tempLevels = levelHelper.getLevels().subList(limit, (int) ((page == totalPage) ? totalItems : perPage * page));
 
-            LevelAdapter page = new LevelAdapter(this, levelList);
-            viewPagerAdapter.addFragment(GridFragment.newInstance(page));
-
-            /*Bir sayfa için gerekli Bitiş*/
-
-            begin += objectCount;
-
-            if (levelHelper.getLevelSize() - (objectCount * (a + 1)) < 9) {
-
-                next = levelHelper.getLevelSize();
-
-            } else {
-
-                next = (objectCount * (a + 1) + objectCount);
-
-            }
+            LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
+            viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter));
         }
 
         levelPager.setAdapter(viewPagerAdapter);
