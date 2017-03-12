@@ -64,7 +64,7 @@
         android:layout_marginTop="130dp">
 
         <TextView
-            android:text="YOU WIN"
+            android:text="@string/win_title"
             android:layout_height="wrap_content"
             android:id="@+id/win_title"
             android:background="@drawable/curve_green"
@@ -84,7 +84,7 @@
         android:id="@+id/remaining_time_layout">
 
         <TextView
-            android:text="60 SEC"
+            android:text="@string/remaining_time"
             android:layout_height="wrap_content"
             android:id="@+id/remaining_time"
             android:background="@drawable/curve_red"
@@ -152,7 +152,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="CONGURATILATIONS"
+        android:text="@string/top_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#ff6763"
@@ -163,7 +163,7 @@
         android:textSize="30sp" />
 
     <TextView
-        android:text="YOU WIN THIS PART, NOW NEXT LEVEL TIME"
+        android:text="@string/bottom_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottom_message"

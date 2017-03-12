@@ -14,6 +14,7 @@
 
     <!-- MessageBox Begin-->
     <string name="top_message">FELICIDADES</string>
+    <string name="win_title">¡Enhorabuena</string>
     <string name="bottom_message">SE PUEDE GANAR ESTA SECCIÓN, NUEVO TIEMPO PARCIAL</string>
     <string name="remaining_time">%1$s SEG</string>
 </resources>

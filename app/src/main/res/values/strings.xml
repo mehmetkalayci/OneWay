@@ -14,6 +14,7 @@
 
     <!-- MessageBox Begin-->
     <string name="top_message">CONGRATULATIONS</string>
+    <string name="win_title">YOU WIN</string>
     <string name="bottom_message">YOU WIN THIS PART,NOW THE NEW LEVEL TIME</string>
     <string name="remaining_time">%1$s SEC</string>
 </resources>

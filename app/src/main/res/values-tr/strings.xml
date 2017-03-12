@@ -14,7 +14,8 @@
 
     <!-- MessageBox Begin-->
     <string name="top_message">TEBRİKLER</string>
-    <string name="bottom_message">BU BÖLÜMÜ KAZANDIN,YENİ BÖLÜM ZAMANI</string>
+    <string name="win_title">KAZANDIN</string>
+    <string name="bottom_message">BU BÖLÜMÜ KAZANDI,SIRADA Kİ BÖLÜME GEÇEBİLİRSİN</string>
     <string name="remaining_time">%1$s SN</string>
 
 </resources>
