@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">One\n Touch-Go</string>
-
     <string name="levelName">Bölüm %1$s</string>
     <string name="btnPlay">Oyna</string>
     <string name="btnSettings">Ayarlar</string>
@@ -12,4 +11,10 @@
     <string name="gameOverMessage">Oyun Bitti :(</string>
     <string name="selectLevel">Bölüm Seçin</string>
     <string name="progressbar_text">Yükleniyor...</string>
+
+    <!-- MessageBox Begin-->
+    <string name="top_message">TEBRİKLER</string>
+    <string name="bottom_message">BU BÖLÜMÜ KAZANDIN,YENİ BÖLÜM ZAMANI</string>
+    <string name="remaining_time">%1$s SN</string>
+
 </resources>

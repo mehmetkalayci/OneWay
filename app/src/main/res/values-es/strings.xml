@@ -11,4 +11,9 @@
     <string name="moveText">Movimiento </string>
     <string name="selectLevel">Selecciona el Nivel</string> <!-- tam doğru olmayabilir -->
     <string name="progressbar_text">Cargando...</string> <!-- tam doğru olmayabilir -->
+
+    <!-- MessageBox Begin-->
+    <string name="top_message">FELICIDADES</string>
+    <string name="bottom_message">SE PUEDE GANAR ESTA SECCIÓN, NUEVO TIEMPO PARCIAL</string>
+    <string name="remaining_time">%1$s SEG</string>
 </resources>

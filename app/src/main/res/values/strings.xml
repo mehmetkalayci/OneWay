@@ -11,4 +11,9 @@
     <string name="gameOverMessage">Game Over :(</string>
     <string name="selectLevel">Select Level</string>
     <string name="progressbar_text">Loading...</string>
+
+    <!-- MessageBox Begin-->
+    <string name="top_message">CONGRATULATIONS</string>
+    <string name="bottom_message">YOU WIN THIS PART,NOW THE NEW LEVEL TIME</string>
+    <string name="remaining_time">%1$s SEC</string>
 </resources>

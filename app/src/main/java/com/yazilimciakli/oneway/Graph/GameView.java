@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.Utils.DialogHelper;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
@@ -55,7 +57,6 @@ public class GameView extends View implements Runnable {
     String levelName;
     String timeText = getResources().getString(R.string.timeText);
     String moveText = getResources().getString(R.string.moveText);
-    String winMessage = getResources().getString(R.string.winMessage);
     String gameOverMessage = getResources().getString(R.string.gameOverMessage);
 
     //WIDTH
@@ -309,7 +310,9 @@ public class GameView extends View implements Runnable {
                         // Oyunu bitirdiyse
                         if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
-                            Toast.makeText(getContext(), winMessage, Toast.LENGTH_SHORT).show();
+                            DialogHelper dialogHelper=new DialogHelper(getContext(),levelName,String.valueOf(time),String.valueOf(currentLevel.score));
+                            dialogHelper.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialogHelper.show();
                         }
                     }
                 }
