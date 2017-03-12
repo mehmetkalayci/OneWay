@@ -1,4 +1,4 @@
-package com.yazilimciakli.oneway.Utils;
+package com.yazilimciakli.oneway.Graph;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,14 +15,14 @@ import com.yazilimciakli.oneway.R;
  * Created by Admin on 11.03.2017.
  */
 
-public class DialogHelper extends  Dialog implements android.view.View.OnClickListener
+public class WinDialog extends  Dialog implements android.view.View.OnClickListener
 {
         public Context context;
         String gettitle,getremaining_time,getscore;
         TextView title,top_message,bottom_message,win_title,score,remaining_time;
         ImageButton repeat_button,next_button;
         Typeface typeface;
-        public DialogHelper(Context context,String title, String remaining_time,String score) {
+        public WinDialog(Context context, String title, String remaining_time, String score) {
             super(context);
             this.context = context;
             this.gettitle=title;
