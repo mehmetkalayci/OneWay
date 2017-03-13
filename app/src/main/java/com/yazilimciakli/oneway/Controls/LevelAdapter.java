@@ -3,6 +3,7 @@ package com.yazilimciakli.oneway.Controls;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
 
@@ -21,10 +23,12 @@ public class LevelAdapter extends BaseAdapter {
     Context context;
     Typeface typeface;
     List<Level> levelList;
+    DatabaseHandler dbHandler;
 
-    public LevelAdapter(Context context,List<Level> levelList) {
+    public LevelAdapter(Context context, List<Level> levelList) {
         this.context = context;
         this.levelList = levelList;
+        this.dbHandler = new DatabaseHandler(context);
         typeface = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Atma.ttf");
     }
 
@@ -47,7 +51,7 @@ public class LevelAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         TextView title;
-        ImageView star1, star2, star3;
+        ImageView star1, star2, star3, lock;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(R.layout.level_item, parent, false);
@@ -57,12 +61,23 @@ public class LevelAdapter extends BaseAdapter {
         star1 = (ImageView) itemView.findViewById(R.id.star1);
         star2 = (ImageView) itemView.findViewById(R.id.star2);
         star3 = (ImageView) itemView.findViewById(R.id.star3);
+        lock = (ImageView) itemView.findViewById(R.id.lock);
 
-        star1.setImageResource(R.drawable.ic_star_gold_48dp);
-        star2.setImageResource(R.drawable.ic_star_gold_48dp);
-        star3.setImageResource(R.drawable.ic_star_gold_48dp);
+        com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
 
-        title.setText(levelList.get(position).name);
+        if (tempLevel != null ||  levelList.get(position).levelid == 1) {
+            star1.setImageResource(R.drawable.ic_star_black_48dp);
+            star2.setImageResource(R.drawable.ic_star_black_48dp);
+            star3.setImageResource(R.drawable.ic_star_black_48dp);
+        } else {
+            star1.setVisibility(View.INVISIBLE);
+            star2.setVisibility(View.INVISIBLE);
+            star3.setVisibility(View.INVISIBLE);
+            title.setVisibility(View.INVISIBLE);
+            lock.setVisibility(View.VISIBLE);
+        }
+
+        title.setText(String.valueOf(levelList.get(position).levelid));
         return itemView;
     }
 

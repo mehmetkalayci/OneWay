@@ -11,9 +11,7 @@ public class Level {
     @SerializedName("levelid")
     @Expose
     public int levelid;
-    @SerializedName("name")
-    @Expose
-    public String name;
+
     @SerializedName("points")
     @Expose
     public List<Point> points = null;
@@ -31,7 +29,6 @@ public class Level {
     public String toString() {
         return "Level{" +
                 "levelid=" + levelid +
-                ", name='" + name + '\'' +
                 ", points=" + points +
                 ", moveNumber=" + moveNumber +
                 ", score=" + score +

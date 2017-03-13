@@ -98,7 +98,7 @@ public class GameView extends View implements Runnable {
         time = currentLevel.time;
         moveNumber = currentLevel.moveNumber;
         userMove = currentLevel.moveNumber;
-        levelName = String.format(getResources().getString(R.string.levelName), currentLevel.name);
+        levelName = String.format(getResources().getString(R.string.levelName), currentLevel.levelid);
 
         mHandler.postDelayed(this, 1000);
         addPoints();
@@ -308,7 +308,7 @@ public class GameView extends View implements Runnable {
                         // Oyunu bitirdiyse
                         if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
-                            WinDialog winDialog =new WinDialog(getContext(),levelName,String.valueOf(time),String.valueOf(currentLevel.score));
+                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(currentLevel.score));
                             winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             winDialog.show();
                         }
@@ -333,9 +333,9 @@ public class GameView extends View implements Runnable {
             invalidate();
             mHandler.postDelayed(this, 1000);
         }
-        if (time == 0) {
+        if (time == 0 &&  !isGameOver) {
             isGameOver = true;
-            GameoverDialog gameoverDialog =new GameoverDialog(getContext());
+            GameOverDialog gameoverDialog = new GameOverDialog(getContext());
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.show();
         }

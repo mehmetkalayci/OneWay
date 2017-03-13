@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.GameActivity;
+import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.Utils.LevelHelper;
 
 public class GridFragment extends Fragment {
 
@@ -29,13 +33,25 @@ public class GridFragment extends Fragment {
         GridView gridView = (GridView) view.findViewById(R.id.grid);
         gridView.setAdapter(levelAdapter);
 
+        final LevelHelper levelHelper = new LevelHelper(getContext());
+        final DatabaseHandler dbHandler = new DatabaseHandler(getContext());
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent();
-                intent.setClass(view.getContext(), GameActivity.class);
-                intent.putExtra("level", position);
-                startActivity(intent);
+
+                Level tempLevel = levelHelper.getLevel(position);
+                com.yazilimciakli.oneway.Database.Level level = dbHandler.getLevel(tempLevel.levelid);
+                if (level != null || tempLevel.levelid == 1) {
+                    Intent openLevelIntent = new Intent();
+                    openLevelIntent.setClass(view.getContext(), GameActivity.class);
+                    openLevelIntent.putExtra("levelId", position);
+                    startActivity(openLevelIntent);
+                }else {
+                    Toast.makeText(getContext(), "Level Kilitli", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 

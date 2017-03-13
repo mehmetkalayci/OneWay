@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="340dp">
+    android:layout_height="340dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <ImageView
         android:layout_width="match_parent"

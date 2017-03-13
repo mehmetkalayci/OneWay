@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yazilimciakli.oneway.MainActivity"
+    android:gravity="center">
+
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnPlay"
+        android:id="@+id/btnPlay"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSettings"
+        android:id="@+id/btnSettings"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btnPlay"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnExit"
+        android:id="@+id/btnExit"
+        android:layout_below="@+id/btnSettings"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/app_name"
+        android:textColor="#fff"
+        android:textSize="60sp"
+        android:id="@+id/textView"
+        android:layout_above="@+id/btnPlay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:textStyle="bold"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>
