@@ -23,7 +23,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 5);
-        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setColor(Color.rgb(0, 201, 219));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
@@ -34,7 +34,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 5);
-        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setColor(Color.rgb(0, 201, 219));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
@@ -45,7 +45,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 5);
-        paint.setColor(Color.argb(50, 255, 255, 255));
+        paint.setColor(Color.argb(50, 0, 0, 0));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
@@ -56,7 +56,7 @@ public class PaintHelper {
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(screenRatio * 2);
-        paint.setColor(Color.argb(50, 255, 255, 255));
+        paint.setColor(Color.argb(50, 0, 201, 219));
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
@@ -65,7 +65,7 @@ public class PaintHelper {
     public Paint borderText() {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setColor(Color.rgb(0, 201, 219));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
         paint.setTextSize(screenRatio * 20);
@@ -75,7 +75,7 @@ public class PaintHelper {
     public Paint titleText() {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setColor(Color.rgb(0, 201, 219));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
         paint.setTextSize(screenRatio * 30);
@@ -85,7 +85,7 @@ public class PaintHelper {
     public Paint borderMiddleText() {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.rgb(255, 255, 255));
+        paint.setColor(Color.rgb(0, 201, 219));
         paint.setFakeBoldText(true);
         paint.setTypeface(plain);
         paint.setTextSize(screenRatio * 20);

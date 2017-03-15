@@ -7,4 +7,5 @@
     
     <color name="progressbar_bg">#64000000</color>
     <color name="progressbar_text">#ffffff</color>
+    <color name="BackgroundColor">#daefed</color>
 </resources>

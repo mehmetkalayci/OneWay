@@ -3,7 +3,6 @@ package com.yazilimciakli.oneway.Controls;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,9 +65,19 @@ public class LevelAdapter extends BaseAdapter {
         com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
 
         if (tempLevel != null ||  levelList.get(position).levelid == 1) {
-            star1.setImageResource(R.drawable.ic_star_black_48dp);
-            star2.setImageResource(R.drawable.ic_star_black_48dp);
-            star3.setImageResource(R.drawable.ic_star_black_48dp);
+
+            if(tempLevel == null || (tempLevel.getScore()==0 && tempLevel.getElapsedTime()==0)) {
+
+                star1.setImageResource(R.drawable.ic_star_black_48dp);
+                star2.setImageResource(R.drawable.ic_star_black_48dp);
+                star3.setImageResource(R.drawable.ic_star_black_48dp);
+
+            }else
+            {
+                star1.setImageResource(R.drawable.ic_star_gold_48dp);
+                star2.setImageResource(R.drawable.ic_star_gold_48dp);
+                star3.setImageResource(R.drawable.ic_star_black_48dp);
+            }
         } else {
             star1.setVisibility(View.INVISIBLE);
             star2.setVisibility(View.INVISIBLE);

@@ -41,11 +41,14 @@ public class LevelActivity extends AppCompatActivity {
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
+
+
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         LevelHelper levelHelper = new LevelHelper(this);
 
-        double page;
+        int page;
         double perPage = 9;
         double totalItems = levelHelper.getLevelSize();
         double totalPage = Math.ceil(totalItems / perPage);
@@ -57,9 +60,13 @@ public class LevelActivity extends AppCompatActivity {
             tempLevels = levelHelper.getLevels().subList(limit, (int) ((page == totalPage) ? totalItems : perPage * page));
 
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
-            viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter));
+            viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter,page));
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         levelPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(levelPager);
     }

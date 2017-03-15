@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.yazilimciakli.oneway.R;
 
 
-public class GameOverDialog extends Dialog {
+class GameOverDialog extends Dialog {
 
     TextView lblTitle, lblMessage;
     ImageButton btnRepeat;

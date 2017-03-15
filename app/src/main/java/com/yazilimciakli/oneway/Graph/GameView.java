@@ -8,10 +8,12 @@ import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
@@ -89,7 +91,6 @@ public class GameView extends View implements Runnable {
         super(context, attrs);
         setFocusable(true);
         setFocusableInTouchMode(true);
-        setBackgroundColor(Color.rgb(31, 31, 33));
     }
 
     public void setLevel(int level) {
@@ -308,6 +309,47 @@ public class GameView extends View implements Runnable {
                         // Oyunu bitirdiyse
                         if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
+                            DatabaseHandler dbHandler;
+                            dbHandler = new DatabaseHandler(getContext());
+
+                            com.yazilimciakli.oneway.Database.Level tempData= dbHandler.getLevel(currentLevel.levelid);
+
+                            Log.d("deneme",tempData.toString());
+                            if(tempData!=null) {
+                                if(tempData.getScore()==0 && tempData.getElapsedTime()==0)
+                                {
+                                    com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
+                                    com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
+                                    levels.setLevelId(currentLevel.levelid);
+                                    levels.setElapsedTime(time);
+                                    levels.setScore(currentLevel.score);
+                                    dbHandler.updateLevel(levels);
+                                    level2.setLevelId(currentLevel.levelid+1);
+                                    dbHandler.addLevel(level2);
+                                }
+                                else
+                                {
+                                    com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
+                                    com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
+                                    levels.setLevelId(currentLevel.levelid);
+                                    levels.setElapsedTime(time);
+                                    levels.setScore(currentLevel.score);
+                                    dbHandler.updateLevel(levels);
+                                    level2.setLevelId(currentLevel.levelid+1);
+                                    dbHandler.addLevel(level2);
+                                }
+                            }
+                            else {
+                                com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
+                                com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
+                                levels.setLevelId(currentLevel.levelid);
+                                levels.setElapsedTime(time);
+                                levels.setScore(currentLevel.score);
+                                dbHandler.addLevel(levels);
+                                level2.setLevelId(currentLevel.levelid+1);
+                                dbHandler.addLevel(level2);
+                            }
+
                             WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(currentLevel.score));
                             winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             winDialog.show();
