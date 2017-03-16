@@ -28,11 +28,13 @@ public class GridFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.grid, container, false);
         GridView gridView = (GridView) view.findViewById(R.id.grid);
         gridView.setAdapter(levelAdapter);
+
+
 
         final LevelHelper levelHelper = new LevelHelper(getContext());
         final DatabaseHandler dbHandler = new DatabaseHandler(getContext());
@@ -46,9 +48,13 @@ public class GridFragment extends Fragment {
 
                 if (level != null || tempLevel.levelid == 1) {
                     Intent openLevelIntent = new Intent();
+
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
                     openLevelIntent.putExtra("levelId", position);
                     startActivity(openLevelIntent);
+
+                    getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
                 }else {
                     Toast.makeText(getContext(), "Level Kilitli", Toast.LENGTH_SHORT).show();
                 }

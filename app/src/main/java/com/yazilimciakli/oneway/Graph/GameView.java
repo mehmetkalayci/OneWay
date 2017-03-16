@@ -1,6 +1,8 @@
 package com.yazilimciakli.oneway.Graph;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +17,7 @@ import android.view.View;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
@@ -84,6 +87,14 @@ public class GameView extends View implements Runnable {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         mHandler.removeCallbacks(this);
+        Intent openLevelIntent = new Intent();
+
+        openLevelIntent.setClass(getContext(), LevelActivity.class);
+
+        getContext().startActivity(openLevelIntent);
+
+        Activity activity = (Activity) getContext();
+        activity.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
         return super.dispatchKeyEvent(event);
     }
 

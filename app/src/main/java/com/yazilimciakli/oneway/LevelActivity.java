@@ -1,10 +1,12 @@
 package com.yazilimciakli.oneway;
 
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Controls.GridFragment;
@@ -28,12 +30,19 @@ public class LevelActivity extends AppCompatActivity {
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Intent openLevelIntent = new Intent();
+        openLevelIntent.setClass(this, MainActivity.class);
+        startActivity(openLevelIntent);
+        this.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+        return super.dispatchKeyEvent(event);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
-
         lblSelectLevel = (TextView) findViewById(R.id.lblSelectLevel);
         typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
         lblSelectLevel.setTypeface(typeface);
