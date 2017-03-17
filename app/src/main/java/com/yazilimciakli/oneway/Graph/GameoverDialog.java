@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.GameActivity;
+import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 
 
@@ -27,7 +29,19 @@ class GameOverDialog extends Dialog {
         this.cntx=context;
         this.levelID=levelID;
     }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        Intent openLevelIntent = new Intent();
 
+        openLevelIntent.setClass(getContext(), LevelActivity.class);
+
+        cntx.startActivity(openLevelIntent);
+
+        Activity activity = (Activity) cntx;
+        activity.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+        return super.dispatchKeyEvent(event);
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +69,7 @@ class GameOverDialog extends Dialog {
                 cntx.startActivity(openLevelIntent);
 
                 Activity activity = (Activity) cntx;
-                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                activity.overridePendingTransition( R.anim.fadein,R.anim.fadeout);
             }
         });
     }

@@ -363,6 +363,7 @@ public class GameView extends View implements Runnable {
 
                             WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(currentLevel.score),currentLevel.levelid);
                             winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            winDialog.setCanceledOnTouchOutside(false);
                             winDialog.show();
                         }
                     }
@@ -390,6 +391,7 @@ public class GameView extends View implements Runnable {
             isGameOver = true;
             GameOverDialog gameoverDialog = new GameOverDialog(getContext(),currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            gameoverDialog.setCanceledOnTouchOutside(false);
             gameoverDialog.show();
         }
     }
