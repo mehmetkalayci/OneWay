@@ -1,24 +1,31 @@
 package com.yazilimciakli.oneway.Graph;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.R;
 
 
 class GameOverDialog extends Dialog {
-
+    Context cntx;
     TextView lblTitle, lblMessage;
     ImageButton btnRepeat;
     Typeface typeface;
+    int levelID;
 
-    public GameOverDialog(Context context) {
+    public GameOverDialog(Context context,int levelID) {
         super(context);
+        this.cntx=context;
+        this.levelID=levelID;
     }
 
     @Override
@@ -35,5 +42,21 @@ class GameOverDialog extends Dialog {
 
         lblTitle.setTypeface(typeface);
         lblMessage.setTypeface(typeface);
+
+        btnRepeat=(ImageButton)findViewById(R.id.gameover_repeat);
+
+        btnRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openLevelIntent = new Intent();
+
+                openLevelIntent.setClass(cntx, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID-1);
+                cntx.startActivity(openLevelIntent);
+
+                Activity activity = (Activity) cntx;
+                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+            }
+        });
     }
 }

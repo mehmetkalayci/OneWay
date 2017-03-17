@@ -1,27 +1,35 @@
 package com.yazilimciakli.oneway.Graph;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.R;
 
 public class WinDialog extends Dialog {
 
+    Context cntx;
     String title, remainingTime, score;
     TextView lblTitle, lblTopMessage, lblBottomMessage, lblWinTitle, lblScore, lblRemainingTime;
     ImageButton repeat_button, next_button;
     Typeface typeface;
+    int levelID;
 
-    public WinDialog(Context context, String title, String remainingTime, String score) {
+    public WinDialog(Context context, String title, String remainingTime, String score,int levelID) {
         super(context);
+        this.cntx=context;
         this.title = title;
         this.remainingTime = remainingTime;
         this.score = score;
+        this.levelID=levelID;
     }
 
     @Override
@@ -49,5 +57,35 @@ public class WinDialog extends Dialog {
         lblTitle.setText(title);
         lblRemainingTime.setText(String.format(getContext().getResources().getString(R.string.remaining_time), remainingTime));
         lblScore.setText(score);
+
+        repeat_button=(ImageButton) findViewById(R.id.repeat_button);
+        next_button=(ImageButton)findViewById(R.id.next_button);
+
+        repeat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openLevelIntent = new Intent();
+
+                openLevelIntent.setClass(cntx, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID-1);
+                cntx.startActivity(openLevelIntent);
+
+                Activity activity = (Activity) cntx;
+                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+            }
+        });
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openLevelIntent = new Intent();
+
+                openLevelIntent.setClass(cntx, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID);
+                cntx.startActivity(openLevelIntent);
+
+                Activity activity = (Activity) cntx;
+                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+            }
+        });
     }
 }
