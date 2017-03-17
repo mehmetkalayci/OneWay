@@ -43,14 +43,17 @@ public class GridFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Level tempLevel=new Level();
-                tempLevel = levelHelper.getLevel(position);
+
+                tempLevel = levelHelper.getLevel(position+((pageNumber-1)*9));
+
+
                 com.yazilimciakli.oneway.Database.Level level = dbHandler.getLevel(tempLevel.levelid);
 
                 if (level != null || tempLevel.levelid == 1) {
                     Intent openLevelIntent = new Intent();
 
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
-                    openLevelIntent.putExtra("levelId", position);
+                    openLevelIntent.putExtra("levelId", position+((pageNumber-1)*9));
                     startActivity(openLevelIntent);
 
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
