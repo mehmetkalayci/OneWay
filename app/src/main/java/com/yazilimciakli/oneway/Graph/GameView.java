@@ -10,7 +10,6 @@ import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -325,7 +324,27 @@ public class GameView extends View implements Runnable {
 
                             com.yazilimciakli.oneway.Database.Level tempData= dbHandler.getLevel(currentLevel.levelid);
 
-                            Log.d("deneme",tempData.toString());
+                            /*Skor Hesaplama Başlangıç*/
+                            int writeSkore;
+                            if((currentLevel.time-time)<=(currentLevel.time/3))
+                            {
+                                writeSkore=currentLevel.score;
+                            }
+                            else if((currentLevel.time-time)<=(currentLevel.time/2))
+                            {
+                                writeSkore=currentLevel.score/2;
+                            }
+                            else if((currentLevel.time-time)<(currentLevel.time))
+                            {
+                                writeSkore=currentLevel.score/4;
+                            }
+                            else
+                            {
+                                writeSkore=0;
+                            }
+                            /*Skor Hesaplama Bitiş*/
+
+
                             if(tempData!=null) {
                                 if(tempData.getScore()==0 && tempData.getElapsedTime()==0)
                                 {
@@ -333,7 +352,7 @@ public class GameView extends View implements Runnable {
                                     com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
                                     levels.setLevelId(currentLevel.levelid);
                                     levels.setElapsedTime(time);
-                                    levels.setScore(currentLevel.score);
+                                    levels.setScore(writeSkore);
                                     dbHandler.updateLevel(levels);
                                     level2.setLevelId(currentLevel.levelid+1);
                                     dbHandler.addLevel(level2);
@@ -344,7 +363,7 @@ public class GameView extends View implements Runnable {
                                     com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
                                     levels.setLevelId(currentLevel.levelid);
                                     levels.setElapsedTime(time);
-                                    levels.setScore(currentLevel.score);
+                                    levels.setScore(writeSkore);
                                     dbHandler.updateLevel(levels);
                                     level2.setLevelId(currentLevel.levelid+1);
                                     dbHandler.addLevel(level2);
@@ -355,13 +374,13 @@ public class GameView extends View implements Runnable {
                                 com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
                                 levels.setLevelId(currentLevel.levelid);
                                 levels.setElapsedTime(time);
-                                levels.setScore(currentLevel.score);
+                                levels.setScore(writeSkore);
                                 dbHandler.addLevel(levels);
                                 level2.setLevelId(currentLevel.levelid+1);
                                 dbHandler.addLevel(level2);
                             }
 
-                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(currentLevel.score),currentLevel.levelid);
+                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(writeSkore),currentLevel.levelid);
                             winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             winDialog.setCanceledOnTouchOutside(false);
                             winDialog.show();

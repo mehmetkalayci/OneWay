@@ -74,9 +74,25 @@ public class LevelAdapter extends BaseAdapter {
 
             }else
             {
-                star1.setImageResource(R.drawable.ic_star_gold_48dp);
-                star2.setImageResource(R.drawable.ic_star_gold_48dp);
-                star3.setImageResource(R.drawable.ic_star_black_48dp);
+                if(tempLevel.getScore()==levelList.get(position).score)
+                {
+                    star1.setImageResource(R.drawable.ic_star_gold_48dp);
+                    star2.setImageResource(R.drawable.ic_star_gold_48dp);
+                    star3.setImageResource(R.drawable.ic_star_gold_48dp);
+                }
+                else if(tempLevel.getScore()==levelList.get(position).score/2)
+                {
+                    star1.setImageResource(R.drawable.ic_star_gold_48dp);
+                    star2.setImageResource(R.drawable.ic_star_gold_48dp);
+                    star3.setImageResource(R.drawable.ic_star_black_48dp);
+                }
+                else
+                {
+                    star1.setImageResource(R.drawable.ic_star_gold_48dp);
+                    star2.setImageResource(R.drawable.ic_star_black_48dp);
+                    star3.setImageResource(R.drawable.ic_star_black_48dp);
+                }
+
             }
         } else {
             star1.setVisibility(View.INVISIBLE);
