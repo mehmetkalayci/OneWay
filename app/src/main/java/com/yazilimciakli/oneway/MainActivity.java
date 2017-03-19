@@ -26,20 +26,6 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         progressDialog.setContentView(R.layout.progressbar);
 
-        WebView webView = (WebView) findViewById(R.id.webView);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
-                    progressDialog.dismiss();
-                }
-            }
-        });
-        webView.loadUrl("file:///android_asset/bg/index.html");
-
-
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, FONT, true);
 
