@@ -33,7 +33,7 @@ public class LevelActivity extends AppCompatActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(this, MainActivity.class);
+        openLevelIntent.setClass(getApplicationContext(), MainActivity.class);
         startActivity(openLevelIntent);
         this.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
         return super.dispatchKeyEvent(event);

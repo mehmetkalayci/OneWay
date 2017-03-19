@@ -16,6 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Dialog.FinishDialog;
+import com.yazilimciakli.oneway.Dialog.GameOverDialog;
+import com.yazilimciakli.oneway.Dialog.WinDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.LevelActivity;
@@ -78,6 +81,7 @@ public class GameView extends View implements Runnable {
     // Oyun kontrol değişkenleri tanımı
     boolean isPointTouched = false;
     boolean isGameOver = false;
+    boolean lastLevel=false;
 
     // Oynanan level
     Level currentLevel;
@@ -349,15 +353,18 @@ public class GameView extends View implements Runnable {
                             // Eğer oyun daha önceden oynanmışsa
                             if (tempData != null) {
                                 // Eğer oyunu ilk defa oynuyorsa ya da sıfır puan almışsa
-                                if (tempData.getScore() == 0 && tempData.getElapsedTime() == 0) {
-                                    com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
-                                    com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
-                                    playingGame.setLevelId(currentLevel.levelid);
-                                    playingGame.setElapsedTime(time);
-                                    playingGame.setScore(gameScore);
-                                    dbHandler.updateLevel(playingGame);
-
-                                    // PATLAMA NOKTASI, SON LEVELDA
+                                com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
+                                com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
+                                playingGame.setLevelId(currentLevel.levelid);
+                                playingGame.setElapsedTime(time);
+                                playingGame.setScore(gameScore);
+                                dbHandler.updateLevel(playingGame);
+                                if(levelHelper.getLevelSize()==currentLevel.levelid)
+                                {
+                                    lastLevel=true;
+                                }
+                                else
+                                {
                                     nextLevel.setLevelId(currentLevel.levelid + 1);
                                     dbHandler.addLevel(nextLevel);
                                 }
@@ -372,24 +379,22 @@ public class GameView extends View implements Runnable {
                                 nextLevel.setLevelId(currentLevel.levelid + 1);
                                 dbHandler.addLevel(nextLevel);
                             }
+                            if(lastLevel)
+                            {
+                                FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
+                                finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                finishDialog.setCancelable(false);
+                                finishDialog.show();
+                            }
+                            else
+                            {
+                                WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
+                                winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                winDialog.setCancelable(false);
+                                winDialog.show();
+                            }
 
-                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
-                            winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            winDialog.setCancelable(true);
-                            winDialog.show();
-                            winDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    Intent openLevelIntent = new Intent();
 
-                                    openLevelIntent.setClass(getContext(), GameActivity.class);
-                                    openLevelIntent.putExtra("levelId", currentLevel.levelid - 1);
-                                    getContext().startActivity(openLevelIntent);
-
-                                    Activity activity = (Activity) getContext();
-                                    activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                                }
-                            });
                         }
                     }
                 }
@@ -410,7 +415,7 @@ public class GameView extends View implements Runnable {
             time--;
             timerCount += (width - ((screenRatio * 40) * 2)) / currentLevel.time;
 
-            redLevel += (255 / time) * 100;
+            redLevel = 0;
 
             invalidate();
             mHandler.postDelayed(this, 1000);
@@ -419,8 +424,21 @@ public class GameView extends View implements Runnable {
             isGameOver = true;
             GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            gameoverDialog.setCanceledOnTouchOutside(false);
+            gameoverDialog.setCanceledOnTouchOutside(true);
             gameoverDialog.show();
+            gameoverDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Intent openLevelIntent = new Intent();
+
+                    openLevelIntent.setClass(getContext(), GameActivity.class);
+                    openLevelIntent.putExtra("levelId", currentLevel.levelid - 1);
+                    getContext().startActivity(openLevelIntent);
+
+                    Activity activity = (Activity) getContext();
+                    activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                }
+            });
         }
     }
 }

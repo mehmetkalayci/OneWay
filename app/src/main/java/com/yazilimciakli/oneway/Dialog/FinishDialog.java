@@ -1,4 +1,4 @@
-package com.yazilimciakli.oneway.Graph;
+package com.yazilimciakli.oneway.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,16 +16,20 @@ import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 
-public class WinDialog extends Dialog {
+/**
+ * Created by Admin on 19.03.2017.
+ */
+
+public class FinishDialog extends Dialog {
 
     Context context;
     String title, remainingTime, score;
     TextView lblTitle, lblTopMessage, lblBottomMessage, lblWinTitle, lblScore, lblRemainingTime;
-    ImageButton btnRestart, btnNextLevel;
+    ImageButton btnRestart;
     Typeface typeface;
     int levelID;
 
-    public WinDialog(Context context, String title, String remainingTime, String score, int levelID) {
+    public FinishDialog(Context context, String title, String remainingTime, String score, int levelID) {
         super(context);
         this.context = context;
         this.title = title;
@@ -50,7 +54,7 @@ public class WinDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.win_game);
+        setContentView(R.layout.finish_game);
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
@@ -73,7 +77,7 @@ public class WinDialog extends Dialog {
         lblScore.setText(score);
 
         btnRestart = (ImageButton) findViewById(R.id.btnRestart);
-        btnNextLevel = (ImageButton) findViewById(R.id.btnNextLevel);
+
 
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,18 +93,5 @@ public class WinDialog extends Dialog {
             }
         });
 
-        btnNextLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openLevelIntent = new Intent();
-
-                openLevelIntent.setClass(context, GameActivity.class);
-                openLevelIntent.putExtra("levelId", levelID);
-                context.startActivity(openLevelIntent);
-
-                Activity activity = (Activity) context;
-                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-            }
-        });
     }
 }

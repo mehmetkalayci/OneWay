@@ -1,4 +1,4 @@
-package com.yazilimciakli.oneway.Graph;
+package com.yazilimciakli.oneway.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,7 +17,7 @@ import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 
 
-class GameOverDialog extends Dialog {
+public class GameOverDialog extends Dialog {
 
     Context context;
     TextView lblTitle, lblMessage;
