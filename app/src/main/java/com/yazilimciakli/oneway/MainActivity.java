@@ -21,11 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.show();
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        progressDialog.setContentView(R.layout.progressbar);
-
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, FONT, true);
 
