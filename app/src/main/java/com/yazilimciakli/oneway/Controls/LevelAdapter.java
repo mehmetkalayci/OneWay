@@ -64,30 +64,25 @@ public class LevelAdapter extends BaseAdapter {
 
         com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
 
-        if (tempLevel != null ||  levelList.get(position).levelid == 1) {
+        if (tempLevel != null || levelList.get(position).levelid == 1) {
 
-            if(tempLevel == null || (tempLevel.getScore()==0 && tempLevel.getElapsedTime()==0)) {
+            if (tempLevel == null || (tempLevel.getScore() == 0 && tempLevel.getElapsedTime() == 0)) {
 
                 star1.setImageResource(R.drawable.ic_star_black_48dp);
                 star2.setImageResource(R.drawable.ic_star_black_48dp);
                 star3.setImageResource(R.drawable.ic_star_black_48dp);
 
-            }else
-            {
-                if(tempLevel.getScore()==levelList.get(position).score)
-                {
+            } else {
+
+                if (tempLevel.getScore() == levelList.get(position).score) {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_gold_48dp);
                     star3.setImageResource(R.drawable.ic_star_gold_48dp);
-                }
-                else if(tempLevel.getScore()==levelList.get(position).score/2)
-                {
+                } else if (tempLevel.getScore() == levelList.get(position).score / 2) {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_gold_48dp);
                     star3.setImageResource(R.drawable.ic_star_black_48dp);
-                }
-                else
-                {
+                } else {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_black_48dp);
                     star3.setImageResource(R.drawable.ic_star_black_48dp);

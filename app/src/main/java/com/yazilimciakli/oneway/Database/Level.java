@@ -37,6 +37,7 @@ public class Level {
     public void setElapsedTime(Integer elapsedTime) {
         this.elapsedTime = elapsedTime;
     }
+
     @Override
     public String toString() {
         return "Level{" +

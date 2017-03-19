@@ -2,6 +2,7 @@ package com.yazilimciakli.oneway.Graph;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
@@ -46,8 +48,8 @@ public class GameView extends View implements Runnable {
     int time = 0;
     int timerCount = 0;
 
-    //Puan Tanımı
-    int score = 0;
+    //Time Progressbar Renk Ayarı
+    int redLevel = 0;
 
     //Level tanımı
     int level = 0;
@@ -59,7 +61,6 @@ public class GameView extends View implements Runnable {
     String levelName;
     String timeText = getResources().getString(R.string.timeText);
     String moveText = getResources().getString(R.string.moveText);
-    String gameOverMessage = getResources().getString(R.string.gameOverMessage);
 
     //WIDTH
     float width = 0;
@@ -86,14 +87,13 @@ public class GameView extends View implements Runnable {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         mHandler.removeCallbacks(this);
+
         Intent openLevelIntent = new Intent();
-
         openLevelIntent.setClass(getContext(), LevelActivity.class);
-
         getContext().startActivity(openLevelIntent);
 
         Activity activity = (Activity) getContext();
-        activity.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         return super.dispatchKeyEvent(event);
     }
 
@@ -103,9 +103,13 @@ public class GameView extends View implements Runnable {
         setFocusableInTouchMode(true);
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-        currentLevel = levelHelper.getLevel(level);
+    /***
+     * GameActivityden verilen gameid 'sine göre oyununun ayarlarını yapar.
+     * @param levelId
+     */
+    public void setLevel(int levelId) {
+        this.level = levelId;
+        currentLevel = levelHelper.getLevel(levelId);
         time = currentLevel.time;
         moveNumber = currentLevel.moveNumber;
         userMove = currentLevel.moveNumber;
@@ -116,6 +120,10 @@ public class GameView extends View implements Runnable {
         requestLayout();
     }
 
+    /***
+     * Ekran genişliğine göre, ekran ayarını ve nesne boyutlandırmasıyla ilgili ayarları yapar.
+     * @param width
+     */
     public void setWidth(float width) {
         this.width = width;
         screenRatio = width / 480;
@@ -232,7 +240,7 @@ public class GameView extends View implements Runnable {
         canvas.drawPath(guidePath, paint.guideLine());
 
         // Time Progressbar
-        canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40) - timerCount, canvas.getHeight() - (screenRatio * 40), paint.pathLine());
+        canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40) - timerCount, canvas.getHeight() - (screenRatio * 40), paint.pathLineTime(redLevel));
         canvas.drawLine(screenRatio * 40, canvas.getHeight() - (screenRatio * 40), width - (screenRatio * 40), canvas.getHeight() - (screenRatio * 40), paint.pathLittleAlpa());
 
         /********* Game Text Başlangıç *********/
@@ -322,68 +330,66 @@ public class GameView extends View implements Runnable {
                             DatabaseHandler dbHandler;
                             dbHandler = new DatabaseHandler(getContext());
 
-                            com.yazilimciakli.oneway.Database.Level tempData= dbHandler.getLevel(currentLevel.levelid);
+                            com.yazilimciakli.oneway.Database.Level tempData = dbHandler.getLevel(currentLevel.levelid);
 
-                            /*Skor Hesaplama Başlangıç*/
-                            int writeSkore;
-                            if((currentLevel.time-time)<=(currentLevel.time/3))
-                            {
-                                writeSkore=currentLevel.score;
+                            /* Skor Hesaplama Başlangıç */
+                            int gameScore;
+                            if ((currentLevel.time - time) <= (currentLevel.time / 3)) {
+                                gameScore = currentLevel.score;
+                            } else if ((currentLevel.time - time) <= (currentLevel.time / 2)) {
+                                gameScore = currentLevel.score / 2;
+                            } else if ((currentLevel.time - time) < (currentLevel.time)) {
+                                gameScore = currentLevel.score / 4;
+                            } else {
+                                gameScore = 0;
                             }
-                            else if((currentLevel.time-time)<=(currentLevel.time/2))
-                            {
-                                writeSkore=currentLevel.score/2;
-                            }
-                            else if((currentLevel.time-time)<(currentLevel.time))
-                            {
-                                writeSkore=currentLevel.score/4;
-                            }
-                            else
-                            {
-                                writeSkore=0;
-                            }
-                            /*Skor Hesaplama Bitiş*/
+                            /* /Skor Hesaplama Bitiş */
 
 
-                            if(tempData!=null) {
-                                if(tempData.getScore()==0 && tempData.getElapsedTime()==0)
-                                {
-                                    com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
-                                    com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
-                                    levels.setLevelId(currentLevel.levelid);
-                                    levels.setElapsedTime(time);
-                                    levels.setScore(writeSkore);
-                                    dbHandler.updateLevel(levels);
-                                    level2.setLevelId(currentLevel.levelid+1);
-                                    dbHandler.addLevel(level2);
+                            // Eğer oyun daha önceden oynanmışsa
+                            if (tempData != null) {
+                                // Eğer oyunu ilk defa oynuyorsa ya da sıfır puan almışsa
+                                if (tempData.getScore() == 0 && tempData.getElapsedTime() == 0) {
+                                    com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
+                                    com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
+                                    playingGame.setLevelId(currentLevel.levelid);
+                                    playingGame.setElapsedTime(time);
+                                    playingGame.setScore(gameScore);
+                                    dbHandler.updateLevel(playingGame);
+
+                                    // PATLAMA NOKTASI, SON LEVELDA
+                                    nextLevel.setLevelId(currentLevel.levelid + 1);
+                                    dbHandler.addLevel(nextLevel);
                                 }
-                                else
-                                {
-                                    com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
-                                    com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
-                                    levels.setLevelId(currentLevel.levelid);
-                                    levels.setElapsedTime(time);
-                                    levels.setScore(writeSkore);
-                                    dbHandler.updateLevel(levels);
-                                    level2.setLevelId(currentLevel.levelid+1);
-                                    dbHandler.addLevel(level2);
-                                }
-                            }
-                            else {
-                                com.yazilimciakli.oneway.Database.Level levels=new com.yazilimciakli.oneway.Database.Level();
-                                com.yazilimciakli.oneway.Database.Level level2=new com.yazilimciakli.oneway.Database.Level();
-                                levels.setLevelId(currentLevel.levelid);
-                                levels.setElapsedTime(time);
-                                levels.setScore(writeSkore);
-                                dbHandler.addLevel(levels);
-                                level2.setLevelId(currentLevel.levelid+1);
-                                dbHandler.addLevel(level2);
+                            } else {
+                                com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
+                                com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
+                                playingGame.setLevelId(currentLevel.levelid);
+                                playingGame.setElapsedTime(time);
+                                playingGame.setScore(gameScore);
+                                dbHandler.addLevel(playingGame);
+
+                                nextLevel.setLevelId(currentLevel.levelid + 1);
+                                dbHandler.addLevel(nextLevel);
                             }
 
-                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(writeSkore),currentLevel.levelid);
+                            WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                             winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            winDialog.setCanceledOnTouchOutside(false);
+                            winDialog.setCancelable(true);
                             winDialog.show();
+                            winDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    Intent openLevelIntent = new Intent();
+
+                                    openLevelIntent.setClass(getContext(), GameActivity.class);
+                                    openLevelIntent.putExtra("levelId", currentLevel.levelid - 1);
+                                    getContext().startActivity(openLevelIntent);
+
+                                    Activity activity = (Activity) getContext();
+                                    activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                                }
+                            });
                         }
                     }
                 }
@@ -403,12 +409,15 @@ public class GameView extends View implements Runnable {
         if (!isGameOver) {
             time--;
             timerCount += (width - ((screenRatio * 40) * 2)) / currentLevel.time;
+
+            redLevel += (255 / time) * 100;
+
             invalidate();
             mHandler.postDelayed(this, 1000);
         }
-        if (time == 0 &&  !isGameOver) {
+        if (time == 0 && !isGameOver) {
             isGameOver = true;
-            GameOverDialog gameoverDialog = new GameOverDialog(getContext(),currentLevel.levelid);
+            GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.setCanceledOnTouchOutside(false);
             gameoverDialog.show();

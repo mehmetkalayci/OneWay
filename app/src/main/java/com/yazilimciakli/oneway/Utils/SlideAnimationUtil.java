@@ -6,10 +6,6 @@ import android.view.animation.AnimationUtils;
 
 import com.yazilimciakli.oneway.R;
 
-/**
- * Created by Admin on 16.03.2017.
- */
-
 public class SlideAnimationUtil {
 
     /**

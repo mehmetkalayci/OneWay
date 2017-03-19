@@ -18,32 +18,30 @@ import com.yazilimciakli.oneway.R;
 
 public class WinDialog extends Dialog {
 
-    Context cntx;
+    Context context;
     String title, remainingTime, score;
     TextView lblTitle, lblTopMessage, lblBottomMessage, lblWinTitle, lblScore, lblRemainingTime;
-    ImageButton repeat_button, next_button;
+    ImageButton btnRestart, btnNextLevel;
     Typeface typeface;
     int levelID;
 
-    public WinDialog(Context context, String title, String remainingTime, String score,int levelID) {
+    public WinDialog(Context context, String title, String remainingTime, String score, int levelID) {
         super(context);
-        this.cntx=context;
+        this.context = context;
         this.title = title;
         this.remainingTime = remainingTime;
         this.score = score;
-        this.levelID=levelID;
+        this.levelID = levelID;
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         Intent openLevelIntent = new Intent();
-
         openLevelIntent.setClass(getContext(), LevelActivity.class);
+        context.startActivity(openLevelIntent);
 
-        cntx.startActivity(openLevelIntent);
-
-        Activity activity = (Activity) cntx;
-        activity.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+        Activity activity = (Activity) context;
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         return super.dispatchKeyEvent(event);
 
     }
@@ -56,10 +54,10 @@ public class WinDialog extends Dialog {
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
-        lblTitle = (TextView) findViewById(R.id.level_title);
+        lblTitle = (TextView) findViewById(R.id.lblLevelTitle);
         lblRemainingTime = (TextView) findViewById(R.id.remaining_time);
-        lblTopMessage = (TextView) findViewById(R.id.top_message);
-        lblBottomMessage = (TextView) findViewById(R.id.bottom_message);
+        lblTopMessage = (TextView) findViewById(R.id.lblMessageTitle);
+        lblBottomMessage = (TextView) findViewById(R.id.lblMessage);
         lblWinTitle = (TextView) findViewById(R.id.win_title);
         lblScore = (TextView) findViewById(R.id.score);
 
@@ -74,32 +72,33 @@ public class WinDialog extends Dialog {
         lblRemainingTime.setText(String.format(getContext().getResources().getString(R.string.remaining_time), remainingTime));
         lblScore.setText(score);
 
-        repeat_button=(ImageButton) findViewById(R.id.repeat_button);
-        next_button=(ImageButton)findViewById(R.id.next_button);
+        btnRestart = (ImageButton) findViewById(R.id.btnRestart);
+        btnNextLevel = (ImageButton) findViewById(R.id.btnNextLevel);
 
-        repeat_button.setOnClickListener(new View.OnClickListener() {
+        btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
 
-                openLevelIntent.setClass(cntx, GameActivity.class);
-                openLevelIntent.putExtra("levelId", levelID-1);
-                cntx.startActivity(openLevelIntent);
+                openLevelIntent.setClass(context, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID - 1);
+                context.startActivity(openLevelIntent);
 
-                Activity activity = (Activity) cntx;
-                activity.overridePendingTransition( R.anim.fadein,R.anim.fadeout);
+                Activity activity = (Activity) context;
+                activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
-        next_button.setOnClickListener(new View.OnClickListener() {
+
+        btnNextLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
 
-                openLevelIntent.setClass(cntx, GameActivity.class);
+                openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID);
-                cntx.startActivity(openLevelIntent);
+                context.startActivity(openLevelIntent);
 
-                Activity activity = (Activity) cntx;
+                Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });

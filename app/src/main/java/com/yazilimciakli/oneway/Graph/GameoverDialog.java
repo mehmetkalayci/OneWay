@@ -18,30 +18,31 @@ import com.yazilimciakli.oneway.R;
 
 
 class GameOverDialog extends Dialog {
-    Context cntx;
+
+    Context context;
     TextView lblTitle, lblMessage;
     ImageButton btnRepeat;
     Typeface typeface;
     int levelID;
 
-    public GameOverDialog(Context context,int levelID) {
+    public GameOverDialog(Context context, int levelID) {
         super(context);
-        this.cntx=context;
-        this.levelID=levelID;
+        this.context = context;
+        this.levelID = levelID;
     }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+
         Intent openLevelIntent = new Intent();
-
         openLevelIntent.setClass(getContext(), LevelActivity.class);
+        context.startActivity(openLevelIntent);
 
-        cntx.startActivity(openLevelIntent);
-
-        Activity activity = (Activity) cntx;
-        activity.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
+        Activity activity = (Activity) context;
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         return super.dispatchKeyEvent(event);
-
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,19 +58,19 @@ class GameOverDialog extends Dialog {
         lblTitle.setTypeface(typeface);
         lblMessage.setTypeface(typeface);
 
-        btnRepeat=(ImageButton)findViewById(R.id.gameover_repeat);
+        btnRepeat = (ImageButton) findViewById(R.id.gameover_repeat);
 
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
 
-                openLevelIntent.setClass(cntx, GameActivity.class);
-                openLevelIntent.putExtra("levelId", levelID-1);
-                cntx.startActivity(openLevelIntent);
+                openLevelIntent.setClass(context, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID - 1);
+                context.startActivity(openLevelIntent);
 
-                Activity activity = (Activity) cntx;
-                activity.overridePendingTransition( R.anim.fadein,R.anim.fadeout);
+                Activity activity = (Activity) context;
+                activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
     }
