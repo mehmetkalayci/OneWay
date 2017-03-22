@@ -16,10 +16,6 @@ import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 
-/**
- * Created by Admin on 19.03.2017.
- */
-
 public class FinishDialog extends Dialog {
 
     Context context;

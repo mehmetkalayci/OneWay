@@ -14,6 +14,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Dialog.FinishDialog;
@@ -81,25 +82,12 @@ public class GameView extends View implements Runnable {
     // Oyun kontrol değişkenleri tanımı
     boolean isPointTouched = false;
     boolean isGameOver = false;
-    boolean lastLevel=false;
+    boolean lastLevel = false;
 
     // Oynanan level
     Level currentLevel;
 
     Handler mHandler = new Handler();
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        mHandler.removeCallbacks(this);
-
-        Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(getContext(), LevelActivity.class);
-        getContext().startActivity(openLevelIntent);
-
-        Activity activity = (Activity) getContext();
-        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        return super.dispatchKeyEvent(event);
-    }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -109,6 +97,7 @@ public class GameView extends View implements Runnable {
 
     /***
      * GameActivityden verilen gameid 'sine göre oyununun ayarlarını yapar.
+     *
      * @param levelId
      */
     public void setLevel(int levelId) {
@@ -126,6 +115,7 @@ public class GameView extends View implements Runnable {
 
     /***
      * Ekran genişliğine göre, ekran ayarını ve nesne boyutlandırmasıyla ilgili ayarları yapar.
+     *
      * @param width
      */
     public void setWidth(float width) {
@@ -231,6 +221,10 @@ public class GameView extends View implements Runnable {
         return sum;
     }
 
+    /***
+     * Canvas üzerine çizilen her şey burada yapıldı
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -268,6 +262,11 @@ public class GameView extends View implements Runnable {
         canvas.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), paint.circlePaint());
     }
 
+    /***
+     * Oyunun oynandığı kodlar burası
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Oyun bittiyse çizmeyi engelle
@@ -359,12 +358,9 @@ public class GameView extends View implements Runnable {
                                 playingGame.setElapsedTime(time);
                                 playingGame.setScore(gameScore);
                                 dbHandler.updateLevel(playingGame);
-                                if(levelHelper.getLevelSize()==currentLevel.levelid)
-                                {
-                                    lastLevel=true;
-                                }
-                                else
-                                {
+                                if (levelHelper.getLevelSize() == currentLevel.levelid) {
+                                    lastLevel = true;
+                                } else {
                                     nextLevel.setLevelId(currentLevel.levelid + 1);
                                     dbHandler.addLevel(nextLevel);
                                 }
@@ -379,15 +375,12 @@ public class GameView extends View implements Runnable {
                                 nextLevel.setLevelId(currentLevel.levelid + 1);
                                 dbHandler.addLevel(nextLevel);
                             }
-                            if(lastLevel)
-                            {
+                            if (lastLevel) {
                                 FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                                 finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 finishDialog.setCancelable(false);
                                 finishDialog.show();
-                            }
-                            else
-                            {
+                            } else {
                                 WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                                 winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 winDialog.setCancelable(false);
@@ -409,6 +402,9 @@ public class GameView extends View implements Runnable {
         return true;
     }
 
+    /***
+     * Timer olayı burada yapıldı
+     */
     @Override
     public void run() {
         if (!isGameOver) {
@@ -441,4 +437,27 @@ public class GameView extends View implements Runnable {
             });
         }
     }
+
+    /***
+     * BACK butonuna tıklanınca Level Activity'e git
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Game over dialog çıkmış ise ve geri tuşuna basılırsa dialog kapanacak onun kontrolu yapılacak
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            mHandler.removeCallbacks(this);
+
+            Intent intent = new Intent(getContext(), LevelActivity.class);
+            getContext().startActivity(intent);
+            Activity activity = (Activity) getContext();
+            activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+            activity.finish();
+            return true;
+        }
+        return false;
+    }
+
+
 }
