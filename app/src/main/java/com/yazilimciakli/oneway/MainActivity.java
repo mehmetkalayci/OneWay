@@ -66,9 +66,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnPlay:
                 startActivity(new Intent(MainActivity.this, LevelActivity.class));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.btnSettings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.btnRateThisApp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.marketURL))));

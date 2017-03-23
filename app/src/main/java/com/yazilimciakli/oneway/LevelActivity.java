@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
@@ -32,12 +33,15 @@ public class LevelActivity extends AppCompatActivity {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(getApplicationContext(), MainActivity.class);
-        startActivity(openLevelIntent);
-        this.overridePendingTransition(R.anim.slide_from_left,R.anim.slide_to_right);
-        return super.dispatchKeyEvent(event);
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            startActivity(new Intent(LevelActivity.this, MainActivity.class));
+            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+            finish();
+            return true;
+        }
+        return false;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,6 @@ public class LevelActivity extends AppCompatActivity {
 
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
-
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -71,6 +74,7 @@ public class LevelActivity extends AppCompatActivity {
         }
     }
 
+    // Bu kodların amacı nedir???
     @Override
     protected void onResume() {
         super.onResume();

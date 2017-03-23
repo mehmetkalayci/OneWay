@@ -19,18 +19,11 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        view = (GameView) findViewById(R.id.view);
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int width = metrics.widthPixels;
-
-        Intent openLevelIntent = getIntent();
-        Integer data = openLevelIntent.getIntExtra("levelId", 0);
-
-        final ImageView backgroundOne = (ImageView) findViewById(R.id.anim1);
-        final ImageView backgroundTwo = (ImageView) findViewById(R.id.anim2);
-        final ImageView backgroundThree = (ImageView) findViewById(R.id.anim3);
+        /* Animation Code */
+        final ImageView background1 = (ImageView) findViewById(R.id.anim1);
+        final ImageView background2 = (ImageView) findViewById(R.id.anim2);
+        final ImageView background3 = (ImageView) findViewById(R.id.anim3);
 
         final ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 4.0f);
         animator.setRepeatCount(ValueAnimator.INFINITE);
@@ -39,17 +32,27 @@ public class GameActivity extends AppCompatActivity {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                final float progress = (float) animation.getAnimatedValue();
-                final float width = backgroundOne.getWidth();
-                final float translationX = width * progress;
-                backgroundOne.setTranslationX(translationX);
-                backgroundTwo.setTranslationX(translationX - width);
-                backgroundThree.setTranslationX(translationX - width - width);
-                backgroundOne.setTranslationX(translationX - width - width - width);
+                float progress = (float) animation.getAnimatedValue();
+                float width = background1.getWidth();
+                float translationX = width * progress;
+                background1.setTranslationX(translationX);
+                background2.setTranslationX(translationX - width);
+                background3.setTranslationX(translationX - width - width);
+                background1.setTranslationX(translationX - width - width - width);
             }
         });
         animator.start();
+        /* /Animation Code */
 
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+
+        Intent openLevelIntent = getIntent();
+        Integer data = openLevelIntent.getIntExtra("levelId", 0);
+
+        view = (GameView) findViewById(R.id.view);
         view.setWidth(width);
         view.setLevel(data);
     }
