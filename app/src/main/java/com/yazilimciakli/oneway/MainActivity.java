@@ -72,9 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnSettings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                finish();
                 break;
             case R.id.btnRateThisApp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.marketURL))));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
             case R.id.btnShare:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
