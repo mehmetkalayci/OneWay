@@ -20,6 +20,10 @@
     <string name="gameover_title">GAME OVER</string>
     <string name="gameover_message">UPPS! GAME OVER, YOU LOSE</string>
 
+    <string name="shareIntentTitle">Share</string>
+    <string name="shareMessageTitle">One Touch -Go-</string>
+    <string name="shareMessage">Check out One Touch -Go- game for your smartphone. Download it today from http://yazilimciakli.com</string>
 
+    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 
 </resources>

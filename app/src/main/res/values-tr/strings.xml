@@ -20,4 +20,10 @@
     <string name="gameover_title">OYUN BİTTİ</string>
     <string name="gameover_message">OYUN BİTTİ! KAYBETTİN</string>
 
+    <string name="shareIntentTitle">Paylaş</string>
+    <string name="shareMessageTitle">One Touch -Go-</string>
+    <string name="shareMessage">Akıllı telefonunuzda One Touch -Go- oyununu deneyin. Hemen http://yazilimciakli.com adresinden indirin.</string>
+
+    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
+
 </resources>

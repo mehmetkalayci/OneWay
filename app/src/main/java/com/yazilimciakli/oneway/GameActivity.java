@@ -44,8 +44,8 @@ public class GameActivity extends AppCompatActivity {
                 final float translationX = width * progress;
                 backgroundOne.setTranslationX(translationX);
                 backgroundTwo.setTranslationX(translationX - width);
-                backgroundThree.setTranslationX(translationX - width- width);
-                backgroundOne.setTranslationX(translationX- width- width-width);
+                backgroundThree.setTranslationX(translationX - width - width);
+                backgroundOne.setTranslationX(translationX - width - width - width);
             }
         });
         animator.start();

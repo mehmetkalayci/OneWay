@@ -415,13 +415,16 @@ public class GameView extends View implements Runnable {
         }
         if (time == 0 && !isGameOver) {
             isGameOver = true;
+
             GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.setCanceledOnTouchOutside(true);
             gameoverDialog.show();
+
             gameoverDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
+
                     Intent openLevelIntent = new Intent();
 
                     openLevelIntent.setClass(getContext(), GameActivity.class);
@@ -434,6 +437,9 @@ public class GameView extends View implements Runnable {
             });
         }
     }
+
+
+
 
     /***
      * BACK butonuna tıklanınca Level Activity'e git
