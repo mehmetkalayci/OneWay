@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Dialog.FinishDialog;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameView extends View implements Runnable {
-
 
     // pointListesi, oyuncuListesi tanımları
     ArrayList<Tuple<Point, ArrayList<Point>>> pointList = new ArrayList<>();
@@ -144,7 +142,6 @@ public class GameView extends View implements Runnable {
                 guidePath.moveTo(x, y);
                 guidePath.lineTo(sx, sy);
             }
-
             pointList.add(new Tuple<Point, ArrayList<Point>>(
                     point, new ArrayList<Point>(subPoint)
             ));

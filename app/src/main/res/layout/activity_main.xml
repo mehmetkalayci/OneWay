@@ -1,51 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yazilimciakli.oneway.MainActivity"
-    android:gravity="center">
+    android:background="@color/MainBackground">
 
-
-    <Button
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnPlay"
-        android:id="@+id/btnPlay"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/image_1"
+        android:id="@+id/anim1"
+        android:layout_alignParentTop="true" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnSettings"
-        android:id="@+id/btnSettings"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/btnPlay"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/image_2"
+        android:id="@+id/anim2"
+        android:layout_alignParentTop="true" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnExit"
-        android:id="@+id/btnExit"
-        android:layout_below="@+id/btnSettings"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        app:srcCompat="@drawable/image_3"
+        android:id="@+id/anim3"
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/logo"
+        android:id="@+id/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/app_name"
-        android:textColor="#fff"
-        android:textSize="60sp"
-        android:id="@+id/textView"
-        android:layout_above="@+id/btnPlay"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:textStyle="bold"
-        android:textAlignment="center" />
+        android:background="@drawable/bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="250dp">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnPlay"
+                android:background="@drawable/button"
+                android:layout_margin="7dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/setting_button"
+                android:id="@+id/btnSettings"
+                android:layout_margin="7dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="-20dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLike"
+                android:background="@drawable/like_button"
+                android:layout_margin="7dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnShare"
+                android:background="@drawable/share_button"
+                android:layout_margin="7dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnInfo"
+                android:background="@drawable/info_button"
+                android:layout_margin="7dp" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>
