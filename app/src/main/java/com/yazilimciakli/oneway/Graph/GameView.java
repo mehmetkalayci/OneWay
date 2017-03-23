@@ -433,12 +433,11 @@ public class GameView extends View implements Runnable {
 
                     Activity activity = (Activity) getContext();
                     activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    activity.finish();
                 }
             });
         }
     }
-
-
 
 
     /***
