@@ -2,14 +2,18 @@ package com.yazilimciakli.oneway;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.Calligrapher;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -86,5 +90,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
                 break;
         }
+    }
+    /***
+     * BACK butonuna tıklanınca Level Activity'e git
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Game over dialog çıkmış ise ve geri tuşuna basılırsa dialog kapanacak onun kontrolu yapılacak
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            ExitDialog exitDialog = new ExitDialog(this);
+            exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            exitDialog.setCancelable(false);
+            exitDialog.show();
+            return true;
+        }
+        return false;
     }
 }

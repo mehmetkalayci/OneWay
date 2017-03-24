@@ -24,6 +24,12 @@
     <string name="shareMessageTitle">One Touch -Go-</string>
     <string name="shareMessage">Akıllı telefonunuzda One Touch -Go- oyununu deneyin. Hemen http://yazilimciakli.com adresinden indirin.</string>
 
+    <!-- Exit Dialog-->
+    <string name="exitTitle">Çıkış</string>
+    <string name="exitMessage">Oyundan çıkmak istediğine emin misin?</string>
+    <string name="yesButton">Evet</string>
+    <string name="noButton">Hayır</string>
+
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 
 </resources>

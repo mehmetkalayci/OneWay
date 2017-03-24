@@ -24,6 +24,12 @@
     <string name="shareMessageTitle">One Touch -Go-</string>
     <string name="shareMessage">Prueba One Touch -Go- para tu smartphone.Visita http://yazilimciakli.com para descargarlo.</string>
 
+    <!-- Exit Dialog-->
+    <string name="exitTitle">Ausfahrt</string>
+    <string name="exitMessage">Sind sie sicher, dass Sie das spiel beenden?</string>
+    <string name="yesButton">Ja</string>
+    <string name="noButton">Nein</string>
+
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 
 </resources>
