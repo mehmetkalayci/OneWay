@@ -51,7 +51,6 @@ public class ExitDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 activity.finish();
-                System.exit(0);
             }
         });
         noBtn.setOnClickListener(new View.OnClickListener() {
