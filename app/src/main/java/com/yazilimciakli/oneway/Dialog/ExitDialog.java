@@ -1,6 +1,5 @@
 package com.yazilimciakli.oneway.Dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -46,11 +45,11 @@ public class ExitDialog extends Dialog {
         yesBtn.setTypeface(typeface);
         noBtn.setTypeface(typeface);
 
-        final Activity activity = (Activity) context;
+
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.finish();
+
             }
         });
         noBtn.setOnClickListener(new View.OnClickListener() {
