@@ -55,6 +55,7 @@ public class GridFragment extends Fragment {
                     startActivity(openLevelIntent);
 
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                    getActivity().finish();
                 } else {
                     Toast.makeText(getContext(), "Level Kilitli", Toast.LENGTH_SHORT).show();
                 }
