@@ -43,6 +43,8 @@ public class LevelActivity extends AppCompatActivity {
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        levelPager.setAdapter(viewPagerAdapter);
+        indicator.setViewPager(levelPager);
 
         LevelHelper levelHelper = new LevelHelper(this);
 
