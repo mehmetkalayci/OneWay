@@ -25,21 +25,21 @@ public class ExitDialog extends Dialog {
 
     public ExitDialog(Context context) {
         super(context);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.exit_dialog);
+        setContentView(R.layout.dialog_exit);
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         exitTitle = (TextView) findViewById(R.id.exitTitle);
         exitMessage = (TextView) findViewById(R.id.exitMessage);
-        yesBtn=(Button) findViewById(R.id.yesBtn);
-        noBtn=(Button) findViewById(R.id.noBtn);
+        yesBtn = (Button) findViewById(R.id.yesBtn);
+        noBtn = (Button) findViewById(R.id.noBtn);
 
         exitTitle.setTypeface(typeface);
         exitMessage.setTypeface(typeface);
@@ -47,18 +47,19 @@ public class ExitDialog extends Dialog {
         noBtn.setTypeface(typeface);
 
         final Activity activity = (Activity) context;
+
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.finish();
             }
         });
+
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cancel();
             }
         });
-
     }
 }

@@ -35,22 +35,10 @@ public class FinishDialog extends Dialog {
     }
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(getContext(), LevelActivity.class);
-        context.startActivity(openLevelIntent);
-
-        Activity activity = (Activity) context;
-        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        return super.dispatchKeyEvent(event);
-
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.finish_game);
+        setContentView(R.layout.dialog_finish);
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
@@ -89,5 +77,16 @@ public class FinishDialog extends Dialog {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent openLevelIntent = new Intent();
+        openLevelIntent.setClass(getContext(), LevelActivity.class);
+        context.startActivity(openLevelIntent);
+
+        Activity activity = (Activity) context;
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }
