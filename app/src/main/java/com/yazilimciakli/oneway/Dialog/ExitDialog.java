@@ -58,7 +58,7 @@ public class ExitDialog extends Dialog {
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancel();
+                dismiss();
             }
         });
     }

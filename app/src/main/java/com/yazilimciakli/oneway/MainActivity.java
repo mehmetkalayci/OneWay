@@ -91,21 +91,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    /***
-     * BACK butonuna tıklanınca Level Activity'e git
-     * @param event
-     * @return
-     */
+
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        // Game over dialog çıkmış ise ve geri tuşuna basılırsa dialog kapanacak onun kontrolu yapılacak
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            ExitDialog exitDialog = new ExitDialog(this);
-            exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            exitDialog.setCancelable(false);
-            exitDialog.show();
-            return true;
-        }
-        return false;
+    public void onBackPressed() {
+        super.onBackPressed();
+        ExitDialog exitDialog = new ExitDialog(this);
+        exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        exitDialog.setCancelable(false);
+        exitDialog.show();
     }
 }
