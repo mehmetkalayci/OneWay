@@ -78,6 +78,7 @@ public class GameActivity extends AppCompatActivity {
         //super.onBackPressed();
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
+        view.mHandler.removeCallbacks(this.view);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
     }

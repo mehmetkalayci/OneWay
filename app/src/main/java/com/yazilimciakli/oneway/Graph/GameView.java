@@ -11,7 +11,6 @@ import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -84,7 +83,7 @@ public class GameView extends View implements Runnable {
     // Oynanan level
     Level currentLevel;
 
-    Handler mHandler = new Handler();
+    public Handler mHandler = new Handler();
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -435,13 +434,5 @@ public class GameView extends View implements Runnable {
                 }
             });
         }
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        //Çıkarken Timer'ı sıfırlar
-        mHandler.removeCallbacks(this);
-
-        return super.dispatchKeyEvent(event);
     }
 }

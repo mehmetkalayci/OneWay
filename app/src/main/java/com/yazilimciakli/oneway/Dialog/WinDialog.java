@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -35,15 +34,14 @@ public class WinDialog extends Dialog {
     }
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
+    public void onBackPressed() {
+        //super.onBackPressed();
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);
 
         Activity activity = (Activity) context;
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        return super.dispatchKeyEvent(event);
-
     }
 
     @Override
