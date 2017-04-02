@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
@@ -53,7 +54,7 @@ public class LevelAdapter extends BaseAdapter {
         ImageView star1, star2, star3, lock;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View itemView = inflater.inflate(R.layout.level_item, parent, false);
+        View itemView = inflater.inflate(R.layout.layout_level_item, parent, false);
         title = (TextView) itemView.findViewById(R.id.levelText);
         title.setTypeface(typeface);
 

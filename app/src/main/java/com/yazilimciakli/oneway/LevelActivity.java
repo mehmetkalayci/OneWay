@@ -32,18 +32,6 @@ public class LevelActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
 
     @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            startActivity(new Intent(LevelActivity.this, MainActivity.class));
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-            finish();
-            return true;
-        }
-        return false;
-    }
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
@@ -55,6 +43,8 @@ public class LevelActivity extends AppCompatActivity {
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        levelPager.setAdapter(viewPagerAdapter);
+        indicator.setViewPager(levelPager);
 
         LevelHelper levelHelper = new LevelHelper(this);
 
@@ -74,11 +64,17 @@ public class LevelActivity extends AppCompatActivity {
         }
     }
 
-    // Bu kodların amacı nedir???
     @Override
     protected void onResume() {
         super.onResume();
-        levelPager.setAdapter(viewPagerAdapter);
-        indicator.setViewPager(levelPager);
+        viewPagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(LevelActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        finish();
     }
 }

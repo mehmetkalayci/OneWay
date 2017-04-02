@@ -437,28 +437,4 @@ public class GameView extends View implements Runnable {
             });
         }
     }
-
-
-    /***
-     * BACK butonuna tıklanınca Level Activity'e git
-     * @param event
-     * @return
-     */
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        // Game over dialog çıkmış ise ve geri tuşuna basılırsa dialog kapanacak onun kontrolu yapılacak
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-            mHandler.removeCallbacks(this);
-
-            Intent intent = new Intent(getContext(), LevelActivity.class);
-            getContext().startActivity(intent);
-            Activity activity = (Activity) getContext();
-            activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-            activity.finish();
-            return true;
-        }
-        return false;
-    }
-
-
 }
