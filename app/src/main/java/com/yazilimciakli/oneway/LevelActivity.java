@@ -6,8 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Controls.GridFragment;
@@ -70,9 +68,10 @@ public class LevelActivity extends AppCompatActivity {
         viewPagerAdapter.notifyDataSetChanged();
     }
 
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         startActivity(new Intent(LevelActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();

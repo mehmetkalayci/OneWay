@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/levelbg">
+    android:background="@drawable/levelscreen">
 
     <TextView
         android:id="@+id/lblSelectLevel"

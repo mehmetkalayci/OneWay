@@ -1,7 +1,6 @@
 package com.yazilimciakli.oneway;
 
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        //super.onBackPressed();
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);

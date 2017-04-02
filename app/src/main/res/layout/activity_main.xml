@@ -6,26 +6,53 @@
     android:layout_height="match_parent"
     android:background="@color/MainBackground">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mainscreen"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/image_1"
         android:id="@+id/anim1"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/anim2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="88dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="7dp" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/image_2"
         android:id="@+id/anim2"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/logo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="105dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="20dp" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/image_3"
         android:id="@+id/anim3"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="34dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="206dp"
+        android:layout_alignBottom="@+id/menu"
+        android:layout_alignRight="@+id/anim2"
+        android:layout_alignEnd="@+id/anim2" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -35,15 +62,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -108,4 +126,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>

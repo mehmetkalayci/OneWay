@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnRateThisApp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.marketURL))));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                break;
+            break;
             case R.id.btnShare:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
