@@ -21,7 +21,6 @@ import com.yazilimciakli.oneway.Dialog.GameOverDialog;
 import com.yazilimciakli.oneway.Dialog.WinDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
-import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
@@ -436,5 +435,13 @@ public class GameView extends View implements Runnable {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        //Çıkarken Timer'ı sıfırlar
+        mHandler.removeCallbacks(this);
+
+        return super.dispatchKeyEvent(event);
     }
 }
