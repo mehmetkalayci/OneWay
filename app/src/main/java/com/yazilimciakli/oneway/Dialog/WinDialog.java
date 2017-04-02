@@ -91,6 +91,8 @@ public class WinDialog extends Dialog {
         btnNextLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dismiss();
                 Intent openLevelIntent = new Intent();
 
                 openLevelIntent.setClass(context, GameActivity.class);
@@ -99,6 +101,7 @@ public class WinDialog extends Dialog {
 
                 Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
             }
         });
     }
