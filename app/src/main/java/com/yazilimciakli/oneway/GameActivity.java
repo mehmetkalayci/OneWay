@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
         final ImageView background2 = (ImageView) findViewById(R.id.anim2);
         final ImageView background3 = (ImageView) findViewById(R.id.anim3);
 
-        FrameLayout gameBackground=(FrameLayout) findViewById(R.id.gameBackground);
+        FrameLayout gameBackground = (FrameLayout) findViewById(R.id.gameBackground);
 
 
         final ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 4.0f);
@@ -59,23 +59,20 @@ public class GameActivity extends AppCompatActivity {
         view = (GameView) findViewById(R.id.view);
         view.setWidth(width);
         view.setLevel(data);
-        if(data==0)
-        {
+
+        if (data == 0) {
             gameBackground.setBackgroundResource(R.drawable.levelbg1);
         }
-        if(data==1)
-        {
+        if (data == 1) {
             gameBackground.setBackgroundResource(R.drawable.levelbg2);
         }
-        if(data==2)
-        {
+        if (data == 2) {
             gameBackground.setBackgroundResource(R.drawable.levelbg3);
         }
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         view.mHandler.removeCallbacks(this.view);

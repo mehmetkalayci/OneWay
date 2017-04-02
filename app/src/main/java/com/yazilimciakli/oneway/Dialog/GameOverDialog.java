@@ -32,13 +32,14 @@ public class GameOverDialog extends Dialog {
 
     @Override
     public void onBackPressed() {
-
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);
 
         Activity activity = (Activity) context;
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
+        activity.finish();
     }
 
     @Override

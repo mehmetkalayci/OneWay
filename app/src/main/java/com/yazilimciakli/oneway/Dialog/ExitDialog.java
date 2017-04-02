@@ -3,6 +3,7 @@ package com.yazilimciakli.oneway.Dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.R;
-
-/**
- * Created by Admin on 24.03.2017.
- */
 
 public class ExitDialog extends Dialog {
 
@@ -47,18 +44,27 @@ public class ExitDialog extends Dialog {
         noBtn.setTypeface(typeface);
 
         final Activity activity = (Activity) context;
+
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+                */
                 activity.finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(intent);
             }
         });
+
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cancel();
             }
         });
-
     }
 }
