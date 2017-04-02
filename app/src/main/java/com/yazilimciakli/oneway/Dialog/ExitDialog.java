@@ -32,7 +32,7 @@ public class ExitDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.exit_dialog);
+        setContentView(R.layout.dialog_exit);
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
