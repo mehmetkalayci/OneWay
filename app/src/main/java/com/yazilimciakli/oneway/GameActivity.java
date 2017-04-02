@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.yazilimciakli.oneway.Graph.GameView;
@@ -24,6 +25,9 @@ public class GameActivity extends AppCompatActivity {
         final ImageView background1 = (ImageView) findViewById(R.id.anim1);
         final ImageView background2 = (ImageView) findViewById(R.id.anim2);
         final ImageView background3 = (ImageView) findViewById(R.id.anim3);
+
+        FrameLayout gameBackground=(FrameLayout) findViewById(R.id.gameBackground);
+
 
         final ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 4.0f);
         animator.setRepeatCount(ValueAnimator.INFINITE);
@@ -55,6 +59,18 @@ public class GameActivity extends AppCompatActivity {
         view = (GameView) findViewById(R.id.view);
         view.setWidth(width);
         view.setLevel(data);
+        if(data==0)
+        {
+            gameBackground.setBackgroundResource(R.drawable.levelbg1);
+        }
+        if(data==1)
+        {
+            gameBackground.setBackgroundResource(R.drawable.levelbg2);
+        }
+        if(data==2)
+        {
+            gameBackground.setBackgroundResource(R.drawable.levelbg3);
+        }
     }
 
     @Override
