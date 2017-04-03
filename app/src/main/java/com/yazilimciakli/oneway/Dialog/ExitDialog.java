@@ -22,7 +22,7 @@ public class ExitDialog extends Dialog {
 
     public ExitDialog(Context context) {
         super(context);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
@@ -33,12 +33,13 @@ public class ExitDialog extends Dialog {
 
         this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
 
+
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
-        exitTitle = (TextView) findViewById(R.id.exitTitle);
+        exitTitle = (TextView) findViewById(R.id.lblExitTitle);
         exitMessage = (TextView) findViewById(R.id.exitMessage);
-        btnYes =(Button) findViewById(R.id.btnYes);
-        btnNo =(Button) findViewById(R.id.btnNo);
+        btnYes = (Button) findViewById(R.id.btnYes);
+        btnNo = (Button) findViewById(R.id.btnNo);
 
         exitTitle.setTypeface(typeface);
         exitMessage.setTypeface(typeface);
@@ -50,11 +51,6 @@ public class ExitDialog extends Dialog {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                int pid = android.os.Process.myPid();
-                android.os.Process.killProcess(pid);
-                */
-
                 dismiss();
 
                 activity.finish();
