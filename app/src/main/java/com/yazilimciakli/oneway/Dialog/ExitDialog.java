@@ -57,7 +57,6 @@ public class ExitDialog extends Dialog {
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 activity.finish();
