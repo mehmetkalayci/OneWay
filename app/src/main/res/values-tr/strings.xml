@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">One\n Touch-Go</string>
+    <string name="app_name">One\n Touch Go</string>
     <string name="levelName">Bölüm %1$s</string>
     <string name="btnPlay">Oyna</string>
     <string name="btnSettings">Ayarlar</string>
@@ -21,8 +21,8 @@
     <string name="gameover_message">OYUN BİTTİ! KAYBETTİN</string>
 
     <string name="shareIntentTitle">Paylaş</string>
-    <string name="shareMessageTitle">One Touch -Go-</string>
-    <string name="shareMessage">Akıllı telefonunuzda One Touch -Go- oyununu deneyin. Hemen http://yazilimciakli.com adresinden indirin.</string>
+    <string name="shareMessageTitle">One Touch Go</string>
+    <string name="shareMessage">Akıllı telefonunuzda One Touch Go oyununu deneyin. Hemen http://yazilimciakli.com adresinden indirin.</string>
 
     <!-- Exit Dialog-->
     <string name="exitTitle">Çıkış</string>

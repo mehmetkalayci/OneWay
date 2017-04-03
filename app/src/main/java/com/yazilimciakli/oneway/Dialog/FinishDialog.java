@@ -40,6 +40,9 @@ public class FinishDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_finish);
 
+        this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
+
+
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         lblTitle = (TextView) findViewById(R.id.lblLevelTitle);
@@ -81,6 +84,7 @@ public class FinishDialog extends Dialog {
 
     @Override
     public void onBackPressed() {
+
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);

@@ -51,6 +51,8 @@ public class WinDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_win_game);
 
+        this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
+
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         lblTitle = (TextView) findViewById(R.id.lblLevelTitle);

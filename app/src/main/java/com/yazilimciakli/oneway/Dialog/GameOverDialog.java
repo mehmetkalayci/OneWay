@@ -48,6 +48,8 @@ public class GameOverDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_game_over);
 
+        this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
+
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         lblTitle = (TextView) findViewById(R.id.gameover_title);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">One\n Touch-Go</string>
+    <string name="app_name">One\n Touch Go</string>
     <string name="btnExit">Salir</string>
     <string name="btnPlay">Jugar</string>
     <string name="levelName">Nivel %1$s</string>
@@ -21,8 +21,8 @@
     <string name="gameover_message">UPPS! GAME OVER, YOU LOSE</string>
 
     <string name="shareIntentTitle">Compartir</string>
-    <string name="shareMessageTitle">One Touch -Go-</string>
-    <string name="shareMessage">Prueba One Touch -Go- para tu smartphone.Visita http://yazilimciakli.com para descargarlo.</string>
+    <string name="shareMessageTitle">One Touch Go</string>
+    <string name="shareMessage">Prueba One Touch Go para tu smartphone.Visita http://yazilimciakli.com para descargarlo.</string>
 
     <!-- Exit Dialog-->
     <string name="exitTitle">Ausfahrt</string>

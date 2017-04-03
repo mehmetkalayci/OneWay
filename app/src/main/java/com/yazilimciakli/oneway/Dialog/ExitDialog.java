@@ -31,6 +31,8 @@ public class ExitDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_exit);
 
+        this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
+
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         exitTitle = (TextView) findViewById(R.id.exitTitle);
