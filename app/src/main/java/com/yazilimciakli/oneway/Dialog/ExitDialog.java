@@ -31,7 +31,7 @@ public class ExitDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_exit);
 
-        this.getWindow().getAttributes().windowAnimations = R.style.mypopwindow_anim_style;
+        this.getWindow().getAttributes().windowAnimations = R.style.popwindow_anim_style;
 
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
@@ -59,7 +59,7 @@ public class ExitDialog extends Dialog {
 
 
                 activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                activity.overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 activity.finish();
             }
         });

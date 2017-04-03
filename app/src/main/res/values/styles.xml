@@ -3,11 +3,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:windowFullscreen">true</item>
-
     </style>
 
 
-    <style name="mypopwindow_anim_style">
+    <style name="popwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/popup_show</item>
         <item name="android:windowExitAnimation">@anim/popup_dismiss</item>
     </style>
