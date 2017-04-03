@@ -59,7 +59,7 @@ public class ExitDialog extends Dialog {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
 
-                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                //activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
 
                 activity.finish();
             }
