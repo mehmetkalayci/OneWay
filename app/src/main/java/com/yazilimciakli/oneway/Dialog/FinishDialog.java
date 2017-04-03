@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -46,11 +45,11 @@ public class FinishDialog extends Dialog {
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         lblTitle = (TextView) findViewById(R.id.lblLevelTitle);
-        lblRemainingTime = (TextView) findViewById(R.id.remaining_time);
+        lblRemainingTime = (TextView) findViewById(R.id.lblRemainingTime);
         lblTopMessage = (TextView) findViewById(R.id.lblMessageTitle);
         lblBottomMessage = (TextView) findViewById(R.id.lblMessage);
-        lblWinTitle = (TextView) findViewById(R.id.win_title);
-        lblScore = (TextView) findViewById(R.id.score);
+        lblWinTitle = (TextView) findViewById(R.id.lblWinTitle);
+        lblScore = (TextView) findViewById(R.id.lblScore);
 
         lblTitle.setTypeface(typeface);
         lblRemainingTime.setTypeface(typeface);

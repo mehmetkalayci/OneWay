@@ -42,7 +42,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/level_title_layout">
+        android:id="@+id/titleLayout">
 
         <TextView
             android:text="Level 1"
@@ -72,7 +72,7 @@
         <TextView
             android:text="@string/win_title"
             android:layout_height="wrap_content"
-            android:id="@+id/win_title"
+            android:id="@+id/lblWinTitle"
             android:background="@drawable/curve_green"
             android:padding="10dp"
             android:textColor="#534459"

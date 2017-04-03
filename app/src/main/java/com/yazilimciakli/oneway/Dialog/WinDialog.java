@@ -59,7 +59,7 @@ public class WinDialog extends Dialog {
         lblRemainingTime = (TextView) findViewById(R.id.remaining_time);
         lblTopMessage = (TextView) findViewById(R.id.lblMessageTitle);
         lblBottomMessage = (TextView) findViewById(R.id.lblMessage);
-        lblWinTitle = (TextView) findViewById(R.id.win_title);
+        lblWinTitle = (TextView) findViewById(R.id.lblWinTitle);
         lblScore = (TextView) findViewById(R.id.score);
 
         lblTitle.setTypeface(typeface);

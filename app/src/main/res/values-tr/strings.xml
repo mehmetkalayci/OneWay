@@ -15,7 +15,7 @@
     <!-- MessageBox Begin-->
     <string name="top_message">TEBRİKLER</string>
     <string name="win_title">KAZANDIN</string>
-    <string name="bottom_message">BU BÖLÜMÜ KAZANDIN, SIRADA Kİ BÖLÜME GEÇEBİLİRSİN</string>
+    <string name="bottom_message">BU BÖLÜMÜ KAZANDIN, SIRADA Kİ BÖLÜME GEÇEBİLİRSİN BU BÖLÜMÜ KAZANDIN, SIRADA Kİ BÖLÜME GEÇEBİLİRSİNBU BÖLÜMÜ KAZANDIN, SIRADA Kİ BÖLÜME GEÇEBİLİRSİNBU BÖLÜMÜ KAZANDIN, SIRADA Kİ BÖLÜME GEÇEBİLİRSİN</string>
     <string name="remaining_time">%1$s SN</string>
     <string name="gameover_title">OYUN BİTTİ</string>
     <string name="gameover_message">OYUN BİTTİ! KAYBETTİN</string>
