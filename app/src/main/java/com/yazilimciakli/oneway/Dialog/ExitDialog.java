@@ -53,11 +53,15 @@ public class ExitDialog extends Dialog {
             public void onClick(View v) {
                 dismiss();
 
-                activity.finish();
+
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
+
+                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
+                activity.finish();
             }
         });
 
