@@ -66,7 +66,7 @@
                 android:text="@string/yesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/yesBtn"
+                android:id="@+id/btnYes"
                 android:background="@drawable/curve_blue"
                 android:textColorLink="@android:color/white"
                 android:layout_margin="10dp"
@@ -76,7 +76,7 @@
                 android:text="@string/noButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/noBtn"
+                android:id="@+id/btnNo"
                 android:background="@drawable/curve_blue"
                 android:layout_margin="10dp"
                 android:textColor="@android:color/white" />

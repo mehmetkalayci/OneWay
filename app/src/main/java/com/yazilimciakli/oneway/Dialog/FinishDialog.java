@@ -77,6 +77,7 @@ public class FinishDialog extends Dialog {
 
                 Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                activity.finish();
             }
         });
 
@@ -84,7 +85,6 @@ public class FinishDialog extends Dialog {
 
     @Override
     public void onBackPressed() {
-
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);

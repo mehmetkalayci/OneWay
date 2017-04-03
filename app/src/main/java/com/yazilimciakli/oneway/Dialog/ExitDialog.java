@@ -17,7 +17,7 @@ public class ExitDialog extends Dialog {
 
     Context context;
     TextView exitTitle, exitMessage;
-    Button yesBtn, noBtn;
+    Button btnYes, btnNo;
     Typeface typeface;
 
     public ExitDialog(Context context) {
@@ -37,23 +37,26 @@ public class ExitDialog extends Dialog {
 
         exitTitle = (TextView) findViewById(R.id.exitTitle);
         exitMessage = (TextView) findViewById(R.id.exitMessage);
-        yesBtn=(Button) findViewById(R.id.yesBtn);
-        noBtn=(Button) findViewById(R.id.noBtn);
+        btnYes =(Button) findViewById(R.id.btnYes);
+        btnNo =(Button) findViewById(R.id.btnNo);
 
         exitTitle.setTypeface(typeface);
         exitMessage.setTypeface(typeface);
-        yesBtn.setTypeface(typeface);
-        noBtn.setTypeface(typeface);
+        btnYes.setTypeface(typeface);
+        btnNo.setTypeface(typeface);
 
         final Activity activity = (Activity) context;
 
-        yesBtn.setOnClickListener(new View.OnClickListener() {
+        btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*
                 int pid = android.os.Process.myPid();
                 android.os.Process.killProcess(pid);
                 */
+
+                dismiss();
+
                 activity.finish();
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
@@ -62,10 +65,10 @@ public class ExitDialog extends Dialog {
             }
         });
 
-        noBtn.setOnClickListener(new View.OnClickListener() {
+        btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancel();
+                dismiss();
             }
         });
     }
