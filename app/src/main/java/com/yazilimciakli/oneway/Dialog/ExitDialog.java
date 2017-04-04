@@ -70,4 +70,9 @@ public class ExitDialog extends Dialog {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        dismiss();
+    }
 }

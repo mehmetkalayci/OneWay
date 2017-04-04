@@ -35,13 +35,14 @@ public class WinDialog extends Dialog {
 
     @Override
     public void onBackPressed() {
+        dismiss();
+
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);
 
         Activity activity = (Activity) context;
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-
         activity.finish();
     }
 
@@ -79,14 +80,16 @@ public class WinDialog extends Dialog {
         btnRestart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent openLevelIntent = new Intent();
+                dismiss();
 
+                Intent openLevelIntent = new Intent();
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
                 context.startActivity(openLevelIntent);
 
                 Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                activity.finish();
             }
         });
 
@@ -107,4 +110,6 @@ public class WinDialog extends Dialog {
             }
         });
     }
+
+
 }
