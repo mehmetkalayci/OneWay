@@ -34,19 +34,6 @@ public class WinDialog extends Dialog {
     }
 
     @Override
-    public void onBackPressed() {
-        dismiss();
-
-        Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(getContext(), LevelActivity.class);
-        context.startActivity(openLevelIntent);
-
-        Activity activity = (Activity) context;
-        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        activity.finish();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -57,11 +44,11 @@ public class WinDialog extends Dialog {
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
         lblTitle = (TextView) findViewById(R.id.lblLevelTitle);
-        lblRemainingTime = (TextView) findViewById(R.id.remaining_time);
+        lblRemainingTime = (TextView) findViewById(R.id.lblRemainingTime);
         lblTopMessage = (TextView) findViewById(R.id.lblMessageTitle);
         lblBottomMessage = (TextView) findViewById(R.id.lblMessage);
         lblWinTitle = (TextView) findViewById(R.id.lblWinTitle);
-        lblScore = (TextView) findViewById(R.id.score);
+        lblScore = (TextView) findViewById(R.id.lblScore);
 
         lblTitle.setTypeface(typeface);
         lblRemainingTime.setTypeface(typeface);
@@ -111,5 +98,18 @@ public class WinDialog extends Dialog {
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+        dismiss();
+
+        Intent openLevelIntent = new Intent();
+        openLevelIntent.setClass(getContext(), LevelActivity.class);
+        context.startActivity(openLevelIntent);
+
+        Activity activity = (Activity) context;
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        activity.finish();
+    }
 
 }

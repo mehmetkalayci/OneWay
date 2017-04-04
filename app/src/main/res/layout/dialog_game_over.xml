@@ -9,12 +9,12 @@
     <ImageView
         android:layout_width="match_parent"
         app:srcCompat="@drawable/curve_white"
-        android:id="@+id/backgorund"
+        android:id="@+id/background"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:scrollbarAlwaysDrawHorizontalTrack="true"
         android:layout_marginTop="20dp"
-        android:layout_height="125dp" />
+        android:layout_height="120dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +25,7 @@
         <TextView
             android:text="@string/gameover_title"
             android:layout_height="wrap_content"
-            android:id="@+id/gameover_title"
+            android:id="@+id/lblGameOverTitle"
             android:background="@drawable/curve_red"
             android:padding="10dp"
             android:layout_width="wrap_content"
@@ -36,50 +36,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:id="@+id/score_layout">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_buttons"
+        android:id="@+id/buttonLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/score_layout"
-        android:layout_marginTop="10dp">
+        android:gravity="center"
+        android:layout_marginTop="100dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:weightSum="1">
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_repeat"
-                android:id="@+id/gameover_repeat"
-                android:background="@android:color/transparent"
-                android:layout_margin="20dp"
-                android:layout_weight="0.47" />
-
-        </LinearLayout>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnRepeat"
+            android:src="@drawable/ic_repeat"
+            android:background="@android:color/transparent" />
     </LinearLayout>
 
     <TextView
         android:text="@string/gameover_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gameover_message"
+        android:id="@+id/lblGameOverMessage"
         android:gravity="center"
         android:layout_marginTop="65dp"
         android:textSize="14sp" />

@@ -31,19 +31,6 @@ public class GameOverDialog extends Dialog {
     }
 
     @Override
-    public void onBackPressed() {
-        dismiss();
-
-        Intent openLevelIntent = new Intent();
-        openLevelIntent.setClass(getContext(), LevelActivity.class);
-        context.startActivity(openLevelIntent);
-
-        Activity activity = (Activity) context;
-        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        activity.finish();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,14 +40,12 @@ public class GameOverDialog extends Dialog {
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
-        lblTitle = (TextView) findViewById(R.id.gameover_title);
-        lblMessage = (TextView) findViewById(R.id.gameover_message);
-        btnRepeat = (ImageButton) findViewById(R.id.gameover_repeat);
+        lblTitle = (TextView) findViewById(R.id.lblGameOverTitle);
+        lblMessage = (TextView) findViewById(R.id.lblGameOverMessage);
+        btnRepeat = (ImageButton) findViewById(R.id.btnRepeat);
 
         lblTitle.setTypeface(typeface);
         lblMessage.setTypeface(typeface);
-
-        btnRepeat = (ImageButton) findViewById(R.id.gameover_repeat);
 
         btnRepeat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,5 +61,18 @@ public class GameOverDialog extends Dialog {
                 activity.finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        dismiss();
+
+        Intent openLevelIntent = new Intent();
+        openLevelIntent.setClass(getContext(), LevelActivity.class);
+        context.startActivity(openLevelIntent);
+
+        Activity activity = (Activity) context;
+        activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        activity.finish();
     }
 }
