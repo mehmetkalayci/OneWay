@@ -4,9 +4,6 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,16 +13,10 @@ import android.widget.ImageView;
 
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.Calligrapher;
-import com.yazilimciakli.oneway.Utils.GameService;
-import com.yazilimciakli.oneway.Utils.MediaPlayerUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static String FONT = "fonts/Atma.ttf";
-
-    private int[] musics = { R.raw.jungle };
-    private int[] sounds = { R.raw.pop, R.raw.win, R.raw.fail };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         ImageButton btnSetting = (ImageButton) findViewById(R.id.btnSettings);
         ImageButton btnShare = (ImageButton) findViewById(R.id.btnShare);
-        ImageButton btnRateThisApp = (ImageButton) findViewById(R.id.btnRateThisApp);
+        //ImageButton btnRateThisApp = (ImageButton) findViewById(R.id.btnRateThisApp);
 
         btnPlay.setOnClickListener(MainActivity.this);
         btnSetting.setOnClickListener(MainActivity.this);
         btnShare.setOnClickListener(MainActivity.this);
-        btnRateThisApp.setOnClickListener(MainActivity.this);
-
+        //btnRateThisApp.setOnClickListener(MainActivity.this);
     }
 
     @Override
@@ -86,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 finish();
                 break;
-            case R.id.btnRateThisApp:
+            /*case R.id.btnRateThisApp:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.marketURL))));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                break;
+            break;*/
             case R.id.btnShare:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
@@ -102,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+        //super.onBackPressed();
         ExitDialog exitDialog = new ExitDialog(this);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exitDialog.setCancelable(false);
