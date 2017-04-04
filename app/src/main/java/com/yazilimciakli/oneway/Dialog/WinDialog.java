@@ -103,7 +103,7 @@ public class WinDialog extends Dialog {
 
                 Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-
+                activity.finish();
             }
         });
     }
