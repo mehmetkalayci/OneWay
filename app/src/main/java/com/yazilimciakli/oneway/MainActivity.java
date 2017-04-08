@@ -15,12 +15,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
-import com.yazilimciakli.oneway.Utils.Calligrapher;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static String FONT = "fonts/Atma.ttf";
 
     private AdView mAdView;
 
@@ -29,11 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Calligrapher calligrapher = new Calligrapher(this);
-        calligrapher.setFont(this, FONT, true);
-
-
 
         // Initialize the Mobile Ads SDK.
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
