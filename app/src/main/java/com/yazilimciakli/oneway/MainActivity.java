@@ -11,12 +11,19 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.Calligrapher;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static String FONT = "fonts/Atma.ttf";
+
+    private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, FONT, true);
+
+
+
+        // Initialize the Mobile Ads SDK.
+        MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
+
+        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+        // values/strings.xml.
+        mAdView = (AdView) findViewById(R.id.adView);
+
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+
+
 
 
         /* Animation Code */
