@@ -4,13 +4,7 @@
     <string name="levelName">Level %1$s</string>
     <string name="timeText">Time</string>
     <string name="moveText">Move</string>
-    <string name="btnSettings">Settings</string>
-    <string name="btnExit">Exit</string>
-    <string name="btnPlay">Play</string>
-    <string name="winMessage">You Win!</string>
-    <string name="gameOverMessage">Game Over :(</string>
     <string name="selectLevel">Select Level</string>
-    <string name="progressbar_text">Loading...</string>
 
     <!-- MessageBox Begin-->
     <string name="top_message">CONGRATULATIONS</string>
@@ -30,9 +24,5 @@
     <string name="yesButton">Yes</string>
     <string name="noButton">No</string>
 
-    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
-
-
-    <string name="banner_ad_unit_id">ca-app-pub-5142565439495272/9078942743</string>
 
 </resources>

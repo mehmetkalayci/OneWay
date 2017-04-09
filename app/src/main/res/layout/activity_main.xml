@@ -115,7 +115,6 @@
                 android:layout_height="60dp" />
 
             <ImageButton
-                android:id="@+id/btnInfo"
                 android:background="@drawable/info_button"
                 android:layout_margin="7dp"
                 android:layout_weight="1"
@@ -124,15 +123,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

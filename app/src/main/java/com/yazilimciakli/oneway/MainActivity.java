@@ -11,42 +11,75 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
+import com.yazilimciakli.oneway.Utils.MusicService;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-    private AdView mAdView;
-
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize the Mobile Ads SDK.
+        /* Reklam Kodları
+
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
 
-        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
-        // values/strings.xml.
-        mAdView = (AdView) findViewById(R.id.adView);
+        mInterstitialAd = new InterstitialAd(this);
 
-        // Create an ad request. Check your logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
+
         AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("1AB709011FC32397BD73E59EEF1AA148")
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
 
+        mInterstitialAd.loadAd(adRequest);
 
-        // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);
+        mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        });
 
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
 
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+        });
+
+        /*  /Reklam Kodları */
+
+        MusicService musicService = MusicService.getInstance();
+        musicService.initialize(this, R.raw.jungle);
+        musicService.play();
 
 
         /* Animation Code */
@@ -73,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         animator.start();
         /* /Animation Code */
+
 
         ImageButton btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         ImageButton btnSetting = (ImageButton) findViewById(R.id.btnSettings);

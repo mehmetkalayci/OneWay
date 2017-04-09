@@ -2,15 +2,9 @@
 <resources>
     <string name="app_name">One\n Touch Go</string>
     <string name="levelName">Bölüm %1$s</string>
-    <string name="btnPlay">Oyna</string>
-    <string name="btnSettings">Ayarlar</string>
-    <string name="btnExit">Çıkış</string>
     <string name="moveText">Kalan</string>
     <string name="timeText">Süre</string>
-    <string name="winMessage">Kazandınız!</string>
-    <string name="gameOverMessage">Oyun Bitti :(</string>
     <string name="selectLevel">Bölüm Seçin</string>
-    <string name="progressbar_text">Yükleniyor...</string>
 
     <!-- MessageBox Begin-->
     <string name="top_message">TEBRİKLER</string>
@@ -29,7 +23,5 @@
     <string name="exitMessage">Oyundan çıkmak istediğine emin misin?</string>
     <string name="yesButton">Evet</string>
     <string name="noButton">Hayır</string>
-
-    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 
 </resources>

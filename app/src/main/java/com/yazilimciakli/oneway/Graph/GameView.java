@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,6 +83,9 @@ public class GameView extends View implements Runnable {
 
     // Oynanan level
     Level currentLevel;
+
+    Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+    long vibrationTime = 50;
 
     public Handler mHandler = new Handler();
 
@@ -306,6 +310,9 @@ public class GameView extends View implements Runnable {
 
                     // tempPoint(HedefNokta), lastPoint(başlangıç noktası) bağlanabilir mi?
                     if (tempPoint != null && lastPoint != null && lastPoint.item2.contains(tempPoint.item1) && !wasThereLine(tempPoint.item1, lastPoint.item1)) {
+
+                        vibrator.vibrate(vibrationTime);
+
 
                         // tempPoint(HedefNokta), lastPoint(başlangıç noktası) bağlanabilir olduğuna göre;
                         // playerList'e tempPoint'i (hedef noktayı) atar

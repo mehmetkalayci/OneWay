@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    
-    
-    <color name="progressbar_bg">#64000000</color>
+
+
     <color name="progressbar_text">#ffffff</color>
     <color name="BackgroundColor">#aaeaf3</color>
     <color name="TextColorBlue">#00c9db</color>
