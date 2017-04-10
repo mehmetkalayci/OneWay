@@ -22,6 +22,7 @@ import com.yazilimciakli.oneway.Dialog.WinDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.SettingsActivity;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.PaintHelper;
 import com.yazilimciakli.oneway.Utils.Tuple;
@@ -311,7 +312,9 @@ public class GameView extends View implements Runnable {
                     // tempPoint(HedefNokta), lastPoint(başlangıç noktası) bağlanabilir mi?
                     if (tempPoint != null && lastPoint != null && lastPoint.item2.contains(tempPoint.item1) && !wasThereLine(tempPoint.item1, lastPoint.item1)) {
 
-                        vibrator.vibrate(vibrationTime);
+                        if (SettingsActivity.getVibrationStatus(getContext())){
+                            vibrator.vibrate(vibrationTime);
+                        }
 
 
                         // tempPoint(HedefNokta), lastPoint(başlangıç noktası) bağlanabilir olduğuna göre;
