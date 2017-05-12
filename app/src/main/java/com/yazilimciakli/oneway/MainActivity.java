@@ -13,10 +13,13 @@ import android.widget.ImageView;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
-import com.yazilimciakli.oneway.Utils.MusicService;
+import com.yazilimciakli.oneway.Utils.MusicManager;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Boolean continueMusic = true;
+
 
     InterstitialAd mInterstitialAd;
 
@@ -77,9 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         /*  /Reklam Kodları */
 
-        MusicService musicService = MusicService.getInstance();
-        musicService.initialize(this, R.raw.jungle);
-        musicService.play();
+
 
 
         /* Animation Code */
@@ -144,6 +145,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (!continueMusic) {
+            MusicManager.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        continueMusic = false;
+        MusicManager.start(this, MusicManager.MUSIC_MENU);
     }
 
     @Override
