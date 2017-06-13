@@ -11,6 +11,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.MusicManager;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MusicManager mp = new MusicManager(this);
 
     InterstitialAd mInterstitialAd;
+    private AdView mAdView;
+
 
     @Override
     protected void onPause() {
@@ -97,6 +101,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         /*  /Reklam Kodları */
 
+
+
+        /*
+        REKLAM KODLARI 2
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        */
 
         /* Animation Code */
 
