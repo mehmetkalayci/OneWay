@@ -12,6 +12,7 @@ import com.yazilimciakli.oneway.Controls.GridFragment;
 import com.yazilimciakli.oneway.Controls.LevelAdapter;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
+import com.yazilimciakli.oneway.Utils.MusicHelper;
 import com.yazilimciakli.oneway.Utils.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -60,20 +61,33 @@ public class LevelActivity extends AppCompatActivity {
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
             viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter,page));
         }
+
+        if(!MainActivity.musicHelper.isPlaying())
+            MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        MainActivity.musicHelper.setPlaying(true);
+
+        startActivity(new Intent(LevelActivity.this, MainActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        finish();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         viewPagerAdapter.notifyDataSetChanged();
+        MainActivity.musicHelper.playMusic();
     }
-
-
 
     @Override
-    public void onBackPressed() {
-        startActivity(new Intent(LevelActivity.this, MainActivity.class));
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-        finish();
+    protected void onPause() {
+        super.onPause();
+        MainActivity.musicHelper.pauseMusic();
     }
+
+
 }

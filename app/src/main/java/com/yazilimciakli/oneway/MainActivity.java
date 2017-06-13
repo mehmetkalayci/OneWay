@@ -11,44 +11,25 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
-import com.yazilimciakli.oneway.Utils.MusicManager;
+import com.yazilimciakli.oneway.Utils.MusicHelper;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    MusicManager mp = new MusicManager(this);
 
     InterstitialAd mInterstitialAd;
     private AdView mAdView;
 
+    public static MusicHelper musicHelper = new MusicHelper();
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //mp.Pause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mp.Play();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mp.Pause();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         /* Reklam Kodları
 
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
@@ -115,10 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /* Animation Code */
 
 
-        mp.Set(MusicManager.MUSICS.MainMusic);
-        mp.Play();
-
-
         final ImageView background1 = (ImageView) findViewById(R.id.anim1);
         final ImageView background2 = (ImageView) findViewById(R.id.anim2);
         final ImageView background3 = (ImageView) findViewById(R.id.anim3);
@@ -153,6 +130,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSetting.setOnClickListener(MainActivity.this);
         btnShare.setOnClickListener(MainActivity.this);
         //btnRateThisApp.setOnClickListener(MainActivity.this);
+
+
+        if(!musicHelper.isPlaying())
+            musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
     @Override
@@ -176,14 +157,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
                 break;
         }
+        MainActivity.musicHelper.setPlaying(true);
     }
 
     @Override
     public void onBackPressed() {
+
+        MainActivity.musicHelper.setPlaying(false);
+
         //Dialogun açılması için super.onBackPressed(); iptal edildi!
         ExitDialog exitDialog = new ExitDialog(this);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exitDialog.setCancelable(false);
         exitDialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        musicHelper.playMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        musicHelper.pauseMusic();
     }
 }

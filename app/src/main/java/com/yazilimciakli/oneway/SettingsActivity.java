@@ -13,6 +13,7 @@ import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
 
 public class SettingsActivity extends Activity {
 
+
     private static final String SETTING_VIBRATION = "vibrationStatus";
     CheckBox chkVibrationStatus;
 
@@ -42,11 +43,8 @@ public class SettingsActivity extends Activity {
                     }
                     Toast.makeText(SettingsActivity.this, "Kaydedildi!", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
 
     boolean changeVibrationStatus(boolean status) {
@@ -59,5 +57,17 @@ public class SettingsActivity extends Activity {
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainActivity.musicHelper.playMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.musicHelper.pauseMusic();
     }
 }

@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.yazilimciakli.oneway.Graph.GameView;
+import com.yazilimciakli.oneway.Utils.MusicHelper;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -19,7 +20,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
 
         /* Animation Code */
         final ImageView background1 = (ImageView) findViewById(R.id.anim1);
@@ -69,13 +69,9 @@ public class GameActivity extends AppCompatActivity {
         if (data == 2) {
             gameBackground.setBackgroundResource(R.drawable.levelbg3);
         }
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -84,5 +80,17 @@ public class GameActivity extends AppCompatActivity {
         view.mHandler.removeCallbacks(this.view);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MainActivity.musicHelper.playMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MainActivity.musicHelper.pauseMusic();
     }
 }
