@@ -9,13 +9,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import com.yazilimciakli.oneway.Utils.MusicManager;
 import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
 
 public class SettingsActivity extends Activity {
-
-    Boolean continueMusic = true;
-
 
     private static final String SETTING_VIBRATION = "vibrationStatus";
     CheckBox chkVibrationStatus;
@@ -58,27 +54,8 @@ public class SettingsActivity extends Activity {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, true);
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (!continueMusic) {
-            MusicManager.pause();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        continueMusic = false;
-        MusicManager.start(this, MusicManager.MUSIC_MENU);
-    }
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.continueMusic = true;
-
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();

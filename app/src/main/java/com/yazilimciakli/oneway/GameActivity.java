@@ -10,12 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.yazilimciakli.oneway.Graph.GameView;
-import com.yazilimciakli.oneway.Utils.MusicManager;
 
 public class GameActivity extends AppCompatActivity {
-
-    Boolean continueMusic = true;
-
 
     GameView view;
 
@@ -75,26 +71,14 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (!continueMusic) {
-            MusicManager.pause();
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        continueMusic = false;
-        MusicManager.start(this, MusicManager.MUSIC_MENU);
     }
 
 
     @Override
     public void onBackPressed() {
-        this.continueMusic = true;
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         view.mHandler.removeCallbacks(this.view);

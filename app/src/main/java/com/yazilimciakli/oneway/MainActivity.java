@@ -18,10 +18,27 @@ import com.yazilimciakli.oneway.Utils.MusicManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Boolean continueMusic = true;
-
+    MusicManager mp = new MusicManager(this);
 
     InterstitialAd mInterstitialAd;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //mp.Pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mp.Play();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mp.Pause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +98,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /*  /Reklam Kodları */
 
 
-
-
         /* Animation Code */
+
+
+        mp.Set(MusicManager.MUSICS.MainMusic);
+        mp.Play();
+
+
         final ImageView background1 = (ImageView) findViewById(R.id.anim1);
         final ImageView background2 = (ImageView) findViewById(R.id.anim2);
         final ImageView background3 = (ImageView) findViewById(R.id.anim3);
@@ -133,10 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 finish();
                 break;
-            /*case R.id.btnRateThisApp:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.marketURL))));
-                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-            break;*/
             case R.id.btnShare:
                 Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
@@ -148,22 +165,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (!continueMusic) {
-            MusicManager.pause();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        continueMusic = false;
-        MusicManager.start(this, MusicManager.MUSIC_MENU);
-    }
-
-    @Override
     public void onBackPressed() {
+        //Dialogun açılması için super.onBackPressed(); iptal edildi!
         ExitDialog exitDialog = new ExitDialog(this);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         exitDialog.setCancelable(false);

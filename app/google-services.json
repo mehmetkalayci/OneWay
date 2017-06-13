@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "584551430519",
+    "firebase_url": "https://oyun1-7d027.firebaseio.com",
+    "project_id": "oyun1-7d027",
+    "storage_bucket": "oyun1-7d027.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584551430519:android:075594a67a946a33",
+        "android_client_info": {
+          "package_name": "com.yazilimciakli.oneway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584551430519-l1k6nqn9hko8rq0oa1uqqlp1qgoduifg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn_oAKO_yOk5WAEJgYwVbrV3Dhn3VWzrc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

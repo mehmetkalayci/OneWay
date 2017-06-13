@@ -12,7 +12,6 @@ import com.yazilimciakli.oneway.Controls.GridFragment;
 import com.yazilimciakli.oneway.Controls.LevelAdapter;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
-import com.yazilimciakli.oneway.Utils.MusicManager;
 import com.yazilimciakli.oneway.Utils.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -22,8 +21,6 @@ import me.relex.circleindicator.CircleIndicator;
 
 
 public class LevelActivity extends AppCompatActivity {
-
-    Boolean continueMusic = true;
 
     Typeface typeface;
     TextView lblSelectLevel;
@@ -65,29 +62,16 @@ public class LevelActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (!continueMusic) {
-            MusicManager.pause();
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
         viewPagerAdapter.notifyDataSetChanged();
-        continueMusic = false;
-        MusicManager.start(this, MusicManager.MUSIC_MENU);
     }
 
 
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        this.continueMusic = true;
         startActivity(new Intent(LevelActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
