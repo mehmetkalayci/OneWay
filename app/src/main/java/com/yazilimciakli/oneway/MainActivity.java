@@ -23,13 +23,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     InterstitialAd mInterstitialAd;
     private AdView mAdView;
 
-    public static MusicHelper musicHelper = new MusicHelper();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
         /* Reklam Kodları
 
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
@@ -131,9 +135,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnShare.setOnClickListener(MainActivity.this);
         //btnRateThisApp.setOnClickListener(MainActivity.this);
 
-
-        if(!musicHelper.isPlaying())
-            musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
+        if(!MyApplication.musicHelper.isPlaying())
+        {
+            MyApplication.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
+            MyApplication.musicHelper.playMusic();
+        }
     }
 
     @Override
@@ -157,14 +163,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
                 break;
         }
-        MainActivity.musicHelper.setPlaying(true);
     }
 
     @Override
     public void onBackPressed() {
-
-        MainActivity.musicHelper.setPlaying(false);
-
         //Dialogun açılması için super.onBackPressed(); iptal edildi!
         ExitDialog exitDialog = new ExitDialog(this);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -172,15 +174,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         exitDialog.show();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        musicHelper.playMusic();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        musicHelper.pauseMusic();
-    }
 }

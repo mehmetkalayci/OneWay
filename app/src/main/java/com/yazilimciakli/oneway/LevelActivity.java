@@ -61,16 +61,10 @@ public class LevelActivity extends AppCompatActivity {
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
             viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter,page));
         }
-
-        if(!MainActivity.musicHelper.isPlaying())
-            MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
     @Override
     public void onBackPressed() {
-
-        MainActivity.musicHelper.setPlaying(true);
-
         startActivity(new Intent(LevelActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
@@ -80,14 +74,5 @@ public class LevelActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         viewPagerAdapter.notifyDataSetChanged();
-        MainActivity.musicHelper.playMusic();
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MainActivity.musicHelper.pauseMusic();
-    }
-
-
 }

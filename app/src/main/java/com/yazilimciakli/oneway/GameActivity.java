@@ -70,7 +70,12 @@ public class GameActivity extends AppCompatActivity {
             gameBackground.setBackgroundResource(R.drawable.levelbg3);
         }
 
-        MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
+
+        // Müziğin oynatılıp oynatılmaması önemli değil.
+        // Bu ekranda müziği direkt olarak değiştir.
+        MyApplication.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
+        MyApplication.musicHelper.playMusic();
+
     }
 
     @Override
@@ -80,17 +85,9 @@ public class GameActivity extends AppCompatActivity {
         view.mHandler.removeCallbacks(this.view);
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MainActivity.musicHelper.playMusic();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MainActivity.musicHelper.pauseMusic();
+        // Bu ekrandan çıkarken eski müziğe geri dön.
+        MyApplication.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
+        MyApplication.musicHelper.playMusic();
     }
 }

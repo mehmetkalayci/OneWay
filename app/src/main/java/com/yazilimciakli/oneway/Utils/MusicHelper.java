@@ -3,6 +3,8 @@ package com.yazilimciakli.oneway.Utils;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import com.yazilimciakli.oneway.Foreground;
+import com.yazilimciakli.oneway.MyApplication;
 import com.yazilimciakli.oneway.R;
 
 
@@ -11,8 +13,8 @@ public class MusicHelper {
     private MediaPlayer mediaPlayer;
     private boolean isPlaying = false;
 
-
     public MusicHelper() {
+
     }
 
     public enum MUSICS {MainMusic, GameMusic}
@@ -48,10 +50,8 @@ public class MusicHelper {
     }
 
     public boolean isPlaying() {
-        return isPlaying;
-    }
-
-    public void setPlaying(boolean playing) {
-        isPlaying = playing;
+        if (mediaPlayer != null)
+            return mediaPlayer.isPlaying();
+        return false;
     }
 }
