@@ -381,11 +381,13 @@ public class GameView extends View implements Runnable {
                                 dbHandler.addLevel(nextLevel);
                             }
                             if (lastLevel) {
+
                                 FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                                 finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 finishDialog.setCancelable(false);
                                 finishDialog.show();
                             } else {
+
                                 WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                                 winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 winDialog.setCancelable(false);
@@ -423,7 +425,6 @@ public class GameView extends View implements Runnable {
         }
         if (time == 0 && !isGameOver) {
             isGameOver = true;
-
             GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.setCanceledOnTouchOutside(true);

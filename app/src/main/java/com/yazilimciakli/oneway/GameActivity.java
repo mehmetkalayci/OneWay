@@ -15,11 +15,13 @@ import com.yazilimciakli.oneway.Utils.MusicHelper;
 public class GameActivity extends AppCompatActivity {
 
     GameView view;
+    public static boolean isBack=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
 
         /* Animation Code */
         final ImageView background1 = (ImageView) findViewById(R.id.anim1);
@@ -69,12 +71,18 @@ public class GameActivity extends AppCompatActivity {
         if (data == 2) {
             gameBackground.setBackgroundResource(R.drawable.levelbg3);
         }
+        if(isBack)
+        {
+            MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
+            MainActivity.musicHelper.playMusic();
+        }
 
-        MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
     }
 
     @Override
     public void onBackPressed() {
+        isBack=true;
+        MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
         view.mHandler.removeCallbacks(this.view);
@@ -91,6 +99,10 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        MainActivity.musicHelper.pauseMusic();
+        if(isBack)
+        {
+            MainActivity.musicHelper.pauseMusic();
+
+        }
     }
 }

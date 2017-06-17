@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
+import com.yazilimciakli.oneway.MainActivity;
 import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.Utils.MusicHelper;
 
 public class FinishDialog extends Dialog {
 
@@ -71,6 +73,9 @@ public class FinishDialog extends Dialog {
                 dismiss();
 
                 Intent openLevelIntent = new Intent();
+
+                GameActivity.isBack=false;
+
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
                 context.startActivity(openLevelIntent);
@@ -89,6 +94,8 @@ public class FinishDialog extends Dialog {
         dismiss();
 
         Intent openLevelIntent = new Intent();
+        GameActivity.isBack=true;
+        MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);
 

@@ -15,6 +15,9 @@ public class SettingsActivity extends Activity {
 
 
     private static final String SETTING_VIBRATION = "vibrationStatus";
+
+    boolean isBack;
+
     CheckBox chkVibrationStatus;
 
     public static boolean getVibrationStatus(Context context) {
@@ -25,6 +28,8 @@ public class SettingsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        isBack=false;
 
         chkVibrationStatus = (CheckBox) findViewById(R.id.chkVibrationStatus);
 
@@ -54,6 +59,7 @@ public class SettingsActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        isBack=true;
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
@@ -68,6 +74,9 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        MainActivity.musicHelper.pauseMusic();
+        if(!isBack)
+        {
+            MainActivity.musicHelper.pauseMusic();
+        }
     }
 }

@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
+import com.yazilimciakli.oneway.MainActivity;
 import com.yazilimciakli.oneway.R;
+import com.yazilimciakli.oneway.Utils.MusicHelper;
 
 public class WinDialog extends Dialog {
 
@@ -68,7 +70,7 @@ public class WinDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-
+                GameActivity.isBack=false;
                 Intent openLevelIntent = new Intent();
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
@@ -85,6 +87,8 @@ public class WinDialog extends Dialog {
             public void onClick(View v) {
 
                 dismiss();
+
+                GameActivity.isBack=false;
                 Intent openLevelIntent = new Intent();
 
                 openLevelIntent.setClass(context, GameActivity.class);
@@ -102,7 +106,8 @@ public class WinDialog extends Dialog {
     @Override
     public void onBackPressed() {
         dismiss();
-
+        GameActivity.isBack=true;
+        MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);

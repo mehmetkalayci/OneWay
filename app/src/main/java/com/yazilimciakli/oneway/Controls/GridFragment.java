@@ -53,7 +53,7 @@ public class GridFragment extends Fragment {
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
                     openLevelIntent.putExtra("levelId", position + ((pageNumber - 1) * 9));
                     startActivity(openLevelIntent);
-
+                    GameActivity.isBack=true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
                 } else {
