@@ -25,4 +25,8 @@
     <string name="yesButton">Ja</string>
     <string name="noButton">Nein</string>
 
+    <!-- Points -->
+    <string name="pointsTitle">Points:</string>
+
+
 </resources>

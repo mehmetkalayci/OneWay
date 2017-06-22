@@ -24,4 +24,8 @@
     <string name="yesButton">Evet</string>
     <string name="noButton">Hayır</string>
 
+    <!-- Points -->
+    <string name="pointsTitle">Puan:</string>
+
+
 </resources>

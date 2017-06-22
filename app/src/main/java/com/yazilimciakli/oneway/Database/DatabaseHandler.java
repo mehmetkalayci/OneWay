@@ -92,14 +92,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return levelList;
     }
 
-    public int getLevelsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_LEVELS;
+    public String getPoints() {
+        String countQuery = "SELECT  SUM(score) FROM " + TABLE_LEVELS;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
-
-        return cursor.getCount();
+        cursor.moveToFirst();
+        return cursor.getString(0);
     }
 
     public int updateLevel(Level level) {

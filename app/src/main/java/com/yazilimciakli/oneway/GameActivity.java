@@ -71,6 +71,42 @@ public class GameActivity extends AppCompatActivity {
         if (data == 2) {
             gameBackground.setBackgroundResource(R.drawable.levelbg3);
         }
+        if (data == 3) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg4);
+        }
+        if (data == 4) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg5);
+        }
+        if (data == 5) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg6);
+        }
+        if (data == 6) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg7);
+        }
+        if (data == 7) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg8);
+        }
+        if (data == 8) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg9);
+        }
+        if (data == 9) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg10);
+        }
+        if (data == 10) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg11);
+        }
+        if (data == 11) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg12);
+        }
+        if (data == 12) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg13);
+        }
+        if (data == 13) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg14);
+        }
+        if (data == 14) {
+            gameBackground.setBackgroundResource(R.drawable.levelbg15);
+        }
         if(isBack)
         {
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);

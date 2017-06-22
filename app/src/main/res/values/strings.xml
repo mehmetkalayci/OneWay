@@ -24,6 +24,8 @@
     <string name="yesButton">Yes</string>
     <string name="noButton">No</string>
 
+    <!-- Points -->
+    <string name="pointsTitle">Points:</string>
 
     <string name="musicVolume">100</string>
 

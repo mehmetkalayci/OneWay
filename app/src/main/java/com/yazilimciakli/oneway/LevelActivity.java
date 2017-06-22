@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Controls.GridFragment;
 import com.yazilimciakli.oneway.Controls.LevelAdapter;
+import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
@@ -29,6 +30,7 @@ public class LevelActivity extends AppCompatActivity {
     CircleIndicator indicator;
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
+    TextView points;
 
     public static boolean isBack;
 
@@ -43,6 +45,7 @@ public class LevelActivity extends AppCompatActivity {
         typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
         lblSelectLevel.setTypeface(typeface);
 
+
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
@@ -50,7 +53,13 @@ public class LevelActivity extends AppCompatActivity {
         levelPager.setAdapter(viewPagerAdapter);
         indicator.setViewPager(levelPager);
 
+        points=(TextView) findViewById(R.id.totalPoints);
+
         LevelHelper levelHelper = new LevelHelper(this);
+
+        DatabaseHandler dbHandler;
+        dbHandler = new DatabaseHandler(this);
+        points.setText(dbHandler.getPoints());
 
         int page;
         double perPage = 9;
