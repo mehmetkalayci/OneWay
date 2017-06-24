@@ -26,11 +26,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static MusicHelper musicHelper = new MusicHelper();
 
     boolean isButton;
+    public static boolean isBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         isButton=true;
+        isBack=true;
         /* Reklam Kodları
 
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final ImageView background2 = (ImageView) findViewById(R.id.anim2);
         final ImageView background3 = (ImageView) findViewById(R.id.anim3);
 
-        ValueAnimator animator = ValueAnimator.ofFloat(1.0f, 4.0f);
+        ValueAnimator animator = ValueAnimator.ofFloat(2f, 5f);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setInterpolator(new LinearInterpolator());
         animator.setDuration(100000L);
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //btnRateThisApp.setOnClickListener(MainActivity.this);
 
 
-        if(!musicHelper.isPlaying() || LevelActivity.isBack==false)
+        if(!musicHelper.isPlaying() || isBack==false)
             musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 

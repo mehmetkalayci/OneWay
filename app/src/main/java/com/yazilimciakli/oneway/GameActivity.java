@@ -15,7 +15,6 @@ import com.yazilimciakli.oneway.Utils.MusicHelper;
 public class GameActivity extends AppCompatActivity {
 
     GameView view;
-    public static boolean isBack=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +106,7 @@ public class GameActivity extends AppCompatActivity {
         if (data == 14) {
             gameBackground.setBackgroundResource(R.drawable.levelbg15);
         }
-        if(isBack)
+        if(MainActivity.isBack)
         {
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
             MainActivity.musicHelper.playMusic();
@@ -117,7 +116,7 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        isBack=true;
+        MainActivity.isBack=true;
         MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
         Intent intent = new Intent(this, LevelActivity.class);
         startActivity(intent);
@@ -135,7 +134,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(isBack)
+        if(!MainActivity.isBack)
         {
             MainActivity.musicHelper.pauseMusic();
 

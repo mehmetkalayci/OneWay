@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.MainActivity;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 
@@ -47,17 +48,17 @@ public class GridFragment extends Fragment {
 
                 com.yazilimciakli.oneway.Database.Level level = dbHandler.getLevel(tempLevel.levelid);
 
-                if (level != null || tempLevel.levelid == 1) {
+                if (level != null || tempLevel.levelid == 1 ) {
 
                     Intent openLevelIntent = new Intent();
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
                     openLevelIntent.putExtra("levelId", position + ((pageNumber - 1) * 9));
                     startActivity(openLevelIntent);
-                    GameActivity.isBack=true;
+                    MainActivity.isBack=true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
                 } else {
-                    Toast.makeText(getContext(), "Level Kilitli", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),""+dbHandler.getPoints(), Toast.LENGTH_SHORT).show();
                 }
 
             }

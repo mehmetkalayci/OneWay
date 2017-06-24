@@ -32,14 +32,14 @@ public class LevelActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     TextView points;
 
-    public static boolean isBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
 
-        isBack=false;
+        MainActivity.isBack=false;
 
         lblSelectLevel = (TextView) findViewById(R.id.lblSelectLevel);
         typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
@@ -82,7 +82,7 @@ public class LevelActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        isBack=true;
+        MainActivity.isBack=true;
         MainActivity.musicHelper.setPlaying(true);
         startActivity(new Intent(LevelActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
@@ -99,7 +99,7 @@ public class LevelActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(!isBack)
+        if(!MainActivity.isBack)
         {
             MainActivity.musicHelper.pauseMusic();
         }

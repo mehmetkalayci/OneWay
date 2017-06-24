@@ -53,7 +53,7 @@ public class GameOverDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
-                GameActivity.isBack=false;
+                MainActivity.isBack=false;
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
                 context.startActivity(openLevelIntent);
@@ -70,7 +70,7 @@ public class GameOverDialog extends Dialog {
         dismiss();
 
         Intent openLevelIntent = new Intent();
-        GameActivity.isBack=true;
+        MainActivity.isBack=true;
         MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);

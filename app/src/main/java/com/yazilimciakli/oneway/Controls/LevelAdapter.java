@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
@@ -62,6 +61,8 @@ public class LevelAdapter extends BaseAdapter {
         star2 = (ImageView) itemView.findViewById(R.id.star2);
         star3 = (ImageView) itemView.findViewById(R.id.star3);
         lock = (ImageView) itemView.findViewById(R.id.lock);
+
+
 
         com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
 

@@ -70,7 +70,7 @@ public class WinDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-                GameActivity.isBack=false;
+                MainActivity.isBack=false;
                 Intent openLevelIntent = new Intent();
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
@@ -88,7 +88,7 @@ public class WinDialog extends Dialog {
 
                 dismiss();
 
-                GameActivity.isBack=false;
+                MainActivity.isBack=false;
                 Intent openLevelIntent = new Intent();
 
                 openLevelIntent.setClass(context, GameActivity.class);
@@ -106,7 +106,7 @@ public class WinDialog extends Dialog {
     @Override
     public void onBackPressed() {
         dismiss();
-        GameActivity.isBack=true;
+        MainActivity.isBack=true;
         MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
