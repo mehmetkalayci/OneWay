@@ -4,37 +4,77 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
-/**
- * Created by Admin on 25.06.2017.
- */
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.yazilimciakli.oneway.Utils.FileHelper;
+import com.yazilimciakli.oneway.Utils.NetworkHelper;
+
+import java.io.IOException;
 
 public class LoadingActivity extends Activity {
-    ProgressBar progressBar;
+
+    /**
+     * Called when the activity is first created.
+     */
+    Thread splashTread;
+    FileHelper fileHelper;
+
+
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
-    /** Called when the activity is first created. */
-    Thread splashTread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        progressBar=(ProgressBar) findViewById(R.id.progressBar);
+
+        fileHelper = new FileHelper(LoadingActivity.this);
+
+        // Volley için istek oluşturuldu
+        StringRequest request = new StringRequest(Request.Method.GET, "http://yazilimciakli.com/demo/OneTouchLevel/creator/level.xml", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    fileHelper.write(response);
+                } catch (IOException e) {
+                    Log.d("ERROR: IOException -> ", e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ERROR: VolleyError -> ", error.getMessage());
+            }
+        });
+
+        // Volley RequestQueue oluşturuldu.
+        RequestQueue requestQueue = Volley.newRequestQueue(LoadingActivity.this);
+        // İstek RequestQueue 'ya eklendi.
+        requestQueue.add(request);
+
+
         StartAnimations();
     }
+
     private void StartAnimations() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.fadein);
         anim.reset();
-        LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
+        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
 
@@ -48,16 +88,12 @@ public class LoadingActivity extends Activity {
             public void run() {
                 try {
                     int waited = 0;
-                    int i=0;
                     // Splash screen pause time
-                    while (waited < 5000) {
+                    while (waited < 2500) {
                         sleep(100);
                         waited += 100;
-                        i+=2;
-                        progressBar.setProgress(i);
                     }
-                    Intent intent = new Intent(LoadingActivity.this,
-                            MainActivity.class);
+                    Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
 
