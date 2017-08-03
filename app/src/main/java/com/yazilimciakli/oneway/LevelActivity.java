@@ -30,8 +30,7 @@ public class LevelActivity extends AppCompatActivity {
     CircleIndicator indicator;
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
-    TextView points;
-
+    TextView lblPoints, lblTotalPoints, lblGo;
 
 
     @Override
@@ -39,27 +38,30 @@ public class LevelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
 
-        MainActivity.isBack=false;
+        MainActivity.isBack = false;
 
         lblSelectLevel = (TextView) findViewById(R.id.lblSelectLevel);
+        lblPoints = (TextView) findViewById(R.id.lblPoints);
+        lblTotalPoints = (TextView) findViewById(R.id.lblTotalPoints);
+        lblGo = (TextView) findViewById(R.id.lblGo);
+
         typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
         lblSelectLevel.setTypeface(typeface);
-
+        lblPoints.setTypeface(typeface);
+        lblTotalPoints.setTypeface(typeface);
+        lblGo.setTypeface(typeface);
 
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         levelPager.setAdapter(viewPagerAdapter);
-        indicator.setViewPager(levelPager);
-
-        points=(TextView) findViewById(R.id.totalPoints);
 
         LevelHelper levelHelper = new LevelHelper(this);
 
         DatabaseHandler dbHandler;
         dbHandler = new DatabaseHandler(this);
-        points.setText(dbHandler.getPoints());
+        lblTotalPoints.setText(dbHandler.getPoints());
 
         int page;
         double perPage = 9;
@@ -73,16 +75,18 @@ public class LevelActivity extends AppCompatActivity {
             tempLevels = levelHelper.getLevels().subList(limit, (int) ((page == totalPage) ? totalItems : perPage * page));
 
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
-            viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter,page));
+            viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter, page));
         }
 
-        if(!MainActivity.musicHelper.isPlaying())
+        indicator.setViewPager(levelPager);
+
+        if (!MainActivity.musicHelper.isPlaying())
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
     @Override
     public void onBackPressed() {
-        MainActivity.isBack=true;
+        MainActivity.isBack = true;
         MainActivity.musicHelper.setPlaying(true);
         startActivity(new Intent(LevelActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
@@ -99,8 +103,7 @@ public class LevelActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(!MainActivity.isBack)
-        {
+        if (!MainActivity.isBack) {
             MainActivity.musicHelper.pauseMusic();
         }
     }
