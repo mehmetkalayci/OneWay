@@ -1,5 +1,6 @@
 package com.yazilimciakli.oneway.Utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -17,6 +18,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,36 +31,29 @@ public class LevelHelper {
 
     FileHelper fileHelper;
 
+
+    private static final Pattern TAG_REGEX = Pattern.compile("<item>(.+?)</item>");
+
+    private static List<String> getTagValues(final String str) {
+        final List<String> tagValues = new ArrayList<String>();
+        final Matcher matcher = TAG_REGEX.matcher(str);
+        while (matcher.find()) {
+            tagValues.add(matcher.group(1));
+        }
+        return tagValues;
+    }
+
     public LevelHelper(Context context) {
-        List<String> stringLevels = new ArrayList<>();
-
+        // internetten indirlen level dosyasını okuyabilirsen oku ve levelList'i ayarla,
+        // internetten indirilen level dosyasını okuyamazsan, catch'e düşersen, varsayılan level dosyasını oku.
+        fileHelper = new FileHelper(context);
         try {
-            InputStream inputStream = fileHelper.getInputStream();
-
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(inputStream);
-
-            Element element = doc.getDocumentElement();
-            element.normalize();
-
-            NodeList nList = doc.getElementsByTagName("item");
-
-            for (int i = 0; i < nList.getLength(); i++) {
-                stringLevels.add(nList.item(i).getNodeValue());
-            }
-
-            levelList = stringLevels;
-
-            Log.d("LEVELS", levelList.toString());
-
-        } catch (Exception e) {
+            String xmlLevelFile = fileHelper.read();
+            levelList = getTagValues(xmlLevelFile);
+        } catch (IOException e) {
             e.printStackTrace();
-            // internetten indirilen dosyayı okurken problem oluşursa,
-            // varsayılan dosyayı oku
             levelList = Arrays.asList(context.getResources().getStringArray(R.array.levels));
         }
-
     }
 
     public Level getLevel(int levelId) {

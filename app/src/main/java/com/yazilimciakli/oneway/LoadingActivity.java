@@ -11,7 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,7 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.yazilimciakli.oneway.Utils.FileHelper;
-import com.yazilimciakli.oneway.Utils.NetworkHelper;
 
 import java.io.IOException;
 
@@ -30,7 +28,7 @@ public class LoadingActivity extends Activity {
      */
     Thread splashTread;
     FileHelper fileHelper;
-
+    String levelUrl = "http://yazilimciakli.com/demo/OneTouchLevel/creator/level.xml";
 
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -43,10 +41,12 @@ public class LoadingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
+        // İnterntten level dosyasını güncelle
+
         fileHelper = new FileHelper(LoadingActivity.this);
 
         // Volley için istek oluşturuldu
-        StringRequest request = new StringRequest(Request.Method.GET, "http://yazilimciakli.com/demo/OneTouchLevel/creator/level.xml", new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, levelUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -66,7 +66,6 @@ public class LoadingActivity extends Activity {
         RequestQueue requestQueue = Volley.newRequestQueue(LoadingActivity.this);
         // İstek RequestQueue 'ya eklendi.
         requestQueue.add(request);
-
 
         StartAnimations();
     }
