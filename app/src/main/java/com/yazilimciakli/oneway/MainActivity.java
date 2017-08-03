@@ -20,20 +20,19 @@ import com.yazilimciakli.oneway.Utils.MusicHelper;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    InterstitialAd mInterstitialAd;
-    private AdView mAdView;
-
     public static MusicHelper musicHelper = new MusicHelper();
-
-    boolean isButton;
     public static boolean isBack;
+    InterstitialAd mInterstitialAd;
+    boolean isButton;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        isButton=true;
-        isBack=true;
+        isButton = true;
+        isBack = true;
+
         /* Reklam Kodları
 
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
@@ -128,15 +127,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         ImageButton btnSetting = (ImageButton) findViewById(R.id.btnSettings);
         ImageButton btnShare = (ImageButton) findViewById(R.id.btnShare);
-        //ImageButton btnRateThisApp = (ImageButton) findViewById(R.id.btnRateThisApp);
 
         btnPlay.setOnClickListener(MainActivity.this);
         btnSetting.setOnClickListener(MainActivity.this);
         btnShare.setOnClickListener(MainActivity.this);
-        //btnRateThisApp.setOnClickListener(MainActivity.this);
 
 
-        if(!musicHelper.isPlaying() || isBack==false)
+        if (!musicHelper.isPlaying() || isBack == false)
             musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
@@ -146,13 +143,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnPlay:
                 startActivity(new Intent(MainActivity.this, LevelActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                isButton=false;
+                isButton = false;
                 finish();
                 break;
             case R.id.btnSettings:
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                isButton=false;
+                isButton = false;
                 finish();
                 break;
             case R.id.btnShare:
@@ -161,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.shareMessageTitle));
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.shareMessage));
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
-                isButton=false;
+                isButton = false;
                 break;
         }
         MainActivity.musicHelper.setPlaying(true);
@@ -189,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onPause() {
 
         super.onPause();
-        if(isButton) {
+        if (isButton) {
             musicHelper.pauseMusic();
         }
     }

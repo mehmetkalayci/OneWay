@@ -29,4 +29,5 @@
 
     <string name="musicVolume">100</string>
 
+    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 </resources>

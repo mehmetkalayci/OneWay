@@ -9,7 +9,6 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -71,16 +70,11 @@ public class LoadingActivity extends Activity {
     }
 
     private void StartAnimations() {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.fadein);
-        anim.reset();
-        LinearLayout l = (LinearLayout) findViewById(R.id.lin_lay);
-        l.clearAnimation();
-        l.startAnimation(anim);
-
-
-        ImageView iv = (ImageView) findViewById(R.id.splash);
-        iv.clearAnimation();
-        iv.startAnimation(anim);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        animation.reset();
+        ImageView imgLogo = (ImageView) findViewById(R.id.splash);
+        imgLogo.clearAnimation();
+        imgLogo.startAnimation(animation);
 
         splashTread = new Thread() {
             @Override
@@ -88,25 +82,21 @@ public class LoadingActivity extends Activity {
                 try {
                     int waited = 0;
                     // Splash screen pause time
-                    while (waited < 2500) {
+                    while (waited < 1500) {
                         sleep(100);
                         waited += 100;
                     }
                     Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
-
                     LoadingActivity.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
                     LoadingActivity.this.finish();
                 }
-
             }
         };
         splashTread.start();
-
     }
 
 }
