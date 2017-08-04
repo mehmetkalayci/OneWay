@@ -57,12 +57,14 @@ public class MusicHelper {
         if (this.mediaPlayer.isPlaying()) {
             mediaPlayer.setVolume(0, 0);
             this.pauseMusic();
+            return false;
         }
         else{
             mediaPlayer.setVolume(0.75f, 0.75f);
             this.playMusic();
+            return true;
         }
-        return mediaPlayer.isPlaying();
+        //return mediaPlayer.isPlaying();
     }
 
     public enum MUSICS {MainMusic, GameMusic}

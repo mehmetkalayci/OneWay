@@ -15,6 +15,7 @@ public class SettingsActivity extends Activity {
 
     private static final String SETTING_VIBRATION = "vibrationStatus";
     private static final String SETTING_MUSIC = "musicStatus";
+    private static final String SETTING_LANGUAGE = "languageStatus";
 
 
     CheckBox chkVibrationStatus, chkMusicStatus;
@@ -25,6 +26,9 @@ public class SettingsActivity extends Activity {
 
     public static boolean getMusicStatus(Context context) {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_MUSIC, true);
+    }
+    public static boolean getLanguageStatus(Context context) {
+        return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_LANGUAGE, true);
     }
 
     @Override
@@ -66,7 +70,7 @@ public class SettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                /*
+
                 boolean lastStatus = changeMusicStatus(isChecked);
                 if (lastStatus != musicStatus) {
                    if (isChecked) {
@@ -79,16 +83,26 @@ public class SettingsActivity extends Activity {
                 }else{
                     Toast.makeText(SettingsActivity.this, "Ayarlar kaydedilemedi!", Toast.LENGTH_SHORT).show();
                 }
-                */
 
             }
         });
     }
 
+    //boolean languageStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_LANGUAGE, true);
+    /*
+    * TR - ENG - ES - DE
+    *
+    *
+    * */
 
     boolean changeMusicStatus(boolean status) {
         SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, status);
         return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
+    }
+
+    boolean changeLanguageStatus(boolean status) {
+        SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_LANGUAGE, status);
+        return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_LANGUAGE, true);
     }
 
     boolean changeVibrationStatus(boolean status) {
