@@ -28,5 +28,8 @@
     <!-- Points -->
     <string name="pointsTitle">Points:</string>
 
+    <!-- Settings -->
+    <string name="settingsVibrationText">Vibración</string>
+    <string name="settingsMusicText">Música</string>
 
 </resources>
