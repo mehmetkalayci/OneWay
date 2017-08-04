@@ -59,15 +59,16 @@ public class SettingsActivity extends Activity {
         });
 
 
-        boolean musicStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
+        final boolean musicStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
         chkMusicStatus.setChecked(musicStatus);
 
         chkMusicStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                /*
                 boolean lastStatus = changeMusicStatus(isChecked);
-                if (lastStatus == isChecked) {
+                if (lastStatus != musicStatus) {
                    if (isChecked) {
                         boolean musicStatus = MainActivity.musicHelper.changeStatus();
                         chkMusicStatus.setChecked(musicStatus);
@@ -75,7 +76,11 @@ public class SettingsActivity extends Activity {
                     }else{
                        Toast.makeText(SettingsActivity.this, "Müzik kapalı!", Toast.LENGTH_SHORT).show();
                    }
+                }else{
+                    Toast.makeText(SettingsActivity.this, "Ayarlar kaydedilemedi!", Toast.LENGTH_SHORT).show();
                 }
+                */
+
             }
         });
     }
