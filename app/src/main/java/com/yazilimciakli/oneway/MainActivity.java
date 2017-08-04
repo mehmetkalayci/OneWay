@@ -166,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-
         MainActivity.musicHelper.setPlaying(false);
 
         //Dialogun açılması için super.onBackPressed(); iptal edildi!
@@ -184,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onPause() {
-
         super.onPause();
         if (isButton) {
             musicHelper.pauseMusic();

@@ -15,8 +15,6 @@ public class MusicHelper {
     public MusicHelper() {
     }
 
-    public enum MUSICS {MainMusic, GameMusic}
-
     public void prepareMusicPlayer(Context context, MUSICS music) {
         if (mediaPlayer != null) {
             mediaPlayer.reset();
@@ -54,4 +52,18 @@ public class MusicHelper {
     public void setPlaying(boolean playing) {
         isPlaying = playing;
     }
+
+    public boolean changeStatus() {
+        if (this.mediaPlayer.isPlaying()) {
+            mediaPlayer.setVolume(0, 0);
+            this.pauseMusic();
+        }
+        else{
+            mediaPlayer.setVolume(0.75f, 0.75f);
+            this.playMusic();
+        }
+        return mediaPlayer.isPlaying();
+    }
+
+    public enum MUSICS {MainMusic, GameMusic}
 }

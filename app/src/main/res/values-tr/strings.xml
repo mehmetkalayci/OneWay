@@ -27,5 +27,7 @@
     <!-- Points -->
     <string name="pointsTitle">Puan:</string>
 
-
+    <!-- Settings -->
+    <string name="settingsVibrationText">Titreşim</string>
+    <string name="settingsMusicText">Müzik</string>
 </resources>

@@ -27,7 +27,11 @@
     <!-- Points -->
     <string name="pointsTitle">Points:</string>
 
-    <string name="musicVolume">100</string>
+    <!-- Settings -->
+    <string name="settingsVibrationText">Vibration</string>
+    <string name="settingsMusicText">Music</string>
 
+
+    <string name="musicVolume">100</string>
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
 </resources>
