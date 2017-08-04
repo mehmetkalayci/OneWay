@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainscreen"
+    android:background="@drawable/settingscreen"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".SettingsActivity">
@@ -17,7 +17,7 @@
         android:layout_margin="10dp"
         android:checked="true"
         android:text="@string/settingsVibrationText"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <CheckBox
@@ -28,6 +28,6 @@
         android:layout_margin="10dp"
         android:checked="true"
         android:text="@string/settingsMusicText"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 </LinearLayout>
