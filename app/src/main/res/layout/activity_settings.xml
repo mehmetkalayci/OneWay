@@ -17,10 +17,10 @@
         android:layout_margin="10dp"
         android:button="@drawable/check_box"
         android:checked="true"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:text="@string/settingsVibrationText"
         android:textColor="@color/orange"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <CheckBox
         android:id="@+id/chkMusicStatus"
@@ -30,10 +30,10 @@
         android:layout_margin="10dp"
         android:button="@drawable/check_box"
         android:checked="true"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:text="@string/settingsMusicText"
-        android:textColor="@color/BackgroundColor"
-        android:textSize="18sp" />
+        android:textColor="@color/orange"
+        android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/rdgLanguages"
