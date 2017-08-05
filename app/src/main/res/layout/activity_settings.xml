@@ -32,39 +32,40 @@
         android:textSize="18sp" />
 
     <RadioGroup
-        android:layout_width="120dp"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/tr"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Türkçe"
+            android:button="@drawable/turkce"
             android:textColor="@color/progressbar_text" />
 
         <RadioButton
-            android:id="@+id/eng"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="English"
+            android:button="@drawable/england"
             android:textColor="@color/progressbar_text" />
 
         <RadioButton
-            android:id="@+id/es"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Español"
+            android:button="@drawable/spain"
             android:textColor="@color/progressbar_text" />
 
         <RadioButton
-            android:id="@+id/de"
-            android:layout_width="wrap_content"
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Deutsch"
+            android:button="@drawable/german"
             android:textColor="@color/progressbar_text" />
     </RadioGroup>
 
