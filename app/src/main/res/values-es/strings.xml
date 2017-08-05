@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">One\n Touch Go</string>
     <string name="levelName">Nivel %1$s</string>
     <string name="timeText">Tiempo</string>
     <string name="moveText">Movimiento </string>
