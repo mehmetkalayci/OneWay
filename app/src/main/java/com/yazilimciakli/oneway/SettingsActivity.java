@@ -45,7 +45,6 @@ public class SettingsActivity extends Activity {
         chkMusicStatus = (CheckBox) findViewById(R.id.chkMusicStatus);
         rdgLanguages = (RadioGroup) findViewById(R.id.rdgLanguages);
 
-
         /*     Titreşim     */
         boolean vibrationStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, true);
         chkVibrationStatus.setChecked(vibrationStatus);
@@ -88,6 +87,24 @@ public class SettingsActivity extends Activity {
         /******Müzik*******/
 
         /*     Dil Ayarları     */
+
+        String language = SharedPreferenceHelper.getSharedPreferenceString(SettingsActivity.this, SETTING_LANGUAGE, "en");
+        switch (language) {
+            case "tr":
+                rdgLanguages.check(R.id.rdTr);
+                break;
+            case "en":
+                rdgLanguages.check(R.id.rdEn);
+                break;
+            case "es_ES":
+                rdgLanguages.check(R.id.rdEs);
+                break;
+            case "de_DE":
+                rdgLanguages.check(R.id.rdDe);
+                break;
+        }
+
+
         rdgLanguages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
