@@ -96,10 +96,10 @@ public class SettingsActivity extends Activity {
             case "en":
                 rdgLanguages.check(R.id.rdEn);
                 break;
-            case "es_ES":
+            case "es":
                 rdgLanguages.check(R.id.rdEs);
                 break;
-            case "de_DE":
+            case "de":
                 rdgLanguages.check(R.id.rdDe);
                 break;
         }
