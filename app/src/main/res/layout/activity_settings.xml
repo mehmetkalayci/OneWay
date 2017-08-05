@@ -15,9 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
+        android:button="@drawable/check_box"
         android:checked="true"
+        android:paddingLeft="5dp"
         android:text="@string/settingsVibrationText"
-        android:textColor="@android:color/white"
+        android:textColor="@color/orange"
         android:textSize="18sp" />
 
     <CheckBox
@@ -26,9 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
+        android:button="@drawable/check_box"
         android:checked="true"
+        android:paddingLeft="5dp"
         android:text="@string/settingsMusicText"
-        android:textColor="@android:color/white"
+        android:textColor="@color/BackgroundColor"
         android:textSize="18sp" />
 
     <RadioGroup

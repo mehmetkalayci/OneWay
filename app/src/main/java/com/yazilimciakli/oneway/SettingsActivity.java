@@ -117,10 +117,10 @@ public class SettingsActivity extends Activity {
                         language = "en";
                         break;
                     case R.id.rdEs:
-                        language = "es_ES";
+                        language = "es";
                         break;
                     case R.id.rdDe:
-                        language = "de_DE";
+                        language = "de";
                         break;
                 }
                 LanguageHelper.changeLocale(SettingsActivity.this, new Locale(language));

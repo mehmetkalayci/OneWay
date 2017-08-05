@@ -4,7 +4,7 @@
 
 
     <color name="progressbar_text">#ffffff</color>
-    <color name="BackgroundColor">#aaeaf3</color>
+    <color name="BackgroundColor">#9ccfe0</color>
     <color name="TextColorBlue">#00c9db</color>
     <color name="MainBackground">#a0c5e7</color>
 </resources>
