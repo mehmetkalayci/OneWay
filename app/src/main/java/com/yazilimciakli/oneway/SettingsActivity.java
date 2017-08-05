@@ -9,7 +9,6 @@ import android.support.annotation.IdRes;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.yazilimciakli.oneway.Utils.LanguageHelper;
 import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
@@ -74,23 +73,19 @@ public class SettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-
                 boolean lastStatus = changeMusicStatus(isChecked);
-                if (lastStatus != musicStatus) {
+                if (lastStatus == isChecked) {
                     if (isChecked) {
-                        boolean musicStatus = changeMusicStatus(isChecked);
+                        boolean musicStatus = MainActivity.musicHelper.changeStatus();
                         chkMusicStatus.setChecked(musicStatus);
-                        Toast.makeText(SettingsActivity.this, "Müzik açık!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(SettingsActivity.this, "Müzik kapalı!", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(SettingsActivity.this, "Ayarlar kaydedilemedi!", Toast.LENGTH_SHORT).show();
+                    else {
+                        boolean musicStatus = MainActivity.musicHelper.changeStatus();
+                    }
                 }
             }
         });
         /******Müzik******/
-
 
         /*     Dil Ayarları     */
         rdgLanguages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -148,7 +143,10 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        MainActivity.musicHelper.playMusic();
+        if(SettingsActivity.getMusicStatus(this))
+        {
+            MainActivity.musicHelper.playMusic();
+        }
     }
 
     @Override
