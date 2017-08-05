@@ -84,12 +84,6 @@ public class SettingsActivity extends Activity {
         });
     }
 
-    //boolean languageStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_LANGUAGE, true);
-    /*
-    * TR - ENG - ES - DE
-    *
-    *
-    * */
 
     boolean changeMusicStatus(boolean status) {
         SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, status);
