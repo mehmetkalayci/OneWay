@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">One\n Touch Go</string>
 
     <string name="levelName">Level %1$s</string>
     <string name="timeText">Time</string>
@@ -9,7 +8,7 @@
     <!-- MessageBox Begin-->
     <string name="top_message">CONGRATULATIONS</string>
     <string name="win_title">YOU WIN</string>
-    <string name="bottom_message">YOU WIN THIS PART, NOW THE NEW LEVEL TIME</string>
+    <string name="bottom_message">YOU WON THIS PART, NOW THE NEW LEVEL TIME</string>
     <string name="remaining_time">%1$s SEC</string>
     <string name="gameover_title">GAME OVER</string>
     <string name="gameover_message">UPPS! GAME OVER, YOU LOSE</string>

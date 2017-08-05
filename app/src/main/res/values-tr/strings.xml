@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">One\n Touch Go</string>
     <string name="levelName">Bölüm %1$s</string>
     <string name="moveText">Kalan</string>
     <string name="timeText">Süre</string>
@@ -30,4 +29,6 @@
     <!-- Settings -->
     <string name="settingsVibrationText">Titreşim</string>
     <string name="settingsMusicText">Müzik</string>
+    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
+    <string name="musicVolume">100</string>
 </resources>
