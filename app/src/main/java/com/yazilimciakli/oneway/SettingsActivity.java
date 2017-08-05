@@ -85,7 +85,7 @@ public class SettingsActivity extends Activity {
                 }
             }
         });
-        /******Müzik******/
+        /******Müzik*******/
 
         /*     Dil Ayarları     */
         rdgLanguages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
