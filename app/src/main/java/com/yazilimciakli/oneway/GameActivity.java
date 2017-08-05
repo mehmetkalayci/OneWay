@@ -108,8 +108,12 @@ public class GameActivity extends AppCompatActivity {
         }
         if(MainActivity.isBack)
         {
+
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.GameMusic);
-            MainActivity.musicHelper.playMusic();
+            if(SettingsActivity.getMusicStatus(this))
+            {
+                MainActivity.musicHelper.playMusic();
+            }
         }
 
     }
@@ -128,7 +132,10 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MainActivity.musicHelper.playMusic();
+        if(SettingsActivity.getMusicStatus(this))
+        {
+            MainActivity.musicHelper.playMusic();
+        }
     }
 
     @Override

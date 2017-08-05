@@ -55,12 +55,12 @@ public class MusicHelper {
 
     public boolean changeStatus() {
         if (this.mediaPlayer.isPlaying()) {
-            mediaPlayer.setVolume(0, 0);
+
             this.pauseMusic();
             return false;
         }
         else{
-            mediaPlayer.setVolume(0.75f, 0.75f);
+
             this.playMusic();
             return true;
         }

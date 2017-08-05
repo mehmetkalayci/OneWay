@@ -97,7 +97,10 @@ public class LevelActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         viewPagerAdapter.notifyDataSetChanged();
-        MainActivity.musicHelper.playMusic();
+        if(SettingsActivity.getMusicStatus(this))
+        {
+            MainActivity.musicHelper.playMusic();
+        }
     }
 
     @Override

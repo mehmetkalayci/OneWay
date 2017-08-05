@@ -178,7 +178,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        musicHelper.playMusic();
+        if(SettingsActivity.getMusicStatus(this))
+        {
+            musicHelper.playMusic();
+        }
     }
 
     @Override
