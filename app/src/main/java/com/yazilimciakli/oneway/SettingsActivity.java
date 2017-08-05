@@ -5,10 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.IdRes;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.yazilimciakli.oneway.Utils.LanguageHelper;
 import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
+
+import java.util.Locale;
 
 public class SettingsActivity extends Activity {
 
@@ -18,6 +24,8 @@ public class SettingsActivity extends Activity {
 
 
     CheckBox chkVibrationStatus, chkMusicStatus;
+    RadioGroup rdgLanguages;
+
 
     public static boolean getVibrationStatus(Context context) {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_VIBRATION, true);
@@ -26,21 +34,20 @@ public class SettingsActivity extends Activity {
     public static boolean getMusicStatus(Context context) {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_MUSIC, true);
     }
-    public static boolean getLanguageStatus(Context context) {
-        return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_LANGUAGE, true);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        MainActivity.isBack=false;
+        MainActivity.isBack = false;
 
         chkVibrationStatus = (CheckBox) findViewById(R.id.chkVibrationStatus);
         chkMusicStatus = (CheckBox) findViewById(R.id.chkMusicStatus);
+        rdgLanguages = (RadioGroup) findViewById(R.id.rdgLanguages);
 
 
+        /*     Titreşim     */
         boolean vibrationStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, true);
         chkVibrationStatus.setChecked(vibrationStatus);
 
@@ -53,41 +60,66 @@ public class SettingsActivity extends Activity {
                     if (isChecked) {
                         Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                         vibrator.vibrate(50);
-                        //Toast.makeText(SettingsActivity.this, "Tireşim açık!", Toast.LENGTH_SHORT).show();
-                    } else{
-                        //Toast.makeText(SettingsActivity.this, "Tireşim kapalı!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+        /******Titreşim******/
 
-
-        boolean musicStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
+        /*     Müzik    */
+        final boolean musicStatus = SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
         chkMusicStatus.setChecked(musicStatus);
 
         chkMusicStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked2) {
-                boolean lastStatus2 = changeMusicStatus(isChecked2);
-                if (lastStatus2 == isChecked2) {
-                    if (isChecked2) {
-                        boolean musicStatus = MainActivity.musicHelper.changeStatus();
-                        chkMusicStatus.setChecked(musicStatus);
-                        // Toast.makeText(SettingsActivity.this, "Müzik açık!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        boolean musicStatus = MainActivity.musicHelper.changeStatus();
-                        // Toast.makeText(SettingsActivity.this, "Müzik kapalı!", Toast.LENGTH_SHORT).show();
-                    }
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+
+                boolean lastStatus = changeMusicStatus(isChecked);
+                if (lastStatus != musicStatus) {
+                    if (isChecked) {
+                        boolean musicStatus = changeMusicStatus(isChecked);
+                        chkMusicStatus.setChecked(musicStatus);
+                        Toast.makeText(SettingsActivity.this, "Müzik açık!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(SettingsActivity.this, "Müzik kapalı!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SettingsActivity.this, "Ayarlar kaydedilemedi!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-    }
+        /******Müzik******/
 
 
-    boolean changeMusicStatus(boolean status) {
-        SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, status);
-        return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
+        /*     Dil Ayarları     */
+        rdgLanguages.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                String language = "en";
+                switch (checkedId){
+                    case R.id.rdTr:
+                        language = "tr";
+                        break;
+                    case R.id.rdEn:
+                        language = "en";
+                        break;
+                    case R.id.rdEs:
+                        language = "es_ES";
+                        break;
+                    case R.id.rdDe:
+                        language = "de_DE";
+                        break;
+                }
+                LanguageHelper.changeLocale(SettingsActivity.this, new Locale(language));
+                changeLanguageStatus(language);
+
+                startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                finish();
+            }
+        });
+        /*****Dil Ayarları******/
     }
 
     boolean changeVibrationStatus(boolean status) {
@@ -95,9 +127,19 @@ public class SettingsActivity extends Activity {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, true);
     }
 
+    boolean changeMusicStatus(boolean status) {
+        SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, status);
+        return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_MUSIC, true);
+    }
+
+    String changeLanguageStatus(String locale) {
+        SharedPreferenceHelper.setSharedPreferenceString(SettingsActivity.this, SETTING_LANGUAGE, locale);
+        return SharedPreferenceHelper.getSharedPreferenceString(SettingsActivity.this, SETTING_LANGUAGE, "en");
+    }
+
     @Override
     public void onBackPressed() {
-        MainActivity.isBack=true;
+        MainActivity.isBack = true;
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
@@ -106,17 +148,13 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(SettingsActivity.getMusicStatus(this))
-        {
-            MainActivity.musicHelper.playMusic();
-        }
+        MainActivity.musicHelper.playMusic();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(!MainActivity.isBack)
-        {
+        if (!MainActivity.isBack) {
             MainActivity.musicHelper.pauseMusic();
         }
     }
