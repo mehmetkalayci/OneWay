@@ -17,8 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.yazilimciakli.oneway.Utils.FileHelper;
+import com.yazilimciakli.oneway.Utils.LanguageHelper;
+import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class LoadingActivity extends Activity {
 
@@ -40,8 +43,14 @@ public class LoadingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
-        // İnterntten level dosyasını güncelle
+        // Varsayılan dili tespit et
+        Locale current = getResources().getConfiguration().locale;
+        String language = SharedPreferenceHelper.getSharedPreferenceString(LoadingActivity.this, SettingsActivity.SETTING_LANGUAGE, current.getLanguage());
+        LanguageHelper.changeLocale(LoadingActivity.this, new Locale(language));
 
+
+
+        // İnternetten level dosyasını güncelle
         fileHelper = new FileHelper(LoadingActivity.this);
 
         // Volley için istek oluşturuldu

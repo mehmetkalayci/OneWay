@@ -17,9 +17,9 @@ import java.util.Locale;
 
 public class SettingsActivity extends Activity {
 
-    private static final String SETTING_VIBRATION = "vibrationStatus";
-    private static final String SETTING_MUSIC = "musicStatus";
-    private static final String SETTING_LANGUAGE = "languageStatus";
+    public static final String SETTING_VIBRATION = "vibrationStatus";
+    public static final String SETTING_MUSIC = "musicStatus";
+    public static final String SETTING_LANGUAGE = "languageStatus";
 
 
     CheckBox chkVibrationStatus, chkMusicStatus;
