@@ -59,9 +59,10 @@ public class LevelActivity extends AppCompatActivity {
 
         LevelHelper levelHelper = new LevelHelper(this);
 
-        DatabaseHandler dbHandler;
-        dbHandler = new DatabaseHandler(this);
+        DatabaseHandler dbHandler = new DatabaseHandler(this);
         lblTotalPoints.setText(dbHandler.getPoints());
+
+
 
         int page;
         double perPage = 9;

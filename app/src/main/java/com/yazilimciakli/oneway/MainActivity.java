@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.yazilimciakli.oneway.Dialog.CreditDialog;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 
@@ -127,10 +129,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton btnPlay = (ImageButton) findViewById(R.id.btnPlay);
         ImageButton btnSetting = (ImageButton) findViewById(R.id.btnSettings);
         ImageButton btnShare = (ImageButton) findViewById(R.id.btnShare);
+        ImageButton btnInfo = (ImageButton) findViewById(R.id.btnInfo);
 
         btnPlay.setOnClickListener(MainActivity.this);
         btnSetting.setOnClickListener(MainActivity.this);
         btnShare.setOnClickListener(MainActivity.this);
+        btnInfo.setOnClickListener(MainActivity.this);
 
 
         if (!musicHelper.isPlaying() || isBack == false)
@@ -160,6 +164,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(Intent.createChooser(sharingIntent, getString(R.string.shareIntentTitle)));
                 isButton = false;
                 break;
+            case R.id.btnInfo:
+                CreditDialog creditDialog = new CreditDialog(this);
+                creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                creditDialog.show();
+                break;
         }
         MainActivity.musicHelper.setPlaying(true);
     }
@@ -167,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         MainActivity.musicHelper.setPlaying(false);
-
         //Dialogun açılması için super.onBackPressed(); iptal edildi!
         ExitDialog exitDialog = new ExitDialog(this);
         exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

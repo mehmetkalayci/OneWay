@@ -30,6 +30,11 @@
     <!-- Settings -->
     <string name="settingsVibrationText">Titreşim</string>
     <string name="settingsMusicText">Müzik</string>
+
+    <!-- Credit -->
+    <string name="creditText">Tasarım &amp; Kodlama\nÖnder Veli GÖKTAŞ\nMehmet KALAYCI</string>
+
+
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
     <string name="musicVolume">100</string>
 </resources>

@@ -31,6 +31,10 @@
     <!-- Settings -->
     <string name="settingsVibrationText">Vibración</string>
     <string name="settingsMusicText">Música</string>
+
+    <!-- Credit -->
+    <string name="creditText">Diseño&amp; Codificación\nÖnder Veli GÖKTAŞ\nMehmet KALAYCI</string>
+
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
     <string name="musicVolume">100</string>
 
