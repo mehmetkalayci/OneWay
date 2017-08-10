@@ -23,6 +23,14 @@ public class CreditDialog extends Dialog {
         this.getWindow().getAttributes().windowAnimations = R.style.popwindow_anim_style;
     }
 
+    @Override
+    public void onBackPressed() {
+        dismiss();
+    }
 
-
+    @Override
+    public void setCanceledOnTouchOutside(boolean cancel) {
+        dismiss();
+        super.setCanceledOnTouchOutside(cancel);
+    }
 }

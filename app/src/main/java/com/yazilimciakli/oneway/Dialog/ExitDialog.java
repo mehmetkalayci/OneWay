@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -74,5 +76,11 @@ public class ExitDialog extends Dialog {
     @Override
     public void onBackPressed() {
         dismiss();
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
+       dismiss();
+        return super.onTouchEvent(event);
     }
 }

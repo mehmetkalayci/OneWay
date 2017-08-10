@@ -37,4 +37,6 @@
 
     <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
     <string name="musicVolume">100</string>
+    <string name="levelClose">Kilitli Bölüm</string>
+    <string name="warning">Uyarı!</string>
 </resources>

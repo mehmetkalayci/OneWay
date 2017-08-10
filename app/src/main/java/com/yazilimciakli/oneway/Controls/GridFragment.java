@@ -1,6 +1,8 @@
 package com.yazilimciakli.oneway.Controls;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Dialog.CreditDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.MainActivity;
@@ -58,7 +60,11 @@ public class GridFragment extends Fragment {
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
                 } else {
-                    Toast.makeText(getContext(),""+dbHandler.getPoints(), Toast.LENGTH_SHORT).show();
+
+                    CreditDialog creditDialog = new CreditDialog(getContext());
+                    creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    creditDialog.setCancelable(false);
+                    creditDialog.show();
                 }
 
             }
