@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.yazilimciakli.oneway.Dialog.CreditDialog;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 
@@ -165,9 +163,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 isButton = false;
                 break;
             case R.id.btnInfo:
+                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                isButton = false;
+                finish();
+                /*
                 CreditDialog creditDialog = new CreditDialog(this);
                 creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                creditDialog.show();
+                creditDialog.show();*/
                 break;
         }
         MainActivity.musicHelper.setPlaying(true);
