@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isButton = true;
         isBack = true;
 
-        /* Reklam Kodları
-
+/*
         MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
 
         mInterstitialAd = new InterstitialAd(this);
@@ -83,18 +82,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        /*  /Reklam Kodları */
-
-
-
-        /*
-        REKLAM KODLARI 2
-
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        */
+*/
 
         /* Animation Code */
 

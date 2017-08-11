@@ -1,11 +1,8 @@
 package com.yazilimciakli.oneway;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.yazilimciakli.oneway.Controls.ExpandableListviewAdapter;
@@ -43,33 +40,6 @@ public class InfoActivity extends Activity {
         expand_adapter = new ExpandableListviewAdapter(getApplicationContext(), list_parent, list_child);
         expandlist_view.setAdapter(expand_adapter);  // oluşturduğumuz adapter sınıfını set ediyoruz
         expandlist_view.setClickable(true);
-
-        expandlist_view.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-
-                String child_name = (String)expand_adapter.getChild(groupPosition, childPosition);
-                //Toast.makeText(getApplicationContext(),"hey" + child_name, Toast.LENGTH_LONG).show();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(InfoActivity.this);
-                builder.setMessage(child_name)
-                        .setTitle("Mobilhanem Expandablelistview")
-                        .setCancelable(false)
-                        .setPositiveButton("TAMAM", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
-
-
-                return false;
-            }
-        });
-
     }
     public void Hazırla()
     {
