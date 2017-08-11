@@ -70,45 +70,31 @@ public class InfoActivity extends Activity {
             }
         });
 
-
-		/*
-		expandlist_view.setOnGroupExpandListener(new OnGroupExpandListener() {
-
-			@Override
-			public void onGroupExpand(int groupPosition) {
-
-				if(last_position != -1 && last_position != groupPosition)
-				{
-					expandlist_view.collapseGroup(last_position);
-				}
-				last_position = groupPosition;
-
-			}
-		});
-		*/
-
     }
     public void Hazırla()
     {
         list_parent = new ArrayList<String>();  // başlıklarımızı listemelek için oluşturduk
         list_child = new HashMap<String, List<String>>(); // başlıklara bağlı elemenları tutmak için oluşturduk
 
-        list_parent.add("Nasıl Oynanır?");  // ilk başlığı giriyoruz
-        list_parent.add("Kurallar Nelerdir?");   // ikinci başlığı giriyoruz
-        list_parent.add("Yapımcılar");   // ikinci başlığı giriyoruz
-        gs_list = new ArrayList<String>();  // ilk başlık için alt elemanları tanımlıyoruz
-        gs_list.add("Oyun tek seferde şekli tamamlamaya yöneliktir.Ekranda çıkan görsel üzerinde herhangibir noktadan başlayıp tek seferde şekli tamamalamaya çalışmalısınız.");
+        list_parent.add(getResources().getString(R.string.howIsPlay));
+        list_parent.add(getResources().getString(R.string.rules));
+        list_parent.add(getResources().getString(R.string.producer));
 
-        fb_list = new ArrayList<String>(); // ikinci başlık için alt elemanları tanımlıyoruz
-        fb_list.add("Kural 1: Şekli tek seferde bitir");
-        fb_list.add("Kural 2: Şekli çizerken elini kaldırma aksi taktide tüm yaptıkların silinir");
-        fb_list.add("Kural 3: Sana verilen süre içinde şekli tamamla");
-        fb_list.add("Kural 4: Sinirlendiğin zaman oyunu kapat ve belli bir süre sonra tekrar dene :)");
-        fb_list.add("Kural 5: Ne olursa olsun telefonu kırma! :)");
-        tt_list = new ArrayList<String>(); // ikinci başlık için alt elemanları tanımlıyoruz
-        tt_list.add("Oyun bir internet projesi olan Yazılımcı Aklı tarafından hazırlanmıştır.");
-        list_child.put(list_parent.get(0),gs_list); // ilk başlığımızı ve onların elemanlarını HashMap sınıfında tutuyoruz
-        list_child.put(list_parent.get(1), fb_list); // ikinci başlığımızı ve onların elemanlarını HashMap sınıfında tutuyoruz
+        gs_list = new ArrayList<String>();
+        gs_list.add(getResources().getString(R.string.l1));
+
+        fb_list = new ArrayList<String>();
+        fb_list.add(getResources().getString(R.string.r1));
+        fb_list.add(getResources().getString(R.string.r2));
+        fb_list.add(getResources().getString(R.string.r3));
+        fb_list.add(getResources().getString(R.string.r4));
+        fb_list.add(getResources().getString(R.string.r5));
+
+        tt_list = new ArrayList<String>();
+        tt_list.add(getResources().getString(R.string.p1));
+
+        list_child.put(list_parent.get(0),gs_list);
+        list_child.put(list_parent.get(1), fb_list);
         list_child.put(list_parent.get(2), tt_list);
 
     }

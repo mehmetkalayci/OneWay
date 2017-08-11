@@ -63,7 +63,7 @@ public class GridFragment extends Fragment {
 
                     CreditDialog creditDialog = new CreditDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    creditDialog.setCancelable(false);
+                    creditDialog.setCancelable(true);
                     creditDialog.show();
                 }
 

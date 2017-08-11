@@ -39,4 +39,14 @@
     <string name="musicVolume">100</string>
     <string name="levelClose">Kilitli Bölüm</string>
     <string name="warning">Uyarı!</string>
+    <string name="howIsPlay">Nasıl Oynanır?</string>
+    <string name="rules">Kurallar Nelerdir?</string>
+    <string name="producer">Yapımcı</string>
+    <string name="l1">Oyun bir dokunuşla tamamlanacak şekilde tasarlanmıştır. Herhangi bir noktadan başlayarak ekrandaki şekli tamamlamış olmalısın</string>
+    <string name="r1">Kural 1: Şekli tek seferde bitir</string>
+    <string name="r2">Kural 2: Şekli çizerken elini kaldırma aksi taktide tüm yaptıkların silinir</string>
+    <string name="r3">Kural 3: Sana verilen süre içinde şekli tamamla</string>
+    <string name="r4">Kural 4: Sinirlendiğin zaman oyunu kapat ve belli bir süre sonra tekrar dene :)</string>
+    <string name="r5">Kural 5: Ne olursa olsun telefonu kırma! :)</string>
+    <string name="p1">Oyun bir internet projesi olan Yazılımcı Aklı tarafından hazırlanmıştır</string>
 </resources>

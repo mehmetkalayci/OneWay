@@ -31,7 +31,7 @@ public class LevelActivity extends AppCompatActivity {
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
     TextView lblPoints, lblTotalPoints, lblGo;
-
+    int pageNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,8 @@ public class LevelActivity extends AppCompatActivity {
         double perPage = 9;
         double totalItems = levelHelper.getLevelSize();
         double totalPage = Math.ceil(totalItems / perPage);
-
+        DatabaseHandler databaseHandler=new DatabaseHandler(this);
+        pageNumber= (int) Math.ceil(databaseHandler.getAllLevels().size()/perPage);
         for (page = 1; page <= totalPage; page++) {
             int limit = (int) ((page - 1) * perPage);
 
@@ -78,9 +79,8 @@ public class LevelActivity extends AppCompatActivity {
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
             viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter, page));
         }
-
+        levelPager.setCurrentItem(pageNumber);
         indicator.setViewPager(levelPager);
-
         if (!MainActivity.musicHelper.isPlaying())
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }

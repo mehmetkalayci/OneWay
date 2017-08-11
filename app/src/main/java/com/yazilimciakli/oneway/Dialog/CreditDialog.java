@@ -28,9 +28,4 @@ public class CreditDialog extends Dialog {
         dismiss();
     }
 
-    @Override
-    public void setCanceledOnTouchOutside(boolean cancel) {
-        dismiss();
-        super.setCanceledOnTouchOutside(cancel);
-    }
 }
