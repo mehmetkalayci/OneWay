@@ -36,7 +36,7 @@
     <string name="creditText">Design &amp; Coding\nÖnder Veli GÖKTAŞ\nMehmet KALAYCI</string>
 
     <string name="musicVolume">100</string>
-    <string name="marketURL">market://details?id=com.yazilimciakli.oneway</string>
+    <string name="marketURL">market://details?id=https://play.google.com/store/apps/details?id=com.yazilimciakli.oneway</string>
     <string name="levelClose">Level Closed</string>
     <string name="warning">Warning!</string>
     <string name="howIsPlay">How is play the game?</string>
