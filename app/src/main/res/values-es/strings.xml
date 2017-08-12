@@ -20,10 +20,10 @@
     <string name="shareMessage">Prueba One Touch Go para tu smartphone.Visita http://yazilimciakli.com para descargarlo.</string>
 
     <!-- Exit Dialog-->
-    <string name="exitTitle">Ausfahrt</string>
-    <string name="exitMessage">Sind sie sicher, dass Sie das spiel beenden?</string>
+    <string name="exitTitle">Salida</string>
+    <string name="exitMessage">Está seguro que desea salir?</string>
     <string name="yesButton">Ja</string>
-    <string name="noButton">Nein</string>
+    <string name="noButton">No</string>
 
     <!-- Points -->
     <string name="pointsTitle">Points:</string>
@@ -41,13 +41,13 @@
     <string name="warning">Warning!</string>
     <string name="howIsPlay">How is play the game?</string>
     <string name="rules">What is Rules?</string>
-    <string name="producer">Producer</string>
+    <string name="producer">Productor</string>
     <string name="l1">The game is meant to be completed in one touch go. You should be complete shape on the screen any start the point</string>
-    <string name="r1">Rule 1: You shape finish one touch go</string>
+    <string name="r1">Rule 1: You have to finish shape one touch go</string>
     <string name="r2">Rule 2: Do not lift your hand when you draw a figure, otherwise you do is erased</string>
     <string name="r3">Rule 3: You should be done complete the shape  in your time</string>
     <string name="r4">Rule 4: if you angry this game closed and  wait a few minute and try again later :)</string>
-    <string name="r5">Rules 5: Don\'t be crack the phone :)</string>
+    <string name="r5">Rule 5: Don\'t be crack the phone :)</string>
     <string name="p1">Made by YazilimciAkli</string>
     <string name="reklam_kimligi">ca-app-pub-5142565439495272/9078942743</string>
     <string name="levelArasi">ca-app-pub-5142565439495272/8804114332</string>
