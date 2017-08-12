@@ -2,8 +2,6 @@ package com.yazilimciakli.oneway;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -16,7 +14,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.yazilimciakli.oneway.Dialog.ExitDialog;
 import com.yazilimciakli.oneway.Graph.GameView;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 
@@ -169,10 +166,10 @@ public class GameActivity extends AppCompatActivity {
     public void onBackPressed() {
         MainActivity.musicHelper.setPlaying(false);
         //Dialogun açılması için super.onBackPressed(); iptal edildi!
-        ExitDialog exitDialog = new ExitDialog(this);
-        exitDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        exitDialog.setCancelable(false);
-        exitDialog.show();
+        MainActivity.musicHelper.setPlaying(true);
+        startActivity(new Intent(GameActivity.this, LevelActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+        finish();
     }
 
     @Override
