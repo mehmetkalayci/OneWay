@@ -74,7 +74,7 @@ public class FinishDialog extends Dialog {
 
                 Intent openLevelIntent = new Intent();
 
-                MainActivity.isBack=false;
+                GameActivity.between=false;
 
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);

@@ -76,7 +76,7 @@ public class WinDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 dismiss();
-                MainActivity.isBack=false;
+                GameActivity.between=false;
                 Intent openLevelIntent = new Intent();
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
@@ -93,7 +93,7 @@ public class WinDialog extends Dialog {
             public void onClick(View v) {
                 dismiss();
 
-                MainActivity.isBack=false;
+                GameActivity.between=false;
                 Intent openLevelIntent = new Intent();
 
                 openLevelIntent.setClass(context, GameActivity.class);

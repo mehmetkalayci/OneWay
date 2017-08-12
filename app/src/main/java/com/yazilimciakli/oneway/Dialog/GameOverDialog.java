@@ -53,7 +53,7 @@ public class GameOverDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
-                MainActivity.isBack=false;
+                GameActivity.between=false;
                 openLevelIntent.setClass(context, GameActivity.class);
                 openLevelIntent.putExtra("levelId", levelID - 1);
                 context.startActivity(openLevelIntent);
