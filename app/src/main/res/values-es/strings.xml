@@ -39,11 +39,11 @@
     <string name="musicVolume">100</string>
     <string name="levelClose">Level Closed</string>
     <string name="warning">Warning!</string>
-    <string name="howIsPlay">How is play the game?</string>
+    <string name="howIsPlay">How is play?</string>
     <string name="rules">What is Rules?</string>
     <string name="producer">Productor</string>
     <string name="l1">The game is meant to be completed in one touch go. You should be complete shape on the screen any start the point</string>
-    <string name="r1">Rule 1: You have to finish shape one touch go</string>
+    <string name="r1">Rule 1: You need to finish with a single touch</string>
     <string name="r2">Rule 2: Do not lift your hand when you draw a figure, otherwise you do is erased</string>
     <string name="r3">Rule 3: You should be done complete the shape  in your time</string>
     <string name="r4">Rule 4: if you angry this game closed and  wait a few minute and try again later :)</string>
