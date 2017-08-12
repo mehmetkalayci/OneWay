@@ -79,7 +79,7 @@ public class LevelActivity extends AppCompatActivity {
             LevelAdapter levelAdapter = new LevelAdapter(this, tempLevels);
             viewPagerAdapter.addFragment(GridFragment.newInstance(levelAdapter, page));
         }
-        levelPager.setCurrentItem(pageNumber);
+        levelPager.setCurrentItem(pageNumber-1);
         indicator.setViewPager(levelPager);
         if (!MainActivity.musicHelper.isPlaying())
             MainActivity.musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
