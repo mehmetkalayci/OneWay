@@ -26,6 +26,7 @@ public class WinDialog extends Dialog {
     Typeface typeface;
     int levelID;
 
+
     public WinDialog(Context context, String title, String remainingTime, String score, int levelID) {
         super(context);
         this.context = context;
@@ -33,6 +34,7 @@ public class WinDialog extends Dialog {
         this.remainingTime = remainingTime;
         this.score = score;
         this.levelID = levelID;
+
     }
 
     @Override
@@ -41,6 +43,10 @@ public class WinDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_win_game);
 
+        if(GameActivity.hideAd)
+        {
+            GameActivity.mInterstitialAd.show();
+        }
         this.getWindow().getAttributes().windowAnimations = R.style.popwindow_anim_style;
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
@@ -85,7 +91,6 @@ public class WinDialog extends Dialog {
         btnNextLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 dismiss();
 
                 MainActivity.isBack=false;
@@ -98,9 +103,11 @@ public class WinDialog extends Dialog {
                 Activity activity = (Activity) context;
                 activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 activity.finish();
+
             }
         });
     }
+
 
 
     @Override

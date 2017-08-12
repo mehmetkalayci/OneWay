@@ -82,6 +82,8 @@ public class GameView extends View implements Runnable {
     boolean isGameOver = false;
     boolean lastLevel = false;
 
+
+
     // Oynanan level
     Level currentLevel;
 
@@ -387,11 +389,11 @@ public class GameView extends View implements Runnable {
                                 finishDialog.setCancelable(false);
                                 finishDialog.show();
                             } else {
-
                                 WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
                                 winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 winDialog.setCancelable(false);
                                 winDialog.show();
+
                             }
 
 
@@ -408,6 +410,8 @@ public class GameView extends View implements Runnable {
         invalidate();
         return true;
     }
+
+
 
     /***
      * Timer olayı burada yapıldı

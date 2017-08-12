@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
@@ -22,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static MusicHelper musicHelper = new MusicHelper();
     public static boolean isBack;
-    InterstitialAd mInterstitialAd;
+
     boolean isButton;
     private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,61 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isButton = true;
         isBack = true;
 
-/*
-        MobileAds.initialize(this, getString(R.string.banner_ad_unit_id));
 
-        mInterstitialAd = new InterstitialAd(this);
-
-        mInterstitialAd.setAdUnitId(getString(R.string.banner_ad_unit_id));
-
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("1AB709011FC32397BD73E59EEF1AA148")
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        mInterstitialAd.loadAd(adRequest);
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-            }
-        });
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-        });
-
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-*/
-
+        reklam_yukle();
+        reklam_yukle2();
         /* Animation Code */
 
 
@@ -131,6 +83,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
+    private void reklam_yukle() {
+        mAdView=new AdView(this);
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
+
+        LinearLayout layout= (LinearLayout) findViewById(R.id.reklam);
+        layout.addView(mAdView);
+
+        AdRequest adRequest=new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+    private void reklam_yukle2() {
+       /* MobileAds.initialize(this, getString(R.string.levelArasi));
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.levelArasi));
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mInterstitialAd.loadAd(adRequest);*/
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -138,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, LevelActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 isButton = false;
+               // mInterstitialAd.show();
                 finish();
                 break;
             case R.id.btnSettings:
