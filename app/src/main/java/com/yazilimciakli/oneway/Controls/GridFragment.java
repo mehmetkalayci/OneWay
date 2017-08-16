@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.Dialog.CreditDialog;
+import com.yazilimciakli.oneway.Dialog.HealtDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.MainActivity;
@@ -49,8 +51,11 @@ public class GridFragment extends Fragment {
                 tempLevel = levelHelper.getLevel(position + ((pageNumber - 1) * 9));
 
                 com.yazilimciakli.oneway.Database.Level level = dbHandler.getLevel(tempLevel.levelid);
+                HealthHandler healtHandler = new HealthHandler(getContext());
 
-                if (level != null || tempLevel.levelid == 1 ) {
+
+                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healtHandler.getHealt(1).get("health"))>0) {
+
 
                     Intent openLevelIntent = new Intent();
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
@@ -59,7 +64,15 @@ public class GridFragment extends Fragment {
                     MainActivity.isBack=true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
-                } else {
+                }
+                else if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
+                {
+                    HealtDialog creditDialog = new HealtDialog(getContext());
+                    creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    creditDialog.setCancelable(true);
+                    creditDialog.show();
+                }
+                else {
 
                     CreditDialog creditDialog = new CreditDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

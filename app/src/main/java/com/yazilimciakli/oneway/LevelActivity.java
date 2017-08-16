@@ -4,6 +4,7 @@ package com.yazilimciakli.oneway;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -11,13 +12,16 @@ import android.widget.TextView;
 import com.yazilimciakli.oneway.Controls.GridFragment;
 import com.yazilimciakli.oneway.Controls.LevelAdapter;
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 import com.yazilimciakli.oneway.Utils.ViewPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -30,7 +34,7 @@ public class LevelActivity extends AppCompatActivity {
     CircleIndicator indicator;
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
-    TextView lblPoints, lblTotalPoints, lblGo;
+    TextView lblhealt, lblTotalPoints, lblGo,timer;
     int pageNumber;
 
     @Override
@@ -41,15 +45,18 @@ public class LevelActivity extends AppCompatActivity {
         MainActivity.isBack = false;
 
         lblSelectLevel = (TextView) findViewById(R.id.lblSelectLevel);
-        lblPoints = (TextView) findViewById(R.id.lblPoints);
         lblTotalPoints = (TextView) findViewById(R.id.lblTotalPoints);
         lblGo = (TextView) findViewById(R.id.lblGo);
+        lblhealt=(TextView) findViewById(R.id.healt);
+        timer=(TextView) findViewById(R.id.timer);
 
         typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
         lblSelectLevel.setTypeface(typeface);
-        lblPoints.setTypeface(typeface);
         lblTotalPoints.setTypeface(typeface);
+        lblhealt.setTypeface(typeface);
         lblGo.setTypeface(typeface);
+
+        final Date now = new Date();
 
         levelPager = (ViewPager) findViewById(R.id.levelPager);
         indicator = (CircleIndicator) findViewById(R.id.indicator);
@@ -60,7 +67,60 @@ public class LevelActivity extends AppCompatActivity {
         LevelHelper levelHelper = new LevelHelper(this);
 
         DatabaseHandler dbHandler = new DatabaseHandler(this);
+
+        final HealthHandler healtHandler = new HealthHandler(this);
+
+        //Level textlere değer atamaları yapılıyor
         lblTotalPoints.setText(dbHandler.getPoints());
+        lblhealt.setText(String.valueOf(healtHandler.getHealt(1).get("health")));
+
+
+        //kalan sürenin hesaplanması için hesap değişkeni oluşturup default değer atandı
+        Long hesap= Long.valueOf(1000);
+
+        //Canı kalmamışsa işlem yapacak
+        if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
+        {
+            /* Canı kalmamışsa işlem yapacak
+            * eğer canı yoksa işlem başlar
+            * hesap değişkenine veritabanından gelecekte olması istenilen süre çekilir
+            * çekilen süreden şimdiki zaman çıkarılır ve kalan süre bulunur*/
+            hesap =Long.parseLong(healtHandler.getHealt(1).get("timeStamp"))-now.getTime();
+
+            //Kalan süre hesap değişkeninden timer a aktarıldı.
+            new CountDownTimer(hesap, 1000) { // gelen süre milisaniye cinsinden
+
+                //saniye sayma fonksiyonu
+                public void onTick(long millisUntilFinished) {
+                    timer.setText(""+String.format("%d:%d",
+                            TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
+                //sayma bittiğinde bu fonksiyon çalışacak
+                public void onFinish() {
+                    HealthHandler healtHandler = new HealthHandler(getApplicationContext());
+                    if(Integer.parseInt(healtHandler.getHealt(1).get("health"))!=5)
+                    {
+                        healtHandler.setHealt(5,now.getTime(),1);
+                    }
+                    timer.setText(getResources().getString(R.string.fullHealth));
+                    lblhealt.setText(String.valueOf(healtHandler.getHealt(1).get("health")));
+                }
+            }.start();
+        }else
+        {
+
+            if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==5)
+            {
+                timer.setText(getResources().getString(R.string.fullHealth));
+            }
+            else
+            {
+                timer.setText(getResources().getString(R.string.lowHealth));
+            }
+        }
+
 
 
 
@@ -68,7 +128,9 @@ public class LevelActivity extends AppCompatActivity {
         double perPage = 9;
         double totalItems = levelHelper.getLevelSize();
         double totalPage = Math.ceil(totalItems / perPage);
+
         DatabaseHandler databaseHandler=new DatabaseHandler(this);
+
         pageNumber= (int) Math.ceil(databaseHandler.getAllLevels().size()/perPage);
         for (page = 1; page <= totalPage; page++) {
             int limit = (int) ((page - 1) * perPage);

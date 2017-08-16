@@ -49,4 +49,7 @@
     <string name="r5">Rule 5: Don\'t be crack the phone :)</string>
     <string name="p1">Made by YazilimciAkli</string>
     <string name="levelArasi">ca-app-pub-5142565439495272/8804114332</string>
+    <string name="nonhealt">Sorry, No Healt, please wait or watch ad</string>
+    <string name="fullHealth">Full Health</string>
+    <string name="lowHealth">Low Health</string>
 </resources>

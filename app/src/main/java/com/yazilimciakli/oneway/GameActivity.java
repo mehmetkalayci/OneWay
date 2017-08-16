@@ -162,7 +162,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        MainActivity.musicHelper.playMusic();
         if(SettingsActivity.getMusicStatus(this))
         {
             MainActivity.musicHelper.playMusic();

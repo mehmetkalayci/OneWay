@@ -429,6 +429,8 @@ public class GameView extends View implements Runnable {
         }
         if (time == 0 && !isGameOver) {
             isGameOver = true;
+
+
             GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.setCanceledOnTouchOutside(true);

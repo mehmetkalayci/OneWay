@@ -26,6 +26,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_SCORE = "score";
     private static final String KEY_ELAPSED_TIME = "elapsedTime";
 
+
+
+    /*HEALT TABLES BEGIN*/
+    //Healt table name
+    private static final String TABLE_HEALT = "healt";
+
+    // Healt Table Columns names
+    private static final String KEY_HEALT_ID = "healtId";
+    private static final String KEY_HEALT = "healt";
+    private static final String KEY_ENDED_TIME = "endedTime";
+    /*HEALT TABLES END*/
+
+
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -37,6 +51,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_ELAPSED_TIME + " INTEGER" + ")";
 
         db.execSQL(CREATE_LEVELS_TABLE);
+
+        /*HEALT TABLE CREATE*/
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_HEALT + "("
+                + KEY_HEALT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_HEALT + " INTEGER,"
+                + KEY_ENDED_TIME + " STRING)";
+        db.execSQL(CREATE_TABLE);
+
     }
 
     @Override
@@ -116,5 +138,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_LEVELS, KEY_LEVEL_ID + " = ?", new String[]{String.valueOf(level.getLevelId())});
         db.close();
     }
+
+
+    /*HEALT TABLE FUNCTIONS*/
+
 
 }
