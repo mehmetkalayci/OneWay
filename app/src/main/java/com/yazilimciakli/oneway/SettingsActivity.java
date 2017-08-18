@@ -82,8 +82,7 @@ public class SettingsActivity extends Activity {
                     if (isChecked) {
                         boolean musicStatus = MainActivity.musicHelper.changeStatus();
                         chkMusicStatus.setChecked(musicStatus);
-                    }
-                    else {
+                    } else {
                         boolean musicStatus = MainActivity.musicHelper.changeStatus();
                     }
                 }
@@ -114,7 +113,7 @@ public class SettingsActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 String language = "en";
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rdTr:
                         language = "tr";
                         break;
@@ -138,17 +137,19 @@ public class SettingsActivity extends Activity {
         });
         /*****Dil Ayarları******/
     }
+
     private void reklam_yukle() {
-        mAdView=new AdView(this);
+        mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.BANNER);
         mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
 
-        LinearLayout layout= (LinearLayout) findViewById(R.id.reklam);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
         layout.addView(mAdView);
 
-        AdRequest adRequest=new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
+
     boolean changeVibrationStatus(boolean status) {
         SharedPreferenceHelper.setSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, status);
         return SharedPreferenceHelper.getSharedPreferenceBoolean(SettingsActivity.this, SETTING_VIBRATION, true);
@@ -175,8 +176,7 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(SettingsActivity.getMusicStatus(this))
-        {
+        if (SettingsActivity.getMusicStatus(this)) {
             MainActivity.musicHelper.playMusic();
         }
     }

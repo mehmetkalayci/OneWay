@@ -12,10 +12,6 @@ import com.yazilimciakli.oneway.R;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Admin on 9.08.2017.
- */
-
 public class ExpandableListviewAdapter extends BaseExpandableListAdapter {
 
     public List<String> list_parent;
@@ -24,17 +20,17 @@ public class ExpandableListviewAdapter extends BaseExpandableListAdapter {
     public TextView txt;
     public TextView txt_child;
     public LayoutInflater inflater;
+
+    public ExpandableListviewAdapter(Context context, List<String> list_parent, HashMap<String, List<String>> list_child) {
+        this.context = context;
+        this.list_parent = list_parent;
+        this.list_child = list_child;
+    }
+
     @Override
     public int getGroupCount() {
 
         return list_parent.size();
-    }
-
-    public ExpandableListviewAdapter(Context context, List<String> list_parent,HashMap<String, List<String>> list_child)
-    {
-        this.context = context;
-        this.list_parent = list_parent;
-        this.list_child = list_child;
     }
 
     @Override
@@ -77,33 +73,30 @@ public class ExpandableListviewAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View view, ViewGroup parent) {
-        String title_name = (String)getGroup(groupPosition);
+        String title_name = (String) getGroup(groupPosition);
 
-        if(view == null)
-        {
-            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.listview_header,null);
+        if (view == null) {
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.listview_header, null);
         }
 
-        txt = (TextView)view.findViewById(R.id.txt_parent);
+        txt = (TextView) view.findViewById(R.id.txt_parent);
         txt.setText(title_name);
 
         return view;
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View view, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
         // kaçıncı pozisyonda ise başlığımızın elemanı onun ismini alarak string e atıyoruz
-        String txt_child_name = (String)getChild(groupPosition, childPosition);
-        if(view==null)
-        {
-            inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        String txt_child_name = (String) getChild(groupPosition, childPosition);
+        if (view == null) {
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.listview_child, null);
             // fonksiyon adından da anlaşılacağı gibi parent a bağlı elemanlarının layoutunu inflate ediyoruz böylece o görüntüye ulaşmış oluyoruz
         }
         // listview_child ulaştığımıza göre içindeki bileşeni de kullanabiliyoruz daha sonradan view olarak return ediyoruz
-        txt_child = (TextView)view.findViewById(R.id.txt_items);
+        txt_child = (TextView) view.findViewById(R.id.txt_items);
         txt_child.setText(txt_child_name);
         return view;
     }
@@ -113,7 +106,6 @@ public class ExpandableListviewAdapter extends BaseExpandableListAdapter {
 
         return true;  // expandablelistview de tıklama yapabilmek için true olmak zorunda
     }
-
 
 
 }

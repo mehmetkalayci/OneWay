@@ -56,27 +56,23 @@ public class GameOverDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 Intent openLevelIntent = new Intent();
-                GameActivity.between=false;
+                GameActivity.between = false;
 
-                HealthHandler healtHandler=new HealthHandler(getContext());
-                int healt=Integer.parseInt(healtHandler.getHealt(1).get("health"));
+                HealthHandler healthHandler = new HealthHandler(getContext());
+                int health = Integer.parseInt(healthHandler.getHealth(1).get("health"));
                 Date now = new Date();
-                healtHandler.setHealt(healt-1,now.getTime(),1);
+                healthHandler.setHealt(health - 1, now.getTime(), 1);
 
-                if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
-                {
+                if (Integer.parseInt(healthHandler.getHealth(1).get("health")) == 0) {
 
-                    healtHandler.setHealt(0,(now.getTime()+10*60*1000),1);
+                    healthHandler.setHealt(0, (now.getTime() + 10 * 60 * 1000), 1);
                     openLevelIntent.setClass(getContext(), LevelActivity.class);
-                }
-                else
-                {
+                } else {
                     openLevelIntent.setClass(context, GameActivity.class);
                 }
 
                 openLevelIntent.putExtra("levelId", levelID - 1);
                 context.startActivity(openLevelIntent);
-
 
 
                 Activity activity = (Activity) context;
@@ -91,21 +87,18 @@ public class GameOverDialog extends Dialog {
         dismiss();
 
         Intent openLevelIntent = new Intent();
-        MainActivity.isBack=true;
+        MainActivity.isBack = true;
         MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
 
-        HealthHandler healtHandler=new HealthHandler(getContext());
-        int healt=Integer.parseInt(healtHandler.getHealt(1).get("health"));
+        HealthHandler healthHandler = new HealthHandler(getContext());
+        int health = Integer.parseInt(healthHandler.getHealth(1).get("health"));
         Date now = new Date();
-        healtHandler.setHealt(healt-1,now.getTime(),1);
+        healthHandler.setHealt(health - 1, now.getTime(), 1);
 
-        if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
-        {
-            healtHandler.setHealt(0,(now.getTime()+10*60*1000),1);
+        if (Integer.parseInt(healthHandler.getHealth(1).get("health")) == 0) {
+            healthHandler.setHealt(0, (now.getTime() + 10 * 60 * 1000), 1);
             openLevelIntent.setClass(getContext(), LevelActivity.class);
-        }
-        else
-        {
+        } else {
             openLevelIntent.setClass(context, LevelActivity.class);
         }
 

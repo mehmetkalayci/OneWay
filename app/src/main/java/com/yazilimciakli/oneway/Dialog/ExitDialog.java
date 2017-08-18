@@ -80,7 +80,7 @@ public class ExitDialog extends Dialog {
 
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-       dismiss();
+        dismiss();
         return super.onTouchEvent(event);
     }
 }

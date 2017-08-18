@@ -27,17 +27,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ELAPSED_TIME = "elapsedTime";
 
 
+    /*HEALTH TABLES BEGIN*/
+    //Health table name
+    private static final String TABLE_HEALTH = "health";
 
-    /*HEALT TABLES BEGIN*/
-    //Healt table name
-    private static final String TABLE_HEALT = "healt";
-
-    // Healt Table Columns names
-    private static final String KEY_HEALT_ID = "healtId";
-    private static final String KEY_HEALT = "healt";
+    // Health Table Columns names
+    private static final String KEY_HEALTH_ID = "healthId";
+    private static final String KEY_HEALTH = "health";
     private static final String KEY_ENDED_TIME = "endedTime";
-    /*HEALT TABLES END*/
-
+    /*HEALTH TABLES END*/
 
 
     public DatabaseHandler(Context context) {
@@ -52,10 +50,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_LEVELS_TABLE);
 
-        /*HEALT TABLE CREATE*/
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_HEALT + "("
-                + KEY_HEALT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_HEALT + " INTEGER,"
+        /*HEALTH TABLE CREATE*/
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_HEALTH + "("
+                + KEY_HEALTH_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_HEALTH + " INTEGER,"
                 + KEY_ENDED_TIME + " STRING)";
         db.execSQL(CREATE_TABLE);
 
@@ -133,14 +131,5 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_LEVELS, values, KEY_LEVEL_ID + " = ?", new String[]{String.valueOf(level.getLevelId())});
     }
 
-    public void deleteContact(Level level) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_LEVELS, KEY_LEVEL_ID + " = ?", new String[]{String.valueOf(level.getLevelId())});
-        db.close();
-    }
-
-
     /*HEALT TABLE FUNCTIONS*/
-
-
 }
