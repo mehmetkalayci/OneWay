@@ -453,5 +453,4 @@ public class GameView extends View implements Runnable {
         }
     }
 
-
 }

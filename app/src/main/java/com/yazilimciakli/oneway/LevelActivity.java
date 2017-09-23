@@ -34,8 +34,10 @@ public class LevelActivity extends AppCompatActivity {
     CircleIndicator indicator;
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
-    TextView lblhealt, lblTotalPoints, lblGo,timer;
+    public static TextView lblhealt, lblTotalPoints, lblGo,timer;
+    Long hesap;
     int pageNumber;
+    public static CountDownTimer waitTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +77,6 @@ public class LevelActivity extends AppCompatActivity {
         lblhealt.setText(String.valueOf(healtHandler.getHealt(1).get("health")));
 
 
-        //kalan sürenin hesaplanması için hesap değişkeni oluşturup default değer atandı
-        Long hesap= Long.valueOf(1000);
-
         //Canı kalmamışsa işlem yapacak
         if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
         {
@@ -85,10 +84,12 @@ public class LevelActivity extends AppCompatActivity {
             * eğer canı yoksa işlem başlar
             * hesap değişkenine veritabanından gelecekte olması istenilen süre çekilir
             * çekilen süreden şimdiki zaman çıkarılır ve kalan süre bulunur*/
+
             hesap =Long.parseLong(healtHandler.getHealt(1).get("timeStamp"))-now.getTime();
 
             //Kalan süre hesap değişkeninden timer a aktarıldı.
-            new CountDownTimer(hesap, 1000) { // gelen süre milisaniye cinsinden
+
+            waitTimer=new CountDownTimer(hesap, 1000) { // gelen süre milisaniye cinsinden
 
                 //saniye sayma fonksiyonu
                 public void onTick(long millisUntilFinished) {

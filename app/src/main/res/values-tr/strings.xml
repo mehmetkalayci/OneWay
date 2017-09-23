@@ -52,4 +52,5 @@
     <string name="nonhealt">Üzgünüm, Canın yok, daha fazla can için reklam izleyin yada sürenin dolmasını bekleyin</string>
     <string name="fullHealth">Canın Dolu</string>
     <string name="lowHealth">Canın Azalıyor</string>
+    <string name="sorry">Üzgünüm</string>
 </resources>
