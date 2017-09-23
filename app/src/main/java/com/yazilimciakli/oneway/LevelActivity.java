@@ -34,7 +34,8 @@ public class LevelActivity extends AppCompatActivity {
     CircleIndicator indicator;
     ViewPager levelPager;
     ViewPagerAdapter viewPagerAdapter;
-    TextView lblhealt, lblTotalPoints, lblGo,timer;
+    public static TextView lblhealt, lblTotalPoints, lblGo,timer;
+    public static CountDownTimer waitTimer;
     int pageNumber;
 
     @Override
@@ -72,23 +73,23 @@ public class LevelActivity extends AppCompatActivity {
 
         //Level textlere değer atamaları yapılıyor
         lblTotalPoints.setText(dbHandler.getPoints());
-        lblhealt.setText(String.valueOf(healtHandler.getHealt(1).get("health")));
+        lblhealt.setText(String.valueOf(healtHandler.getHealth(1).get("health")));
 
 
         //kalan sürenin hesaplanması için hesap değişkeni oluşturup default değer atandı
         Long hesap= Long.valueOf(1000);
 
         //Canı kalmamışsa işlem yapacak
-        if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
+        if(Integer.parseInt(healtHandler.getHealth(1).get("health"))==0)
         {
             /* Canı kalmamışsa işlem yapacak
             * eğer canı yoksa işlem başlar
             * hesap değişkenine veritabanından gelecekte olması istenilen süre çekilir
             * çekilen süreden şimdiki zaman çıkarılır ve kalan süre bulunur*/
-            hesap =Long.parseLong(healtHandler.getHealt(1).get("timeStamp"))-now.getTime();
+            hesap =Long.parseLong(healtHandler.getHealth(1).get("timeStamp"))-now.getTime();
 
             //Kalan süre hesap değişkeninden timer a aktarıldı.
-            new CountDownTimer(hesap, 1000) { // gelen süre milisaniye cinsinden
+            waitTimer=new CountDownTimer(hesap, 1000) { // gelen süre milisaniye cinsinden
 
                 //saniye sayma fonksiyonu
                 public void onTick(long millisUntilFinished) {
@@ -100,18 +101,18 @@ public class LevelActivity extends AppCompatActivity {
                 //sayma bittiğinde bu fonksiyon çalışacak
                 public void onFinish() {
                     HealthHandler healtHandler = new HealthHandler(getApplicationContext());
-                    if(Integer.parseInt(healtHandler.getHealt(1).get("health"))!=5)
+                    if(Integer.parseInt(healtHandler.getHealth(1).get("health"))!=5)
                     {
                         healtHandler.setHealt(5,now.getTime(),1);
                     }
                     timer.setText(getResources().getString(R.string.fullHealth));
-                    lblhealt.setText(String.valueOf(healtHandler.getHealt(1).get("health")));
+                    lblhealt.setText(String.valueOf(healtHandler.getHealth(1).get("health")));
                 }
             }.start();
         }else
         {
 
-            if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==5)
+            if(Integer.parseInt(healtHandler.getHealth(1).get("health"))==5)
             {
                 timer.setText(getResources().getString(R.string.fullHealth));
             }
