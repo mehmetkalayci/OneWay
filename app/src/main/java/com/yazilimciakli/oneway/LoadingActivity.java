@@ -49,7 +49,6 @@ public class LoadingActivity extends Activity {
         LanguageHelper.changeLocale(LoadingActivity.this, new Locale(language));
 
 
-
         // İnternetten level dosyasını güncelle
         fileHelper = new FileHelper(LoadingActivity.this);
 

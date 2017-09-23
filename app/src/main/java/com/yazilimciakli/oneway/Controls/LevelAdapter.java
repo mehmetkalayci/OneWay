@@ -63,7 +63,6 @@ public class LevelAdapter extends BaseAdapter {
         lock = (ImageView) itemView.findViewById(R.id.lock);
 
 
-
         com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
 
         if (tempLevel != null || levelList.get(position).levelid == 1) {

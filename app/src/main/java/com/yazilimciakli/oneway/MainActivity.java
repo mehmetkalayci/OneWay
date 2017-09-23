@@ -84,16 +84,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void reklam_yukle() {
-        mAdView=new AdView(this);
+        mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.BANNER);
         mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
 
-        LinearLayout layout= (LinearLayout) findViewById(R.id.reklam);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
         layout.addView(mAdView);
 
-        AdRequest adRequest=new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
+
     private void reklam_yukle2() {
        /* MobileAds.initialize(this, getString(R.string.levelArasi));
         mInterstitialAd = new InterstitialAd(this);
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, LevelActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 isButton = false;
-               // mInterstitialAd.show();
+                // mInterstitialAd.show();
                 finish();
                 break;
             case R.id.btnSettings:
@@ -133,10 +134,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 isButton = false;
                 finish();
-                /*
-                CreditDialog creditDialog = new CreditDialog(this);
-                creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                creditDialog.show();*/
                 break;
         }
         MainActivity.musicHelper.setPlaying(true);
@@ -155,8 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        if(SettingsActivity.getMusicStatus(this))
-        {
+        if (SettingsActivity.getMusicStatus(this)) {
             musicHelper.playMusic();
         }
     }

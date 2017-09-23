@@ -28,8 +28,8 @@ public class InfoActivity extends Activity {
     public List<String> gs_list;
     public List<String> fb_list;
     public List<String> tt_list;
-    public int last_position = -1;
     private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class InfoActivity extends Activity {
         reklam_yukle();
         MainActivity.isBack = false;
 
-        expandlist_view = (ExpandableListView)findViewById(R.id.expand_listview);
+        expandlist_view = (ExpandableListView) findViewById(R.id.expand_listview);
 
         Hazırla(); // expandablelistview içeriğini hazırlamak için
 
@@ -46,8 +46,8 @@ public class InfoActivity extends Activity {
         expandlist_view.setAdapter(expand_adapter);  // oluşturduğumuz adapter sınıfını set ediyoruz
         expandlist_view.setClickable(true);
     }
-    public void Hazırla()
-    {
+
+    public void Hazırla() {
         list_parent = new ArrayList<String>();  // başlıklarımızı listemelek için oluşturduk
         list_child = new HashMap<String, List<String>>(); // başlıklara bağlı elemenları tutmak için oluşturduk
 
@@ -68,23 +68,24 @@ public class InfoActivity extends Activity {
         tt_list = new ArrayList<String>();
         tt_list.add(getResources().getString(R.string.p1));
 
-        list_child.put(list_parent.get(0),gs_list);
+        list_child.put(list_parent.get(0), gs_list);
         list_child.put(list_parent.get(1), fb_list);
         list_child.put(list_parent.get(2), tt_list);
 
     }
 
     private void reklam_yukle() {
-        mAdView=new AdView(this);
+        mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.BANNER);
         mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
 
-        LinearLayout layout= (LinearLayout) findViewById(R.id.reklam);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
         layout.addView(mAdView);
 
-        AdRequest adRequest=new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
+
     @Override
     public void onBackPressed() {
         MainActivity.isBack = true;
@@ -96,8 +97,7 @@ public class InfoActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(SettingsActivity.getMusicStatus(this))
-        {
+        if (SettingsActivity.getMusicStatus(this)) {
             MainActivity.musicHelper.playMusic();
         }
     }

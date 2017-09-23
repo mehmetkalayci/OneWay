@@ -32,65 +32,47 @@ import java.util.List;
 
 public class GameView extends View implements Runnable {
 
+    public Handler mHandler = new Handler();
     // pointListesi, oyuncuListesi tanımları
     ArrayList<Tuple<Point, ArrayList<Point>>> pointList = new ArrayList<>();
     ArrayList<Point> playerList = new ArrayList<>();
-
     //Levelleri getirmekte kullanılır
     LevelHelper levelHelper = new LevelHelper(getContext());
-
     // Seçili noktanın değerini tutar
     Tuple<Point, ArrayList<Point>> lastPoint = null;
-
     // Hamle tanımı
     int moveNumber = 0;
     int userMove = 0;
-
     //Zaman Tanımı
     int time = 0;
     int timerCount = 0;
-
     //Time Progressbar Renk Ayarı
     int redLevel = 0;
-
     //Level tanımı
     int level = 0;
-
     //Touch Tolerance tanımı
     float touchTolerance = 0;
-
     //Level Başlığı tanımı
     String levelName;
     String timeText = getResources().getString(R.string.timeText);
     String moveText = getResources().getString(R.string.moveText);
-
     //WIDTH
     float width = 0;
     float screenRatio = 0;
-
-
     // Grafik tanımı
     PaintHelper paint;
-
     // Kullanıcıya ait path, kullanıcının göreceği yola ait guidePath ve kullanıcının çizdiği çizgi line olarak tanımlandı
     Path path = new Path();
     Path guidePath = new Path();
     Line line = new Line(0, 0);
-
     // Oyun kontrol değişkenleri tanımı
     boolean isPointTouched = false;
     boolean isGameOver = false;
     boolean lastLevel = false;
-
-
-
     // Oynanan level
     Level currentLevel;
-
     Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
     long vibrationTime = 50;
-
-    public Handler mHandler = new Handler();
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -314,7 +296,7 @@ public class GameView extends View implements Runnable {
                     // tempPoint(HedefNokta), lastPoint(başlangıç noktası) bağlanabilir mi?
                     if (tempPoint != null && lastPoint != null && lastPoint.item2.contains(tempPoint.item1) && !wasThereLine(tempPoint.item1, lastPoint.item1)) {
 
-                        if (SettingsActivity.getVibrationStatus(getContext())){
+                        if (SettingsActivity.getVibrationStatus(getContext())) {
                             vibrator.vibrate(vibrationTime);
                         }
 
@@ -410,7 +392,6 @@ public class GameView extends View implements Runnable {
         invalidate();
         return true;
     }
-
 
 
     /***

@@ -54,25 +54,22 @@ public class GridFragment extends Fragment {
                 HealthHandler healtHandler = new HealthHandler(getContext());
 
 
-                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healtHandler.getHealt(1).get("health"))>0) {
+                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healtHandler.getHealth(1).get("health")) > 0) {
 
 
                     Intent openLevelIntent = new Intent();
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
                     openLevelIntent.putExtra("levelId", position + ((pageNumber - 1) * 9));
                     startActivity(openLevelIntent);
-                    MainActivity.isBack=true;
+                    MainActivity.isBack = true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
-                }
-                else if(Integer.parseInt(healtHandler.getHealt(1).get("health"))==0)
-                {
+                } else if (Integer.parseInt(healtHandler.getHealth(1).get("health")) == 0) {
                     HealtDialog creditDialog = new HealtDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     creditDialog.setCancelable(true);
                     creditDialog.show();
-                }
-                else {
+                } else {
 
                     CreditDialog creditDialog = new CreditDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

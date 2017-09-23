@@ -1,4 +1,3 @@
-
 package com.yazilimciakli.oneway.Level;
 
 import com.google.gson.annotations.Expose;
