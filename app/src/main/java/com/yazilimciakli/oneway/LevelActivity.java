@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Controls.GridFragment;
 import com.yazilimciakli.oneway.Controls.LevelAdapter;
+import com.yazilimciakli.oneway.Database.CoinsHandler;
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.Level.Level;
@@ -67,12 +68,12 @@ public class LevelActivity extends AppCompatActivity {
 
         LevelHelper levelHelper = new LevelHelper(this);
 
-        DatabaseHandler dbHandler = new DatabaseHandler(this);
+        CoinsHandler coinsHandler = new CoinsHandler(this);
 
         final HealthHandler healtHandler = new HealthHandler(this);
 
         //Level textlere değer atamaları yapılıyor
-        lblTotalPoints.setText(dbHandler.getPoints());
+        lblTotalPoints.setText(coinsHandler.getCoins(1).get("totalCoin"));
         lblhealt.setText(String.valueOf(healtHandler.getHealth(1).get("health")));
 
 

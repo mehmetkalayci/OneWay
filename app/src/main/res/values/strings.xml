@@ -52,5 +52,6 @@
     <string name="nonhealt">Sorry, No Healt, please wait or watch ad</string>
     <string name="fullHealth">Full Health</string>
     <string name="lowHealth">Low Health</string>
-    <string name="sorry">Sorry</string>
+    <string name="sorry">Sorry!</string>
+    <string name="you_have_no_money">You haven\'t enough point!</string>
 </resources>

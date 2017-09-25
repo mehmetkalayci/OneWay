@@ -54,5 +54,6 @@
     <string name="fullHealth">Full Health</string>
     <string name="lowHealth">Low Health</string>
     <string name="sorry">Lo Siento</string>
+    <string name="you_have_no_money">No tienes suficiente punto!</string>
 
 </resources>

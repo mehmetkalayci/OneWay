@@ -53,4 +53,5 @@
     <string name="fullHealth">Canın Dolu</string>
     <string name="lowHealth">Canın Azalıyor</string>
     <string name="sorry">Üzgünüm</string>
+    <string name="you_have_no_money">Yeterli puanınız yok!</string>
 </resources>

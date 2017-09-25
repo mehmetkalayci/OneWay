@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/curve_blue"
+            android:background="@drawable/curve_red"
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingLeft="25dp"
@@ -83,15 +83,22 @@
         android:layout_marginTop="-50dp"
         android:gravity="center">
 
+        <Button
+            android:id="@+id/coinAd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/ic_coin"
+            android:textColor="@android:color/white"
+            android:textColorLink="@android:color/white" />
 
         <ImageButton
             android:id="@+id/watchAd"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_next"
-            />
+            app:srcCompat="@drawable/ic_play" />
 
     </LinearLayout>
 

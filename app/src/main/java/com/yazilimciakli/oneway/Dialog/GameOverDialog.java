@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.yazilimciakli.oneway.Database.CoinsHandler;
 import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
@@ -66,7 +67,12 @@ public class GameOverDialog extends Dialog {
                 if (Integer.parseInt(healthHandler.getHealth(1).get("health")) == 0) {
 
                     healthHandler.setHealt(0, (now.getTime() + 10 * 60 * 1000), 1);
+                    CoinsHandler coinsHandler=new CoinsHandler(getContext());
+                    MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
+                    int a=Integer.parseInt(coinsHandler.getCoins(1).get("totalCoefficient"))+1;
+                     coinsHandler.setCount(a,1);
                     openLevelIntent.setClass(getContext(), LevelActivity.class);
+
                 } else {
                     openLevelIntent.setClass(context, GameActivity.class);
                 }

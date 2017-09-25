@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yazilimciakli.oneway.Database.CoinsHandler;
 import com.yazilimciakli.oneway.Database.DatabaseHandler;
 import com.yazilimciakli.oneway.Dialog.FinishDialog;
 import com.yazilimciakli.oneway.Dialog.GameOverDialog;
@@ -73,7 +74,7 @@ public class GameView extends View implements Runnable {
     Level currentLevel;
     Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
     long vibrationTime = 50;
-
+    int hesap;
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFocusable(true);
@@ -323,9 +324,12 @@ public class GameView extends View implements Runnable {
                             dbHandler = new DatabaseHandler(getContext());
 
                             com.yazilimciakli.oneway.Database.Level tempData = dbHandler.getLevel(currentLevel.levelid);
-
+                            CoinsHandler coinsHandler=new CoinsHandler(getContext());
                             /* Skor Hesaplama Başlangıç */
+
                             int gameScore;
+                            int showScore;
+                            int tmpData;
                             if ((currentLevel.time - time) <= (currentLevel.time / 3)) {
                                 gameScore = currentLevel.score;
                             } else if ((currentLevel.time - time) <= (currentLevel.time / 2)) {
@@ -339,13 +343,40 @@ public class GameView extends View implements Runnable {
 
 
                             // Eğer oyun daha önceden oynanmışsa
+                            if(dbHandler.getPoints()==null)
+                            {
+                                hesap=gameScore;
+                            }
+                            else
+                            {
+                                hesap=Integer.parseInt(coinsHandler.getCoins(1).get("totalCoin"))+gameScore;
+                            }
+                            if(dbHandler.getPoints()==null)
+                            {
+                                tmpData=0;
+                            }
+                            else
+                            {
+                                tmpData=tempData.getScore();
+                            }
                             if (tempData != null) {
                                 // Eğer oyunu ilk defa oynuyorsa ya da sıfır puan almışsa
                                 com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
                                 com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
                                 playingGame.setLevelId(currentLevel.levelid);
                                 playingGame.setElapsedTime(time);
-                                playingGame.setScore(gameScore);
+
+                                if(gameScore>tmpData)
+                                {
+                                    playingGame.setScore(gameScore);
+                                    coinsHandler.setCoins(hesap,1);
+                                    showScore=gameScore;
+                                }
+                                else
+                                {
+                                    playingGame.setScore(tempData.getScore());
+                                    showScore=0;
+                                }
                                 dbHandler.updateLevel(playingGame);
                                 if (levelHelper.getLevelSize() == currentLevel.levelid) {
                                     lastLevel = true;
@@ -358,7 +389,17 @@ public class GameView extends View implements Runnable {
                                 com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
                                 playingGame.setLevelId(currentLevel.levelid);
                                 playingGame.setElapsedTime(time);
-                                playingGame.setScore(gameScore);
+                                if(gameScore>tmpData)
+                                {
+                                    playingGame.setScore(gameScore);
+                                    coinsHandler.setCoins(hesap,1);
+                                    showScore=gameScore;
+                                }
+                                else
+                                {
+                                    playingGame.setScore(tempData.getScore());
+                                    showScore=0;
+                                }
                                 dbHandler.addLevel(playingGame);
 
                                 nextLevel.setLevelId(currentLevel.levelid + 1);
@@ -366,12 +407,12 @@ public class GameView extends View implements Runnable {
                             }
                             if (lastLevel) {
 
-                                FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
+                                FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.levelid);
                                 finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 finishDialog.setCancelable(false);
                                 finishDialog.show();
                             } else {
-                                WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(gameScore), currentLevel.levelid);
+                                WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.levelid);
                                 winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 winDialog.setCancelable(false);
                                 winDialog.show();
