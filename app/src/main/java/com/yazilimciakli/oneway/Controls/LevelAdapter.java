@@ -10,8 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
 import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.R;
 
 import java.util.List;
@@ -21,13 +22,13 @@ public class LevelAdapter extends BaseAdapter {
 
     Context context;
     Typeface typeface;
-    List<Level> levelList;
-    DatabaseHandler dbHandler;
+    List<LevelsResponse> levelList;
+    DatabaseObject dbHandler;
 
-    public LevelAdapter(Context context, List<Level> levelList) {
+    public LevelAdapter(Context context, List<LevelsResponse> levelList) {
         this.context = context;
         this.levelList = levelList;
-        this.dbHandler = new DatabaseHandler(context);
+        this.dbHandler=DatabaseObject.newInstance(context);
         typeface = Typeface.createFromAsset(context.getResources().getAssets(), "fonts/Atma.ttf");
     }
 
@@ -63,11 +64,12 @@ public class LevelAdapter extends BaseAdapter {
         lock = (ImageView) itemView.findViewById(R.id.lock);
 
 
-        com.yazilimciakli.oneway.Database.Level tempLevel = dbHandler.getLevel(levelList.get(position).levelid);
+
+        LevelsResponse tempLevel = dbHandler.getLevelsDB().get(levelList.get(position).levelid);
 
         if (tempLevel != null || levelList.get(position).levelid == 1) {
 
-            if (tempLevel == null || (tempLevel.getScore() == 0 && tempLevel.getElapsedTime() == 0)) {
+            if (tempLevel == null || (Integer.valueOf(tempLevel.getScore()) == 0 && tempLevel.getElapsedTime() == 0)) {
 
                 star1.setImageResource(R.drawable.ic_star_black_48dp);
                 star2.setImageResource(R.drawable.ic_star_black_48dp);
@@ -79,7 +81,7 @@ public class LevelAdapter extends BaseAdapter {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_gold_48dp);
                     star3.setImageResource(R.drawable.ic_star_gold_48dp);
-                } else if (tempLevel.getScore() == levelList.get(position).score / 2) {
+                } else if (Integer.valueOf(tempLevel.getScore()) == Integer.valueOf(levelList.get(position).getScore()) / 2) {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_gold_48dp);
                     star3.setImageResource(R.drawable.ic_star_black_48dp);

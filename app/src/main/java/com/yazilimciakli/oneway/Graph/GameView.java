@@ -15,13 +15,14 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.yazilimciakli.oneway.Database.CoinsHandler;
-import com.yazilimciakli.oneway.Database.DatabaseHandler;
+import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
+import com.yazilimciakli.oneway.Database.TableResponse.PointResponse;
 import com.yazilimciakli.oneway.Dialog.FinishDialog;
 import com.yazilimciakli.oneway.Dialog.GameOverDialog;
 import com.yazilimciakli.oneway.Dialog.WinDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.SettingsActivity;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
@@ -38,7 +39,7 @@ public class GameView extends View implements Runnable {
     ArrayList<Tuple<Point, ArrayList<Point>>> pointList = new ArrayList<>();
     ArrayList<Point> playerList = new ArrayList<>();
     //Levelleri getirmekte kullanılır
-    LevelHelper levelHelper = new LevelHelper(getContext());
+    DatabaseObject databaseObject = DatabaseObject.newInstance(getContext());
     // Seçili noktanın değerini tutar
     Tuple<Point, ArrayList<Point>> lastPoint = null;
     // Hamle tanımı
@@ -71,7 +72,7 @@ public class GameView extends View implements Runnable {
     boolean isGameOver = false;
     boolean lastLevel = false;
     // Oynanan level
-    Level currentLevel;
+    LevelsResponse currentLevel;
     Vibrator vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
     long vibrationTime = 50;
     int hesap;
@@ -88,11 +89,11 @@ public class GameView extends View implements Runnable {
      */
     public void setLevel(int levelId) {
         this.level = levelId;
-        currentLevel = levelHelper.getLevel(levelId);
-        time = currentLevel.time;
-        moveNumber = currentLevel.moveNumber;
-        userMove = currentLevel.moveNumber;
-        levelName = String.format(getResources().getString(R.string.levelName), currentLevel.levelid);
+        currentLevel = databaseObject.getLevelsDB().get(levelId);
+        time = Integer.valueOf(currentLevel.getTime());
+        moveNumber = Integer.valueOf(currentLevel.getMoveNumber());
+        userMove = Integer.valueOf(currentLevel.moveNumber);
+        levelName = String.format(getResources().getString(R.string.levelName), String.valueOf(currentLevel.getLevelid()));
 
         mHandler.postDelayed(this, 1000);
         addPoints();
@@ -118,14 +119,15 @@ public class GameView extends View implements Runnable {
      */
     void addPoints() {
         List<Point> subPoint = new ArrayList<>();
-        for (int i = 0; i < currentLevel.points.size(); i++) {
-            float x = currentLevel.points.get(i).x * screenRatio;
-            float y = currentLevel.points.get(i).y * screenRatio;
+        List<PointResponse> pointLists=databaseObject.getPointsDB().getPoint();
+        for (PointResponse pointResponses:pointLists) {
+            float x = pointResponses.getX() * screenRatio;
+            float y = pointResponses.getY() * screenRatio;
             Point point = new Point(x, y);
-
-            for (int j = 0; j < currentLevel.points.get(i).subpoints.size(); j++) {
-                float sx = currentLevel.points.get(i).subpoints.get(j).x * screenRatio;
-                float sy = currentLevel.points.get(i).subpoints.get(j).y * screenRatio;
+            List<PointResponse> subPointList=databaseObject.getPointsDB().getSubPoint(pointResponses.getPointID());
+            for (PointResponse subPointResponses:subPointList) {
+                float sx = subPointResponses.getX() * screenRatio;
+                float sy = subPointResponses.getY() * screenRatio;
                 subPoint.add(new Point(sx, sy));
                 guidePath.moveTo(x, y);
                 guidePath.lineTo(sx, sy);
@@ -163,7 +165,7 @@ public class GameView extends View implements Runnable {
         lastPoint = null;
         isPointTouched = false;
         playerList.clear();
-        userMove = currentLevel.moveNumber;
+        userMove = Integer.valueOf(currentLevel.getMoveNumber());
     }
 
     /***
@@ -320,22 +322,19 @@ public class GameView extends View implements Runnable {
                         // Oyunu bitirdiyse
                         if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
-                            DatabaseHandler dbHandler;
-                            dbHandler = new DatabaseHandler(getContext());
 
-                            com.yazilimciakli.oneway.Database.Level tempData = dbHandler.getLevel(currentLevel.levelid);
-                            CoinsHandler coinsHandler=new CoinsHandler(getContext());
+                            LevelsResponse tempData = databaseObject.getLevelsDB().get(currentLevel.levelid);
                             /* Skor Hesaplama Başlangıç */
 
                             int gameScore;
                             int showScore;
                             int tmpData;
-                            if ((currentLevel.time - time) <= (currentLevel.time / 3)) {
-                                gameScore = currentLevel.score;
-                            } else if ((currentLevel.time - time) <= (currentLevel.time / 2)) {
-                                gameScore = currentLevel.score / 2;
-                            } else if ((currentLevel.time - time) < (currentLevel.time)) {
-                                gameScore = currentLevel.score / 4;
+                            if ((Integer.valueOf(currentLevel.getTime()) - time) <= ((Integer.valueOf(currentLevel.getTime()) / 3))) {
+                                gameScore = (Integer.valueOf(currentLevel.getScore()));
+                            } else if ((Integer.valueOf(currentLevel.getTime())) <= ((Integer.valueOf(currentLevel.getTime()) / 2))) {
+                                gameScore = Integer.valueOf(currentLevel.getScore()) / 2;
+                            } else if (((Integer.valueOf(currentLevel.getTime())) - time) < (Integer.valueOf(currentLevel.getTime()))) {
+                                gameScore = (Integer.valueOf(currentLevel.getScore())) / 4;
                             } else {
                                 gameScore = 0;
                             }
@@ -343,26 +342,20 @@ public class GameView extends View implements Runnable {
 
 
                             // Eğer oyun daha önceden oynanmışsa
-                            if(dbHandler.getPoints()==null)
+                            if(databaseObject.getPointsDB().getPointCount()==0)
                             {
                                 hesap=gameScore;
-                            }
-                            else
-                            {
-                                hesap=Integer.parseInt(coinsHandler.getCoins(1).get("totalCoin"))+gameScore;
-                            }
-                            if(dbHandler.getPoints()==null)
-                            {
                                 tmpData=0;
                             }
                             else
                             {
-                                tmpData=tempData.getScore();
+                                hesap=Integer.parseInt(databaseObject.getProfileDB().getAll().get(0).getTotalCoins())+gameScore;
+                                tmpData=Integer.valueOf(tempData.getScore());
                             }
                             if (tempData != null) {
                                 // Eğer oyunu ilk defa oynuyorsa ya da sıfır puan almışsa
-                                com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
-                                com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
+                                Level playingGame = new Level();
+                                Level nextLevel = new Level();
                                 playingGame.setLevelId(currentLevel.levelid);
                                 playingGame.setElapsedTime(time);
 
@@ -442,7 +435,7 @@ public class GameView extends View implements Runnable {
     public void run() {
         if (!isGameOver) {
             time--;
-            timerCount += (width - ((screenRatio * 40) * 2)) / currentLevel.time;
+            timerCount += (width - ((screenRatio * 40) * 2)) / Integer.valueOf(currentLevel.getTime());
 
             redLevel = 0;
 

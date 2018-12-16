@@ -7,31 +7,47 @@ import java.util.List;
 
 public class Level {
 
-    @SerializedName("levelid")
-    @Expose
-    public int levelid;
+    Integer levelId, score, elapsedTime;
 
-    @SerializedName("points")
-    @Expose
-    public List<Point> points = null;
-    @SerializedName("moveNumber")
-    @Expose
-    public Integer moveNumber;
-    @SerializedName("score")
-    @Expose
-    public Integer score;
-    @SerializedName("time")
-    @Expose
-    public Integer time;
+    public Level() {
+    }
+
+    public Level(Integer levelId, Integer score, Integer elapsedTime) {
+        this.levelId = levelId;
+        this.score = score;
+        this.elapsedTime = elapsedTime;
+    }
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Integer getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(Integer elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
 
     @Override
     public String toString() {
         return "Level{" +
-                "levelid=" + levelid +
-                ", points=" + points +
-                ", moveNumber=" + moveNumber +
-                ", score=" + score +
-                ", time=" + time +
+                "levelid=" + getLevelId() +
+                ", score=" + getScore() +
+                ", ElapsedTime=" + getElapsedTime() +
                 '}';
     }
 }

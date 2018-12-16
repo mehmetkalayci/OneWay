@@ -11,8 +11,6 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.yazilimciakli.oneway.Database.CoinsHandler;
-import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.MainActivity;

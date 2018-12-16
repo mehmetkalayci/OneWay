@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.yazilimciakli.oneway.Database.DatabaseHandler;
-import com.yazilimciakli.oneway.Database.HealthHandler;
+import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
 import com.yazilimciakli.oneway.Dialog.CreditDialog;
 import com.yazilimciakli.oneway.Dialog.HealtDialog;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.MainActivity;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.LevelHelper;
 
@@ -25,6 +25,7 @@ public class GridFragment extends Fragment {
 
     LevelAdapter levelAdapter;
     Integer pageNumber;
+    DatabaseObject databaseObject;
 
     public static GridFragment newInstance(LevelAdapter levelAdapter, int page) {
         GridFragment fragment = new GridFragment();
@@ -39,22 +40,19 @@ public class GridFragment extends Fragment {
         View view = inflater.inflate(R.layout.layout_grid, container, false);
         GridView gridView = (GridView) view.findViewById(R.id.grid);
         gridView.setAdapter(levelAdapter);
-
-        final LevelHelper levelHelper = new LevelHelper(getContext());
-        final DatabaseHandler dbHandler = new DatabaseHandler(getContext());
+        databaseObject=DatabaseObject.newInstance(getContext());
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Level tempLevel = new Level();
+                LevelsResponse tempLevel;
 
-                tempLevel = levelHelper.getLevel(position + ((pageNumber - 1) * 9));
+                tempLevel = databaseObject.getLevelsDB().get(position + ((pageNumber - 1) * 9));
 
-                com.yazilimciakli.oneway.Database.Level level = dbHandler.getLevel(tempLevel.levelid);
-                HealthHandler healtHandler = new HealthHandler(getContext());
+                LevelsResponse level = databaseObject.getLevelsDB().get(tempLevel.getLevelid());
+                int healt=databaseObject.getProfileDB().getAll().get(0).getHealt();
 
-
-                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healtHandler.getHealth(1).get("health")) > 0) {
+                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healt) > 0) {
 
 
                     Intent openLevelIntent = new Intent();
@@ -64,7 +62,7 @@ public class GridFragment extends Fragment {
                     MainActivity.isBack = true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
-                } else if (Integer.parseInt(healtHandler.getHealth(1).get("health")) == 0) {
+                } else if (Integer.parseInt(healt) == 0) {
                     HealtDialog creditDialog = new HealtDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     creditDialog.setCancelable(true);

@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "584551430519",
-    "firebase_url": "https://oyun1-7d027.firebaseio.com",
-    "project_id": "oyun1-7d027",
-    "storage_bucket": "oyun1-7d027.appspot.com"
+    "project_number": "691652957489",
+    "firebase_url": "https://onetouchgo-39c9a.firebaseio.com",
+    "project_id": "onetouchgo-39c9a",
+    "storage_bucket": "onetouchgo-39c9a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:584551430519:android:075594a67a946a33",
+        "mobilesdk_app_id": "1:691652957489:android:075594a67a946a33",
         "android_client_info": {
           "package_name": "com.yazilimciakli.oneway"
         }
       },
       "oauth_client": [
         {
-          "client_id": "584551430519-g935j9j8je27ug8tbegskmthts83qg7v.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.yazilimciakli.oneway",
-            "certificate_hash": "93445925a6c34339a108f6ddb830a3aea717388b"
-          }
-        },
-        {
-          "client_id": "584551430519-l1k6nqn9hko8rq0oa1uqqlp1qgoduifg.apps.googleusercontent.com",
+          "client_id": "691652957489-5oh6ne0js9t8cvugd3sc7jdlkgnol6h1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDn_oAKO_yOk5WAEJgYwVbrV3Dhn3VWzrc"
+          "current_key": "AIzaSyAzFLLQyygGrx9_0QezF75Y7Ka6xGZmOEk"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "584551430519-l1k6nqn9hko8rq0oa1uqqlp1qgoduifg.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

@@ -10,10 +10,7 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
@@ -37,9 +34,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isButton = true;
         isBack = true;
 
-
-        reklam_yukle();
-        reklam_yukle2();
         /* Animation Code */
 
 
@@ -83,27 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             musicHelper.prepareMusicPlayer(this, MusicHelper.MUSICS.MainMusic);
     }
 
-    private void reklam_yukle() {
-        mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
-        layout.addView(mAdView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
-
-    private void reklam_yukle2() {
-       /* MobileAds.initialize(this, getString(R.string.levelArasi));
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.levelArasi));
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mInterstitialAd.loadAd(adRequest);*/
-    }
 
     @Override
     public void onClick(View v) {

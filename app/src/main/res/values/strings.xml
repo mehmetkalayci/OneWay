@@ -31,7 +31,7 @@
     <string name="settingsVibrationText">Vibration</string>
     <string name="settingsMusicText">Music</string>
 
-    <string name="reklam_kimligi">ca-app-pub-5142565439495272/9078942743</string>
+    <string name="reklam_kimligi">ca-app-pub-5142565439495272~6125476348</string>
     <!-- Credit -->
 
     <string name="musicVolume">100</string>
@@ -54,4 +54,5 @@
     <string name="lowHealth">Low Health</string>
     <string name="sorry">Sorry!</string>
     <string name="you_have_no_money">You haven\'t enough point!</string>
+    <string name="healtAd">ca-app-pub-5142565439495272/8196323218</string>
 </resources>

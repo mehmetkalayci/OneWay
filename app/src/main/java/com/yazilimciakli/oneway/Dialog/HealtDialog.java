@@ -15,8 +15,6 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.yazilimciakli.oneway.Database.CoinsHandler;
-import com.yazilimciakli.oneway.Database.HealthHandler;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.R;
 
@@ -84,7 +82,7 @@ public class HealtDialog extends Dialog implements RewardedVideoAdListener {
         loadRewardedVideoAd();
     }
     private void loadRewardedVideoAd() {
-        mAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+        mAd.loadAd(getContext().getString(R.string.healtAd), new AdRequest.Builder().build());
     }
 
     @Override
@@ -130,6 +128,11 @@ public class HealtDialog extends Dialog implements RewardedVideoAdListener {
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
+
+    }
+
+    @Override
+    public void onRewardedVideoCompleted() {
 
     }
 }
