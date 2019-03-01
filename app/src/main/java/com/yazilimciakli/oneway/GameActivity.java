@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        reklam_goster();
+        //reklam_goster();
 
         MainActivity.isBack = false;
 

@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         isBack = true;
 
 
-        reklam_yukle();
-        reklam_yukle2();
+        //reklam_yukle();
+        //reklam_yukle2();
         /* Animation Code */
 
 

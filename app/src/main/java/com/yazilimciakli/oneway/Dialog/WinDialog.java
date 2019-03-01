@@ -42,9 +42,9 @@ public class WinDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_win_game);
 
-        if (GameActivity.hideAd) {
+        /*if (GameActivity.hideAd) {
             GameActivity.mInterstitialAd.show();
-        }
+        }*/
         this.getWindow().getAttributes().windowAnimations = R.style.popwindow_anim_style;
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");

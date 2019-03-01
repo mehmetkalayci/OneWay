@@ -43,7 +43,7 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        reklam_yukle();
+        //reklam_yukle();
         MainActivity.isBack = false;
 
         chkVibrationStatus = (CheckBox) findViewById(R.id.chkVibrationStatus);

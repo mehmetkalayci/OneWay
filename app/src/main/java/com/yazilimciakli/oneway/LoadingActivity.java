@@ -59,13 +59,14 @@ public class LoadingActivity extends Activity {
                 try {
                     fileHelper.write(response);
                 } catch (IOException e) {
-                    Log.d("ERROR: IOException -> ", e.getMessage());
+                    String err = (e.getMessage()==null)?"SD Card failed":e.getMessage();
+                    Log.d("ERROR: IOException -> ", err);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ERROR: VolleyError -> ", error.getMessage());
+                //Log.d("ERROR: VolleyError -> ", error.getMessage());
             }
         });
 

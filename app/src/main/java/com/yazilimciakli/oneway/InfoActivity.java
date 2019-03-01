@@ -34,7 +34,7 @@ public class InfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        reklam_yukle();
+        //reklam_yukle();
         MainActivity.isBack = false;
 
         expandlist_view = (ExpandableListView) findViewById(R.id.expand_listview);

@@ -36,6 +36,7 @@ public class LevelHelper {
     public LevelHelper(Context context) {
         // internetten indirlen level dosyasını okuyabilirsen oku ve levelList'i ayarla,
         // internetten indirilen level dosyasını okuyamazsan, catch'e düşersen, varsayılan level dosyasını oku.
+
         fileHelper = new FileHelper(context);
         try {
             String xmlLevelFile = fileHelper.read();
