@@ -20,11 +20,11 @@ public class CoreDB<T>{
         this.context = context;
     }
 
-    public Dao<T, Integer> getDao() {
+    public Dao getDao() {
         return dao;
     }
 
-    public void setDao(Dao<T, Integer> dao) {
+    public void setDao(Dao dao) {
         this.dao = dao;
     }
 
@@ -41,6 +41,13 @@ public class CoreDB<T>{
             e.printStackTrace();
         }
     }
+    public void create(T clazz) {
+        try {
+            dao.create(clazz);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public List<T> getAll() {
         try {
             return dao.queryForAll();
@@ -49,9 +56,9 @@ public class CoreDB<T>{
         }
         return Collections.emptyList();
     }
-    public void clear() {
+    public void clear(List<T> delete) {
         try {
-            dao.delete(getAll());
+            dao.delete(delete);
         } catch (SQLException e) {
             e.printStackTrace();
         }

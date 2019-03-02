@@ -11,9 +11,8 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.yazilimciakli.oneway.Dialog.ExitDialog;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 
 
@@ -22,10 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static MusicHelper musicHelper = new MusicHelper();
     public static boolean isBack;
-
     boolean isButton;
-    private AdView mAdView;
-    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         isButton = true;
         isBack = true;
-
+        DatabaseObject databaseObject=DatabaseObject.newInstance(getBaseContext());
         /* Animation Code */
 
 
@@ -86,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, LevelActivity.class));
                 overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 isButton = false;
-                // mInterstitialAd.show();
                 finish();
                 break;
             case R.id.btnSettings:

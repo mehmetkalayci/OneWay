@@ -2,9 +2,12 @@ package com.yazilimciakli.oneway.Database.TableResponse;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.yazilimciakli.oneway.Database.PlayLevelsDB;
 
 @DatabaseTable(tableName = "playLevelData")
 public class PlayLevelDataResponse {
+    @DatabaseField(id = true)
+    private Integer id;
     @DatabaseField(columnName = "levelID")
     private int levelID;
     @DatabaseField(columnName = "score")
@@ -12,6 +15,10 @@ public class PlayLevelDataResponse {
     @DatabaseField(columnName = "elapsedTime")
     private int elapsedTime;
 
+    public PlayLevelDataResponse()
+    {
+
+    }
     public PlayLevelDataResponse(Integer levelId, Integer score, Integer elapsedTime) {
 
         this.levelID = levelId;

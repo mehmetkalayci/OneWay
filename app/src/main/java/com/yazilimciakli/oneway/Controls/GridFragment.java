@@ -47,22 +47,23 @@ public class GridFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 LevelsResponse tempLevel;
 
-                tempLevel = databaseObject.getLevelsDB().get(position + ((pageNumber - 1) * 9));
+                tempLevel = databaseObject.getLevelsDB().getAll().get(position + ((pageNumber - 1) * 9));
 
                 LevelsResponse level = databaseObject.getLevelsDB().get(tempLevel.getLevelid());
                 int healt=databaseObject.getProfileDB().getAll().get(0).getHealt();
 
-                if ((level != null || tempLevel.levelid == 1) && Integer.parseInt(healt) > 0) {
+                if ((level != null || tempLevel.getLevelid() == 1) && healt > 0) {
 
 
                     Intent openLevelIntent = new Intent();
                     openLevelIntent.setClass(view.getContext(), GameActivity.class);
-                    openLevelIntent.putExtra("levelId", position + ((pageNumber - 1) * 9));
+                    //openLevelIntent.putExtra("levelId", position + ((pageNumber - 1) * 9));
+                    openLevelIntent.putExtra("levelId", tempLevel.getLevelid());
                     startActivity(openLevelIntent);
                     MainActivity.isBack = true;
                     getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                     getActivity().finish();
-                } else if (Integer.parseInt(healt) == 0) {
+                } else if (healt == 0) {
                     HealtDialog creditDialog = new HealtDialog(getContext());
                     creditDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     creditDialog.setCancelable(true);

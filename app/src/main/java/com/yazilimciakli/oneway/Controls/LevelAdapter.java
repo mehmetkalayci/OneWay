@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
+import com.yazilimciakli.oneway.Database.TableResponse.PlayLevelDataResponse;
 import com.yazilimciakli.oneway.Level.Level;
 import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.R;
@@ -55,19 +56,17 @@ public class LevelAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(R.layout.layout_level_item, parent, false);
-        title = (TextView) itemView.findViewById(R.id.levelText);
+        title = itemView.findViewById(R.id.levelText);
         title.setTypeface(typeface);
 
-        star1 = (ImageView) itemView.findViewById(R.id.star1);
-        star2 = (ImageView) itemView.findViewById(R.id.star2);
-        star3 = (ImageView) itemView.findViewById(R.id.star3);
-        lock = (ImageView) itemView.findViewById(R.id.lock);
+        star1 = itemView.findViewById(R.id.star1);
+        star2 = itemView.findViewById(R.id.star2);
+        star3 = itemView.findViewById(R.id.star3);
+        lock  = itemView.findViewById(R.id.lock);
 
+        PlayLevelDataResponse tempLevel = dbHandler.getPlayLevelsDB().get(levelList.get(position).getLevelid());
 
-
-        LevelsResponse tempLevel = dbHandler.getLevelsDB().get(levelList.get(position).levelid);
-
-        if (tempLevel != null || levelList.get(position).levelid == 1) {
+        if (tempLevel != null || levelList.get(position).getLevelid() == 1) {
 
             if (tempLevel == null || (Integer.valueOf(tempLevel.getScore()) == 0 && tempLevel.getElapsedTime() == 0)) {
 
@@ -77,7 +76,7 @@ public class LevelAdapter extends BaseAdapter {
 
             } else {
 
-                if (tempLevel.getScore() == levelList.get(position).score) {
+                if (tempLevel.getScore() == levelList.get(position).getScore()) {
                     star1.setImageResource(R.drawable.ic_star_gold_48dp);
                     star2.setImageResource(R.drawable.ic_star_gold_48dp);
                     star3.setImageResource(R.drawable.ic_star_gold_48dp);
@@ -100,7 +99,7 @@ public class LevelAdapter extends BaseAdapter {
             lock.setVisibility(View.VISIBLE);
         }
 
-        title.setText(String.valueOf(levelList.get(position).levelid));
+        title.setText(String.valueOf(levelList.get(position).getLevelid()));
         return itemView;
     }
 

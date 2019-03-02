@@ -28,21 +28,16 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-
+    implementation files('libs/ormlite-core-5.1')
+    implementation files('libs/ormlite-android-5.1')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-ads:17.1.2'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
     implementation 'com.android.volley:volley:1.1.1'
-    implementation 'com.google.android.gms:play-services-ads:17.1.2'
-    implementation files('libs/ormlite-core-5.1')
-    implementation files('libs/ormlite-android-5.1')
+
     implementation 'com.android.support:recyclerview-v7:28.0.0' // Required Dependency by Audience Network SDK
-    implementation 'com.facebook.android:audience-network-sdk:4.99.1'
-    testImplementation 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

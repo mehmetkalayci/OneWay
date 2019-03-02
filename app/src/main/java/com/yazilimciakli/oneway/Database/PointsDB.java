@@ -18,6 +18,7 @@ public class PointsDB extends CoreDB<PointResponse> {
         super(context);
         try {
             dao = getSqLiteDBHelper().getPointResponses();
+            setDao(dao);
         } catch (SQLException e) {
             e.printStackTrace();
         }

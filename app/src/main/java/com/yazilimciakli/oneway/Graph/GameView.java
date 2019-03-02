@@ -15,7 +15,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yazilimciakli.oneway.Database.PlayLevelsDB;
 import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
+import com.yazilimciakli.oneway.Database.TableResponse.PlayLevelDataResponse;
 import com.yazilimciakli.oneway.Database.TableResponse.PointResponse;
 import com.yazilimciakli.oneway.Dialog.FinishDialog;
 import com.yazilimciakli.oneway.Dialog.GameOverDialog;
@@ -92,7 +94,7 @@ public class GameView extends View implements Runnable {
         currentLevel = databaseObject.getLevelsDB().get(levelId);
         time = Integer.valueOf(currentLevel.getTime());
         moveNumber = Integer.valueOf(currentLevel.getMoveNumber());
-        userMove = Integer.valueOf(currentLevel.moveNumber);
+        userMove = Integer.valueOf(currentLevel.getMoveNumber());
         levelName = String.format(getResources().getString(R.string.levelName), String.valueOf(currentLevel.getLevelid()));
 
         mHandler.postDelayed(this, 1000);
@@ -323,7 +325,7 @@ public class GameView extends View implements Runnable {
                         if (moveNumber == playerList.size() - 1) {
                             isGameOver = true;
 
-                            LevelsResponse tempData = databaseObject.getLevelsDB().get(currentLevel.levelid);
+                            LevelsResponse tempData = databaseObject.getLevelsDB().get(currentLevel.getLevelid());
                             /* Skor Hesaplama Başlangıç */
 
                             int gameScore;
@@ -349,20 +351,20 @@ public class GameView extends View implements Runnable {
                             }
                             else
                             {
-                                hesap=Integer.parseInt(databaseObject.getProfileDB().getAll().get(0).getTotalCoins())+gameScore;
+                                hesap=databaseObject.getProfileDB().getAll().get(0).getTotalCoins()+gameScore;
                                 tmpData=Integer.valueOf(tempData.getScore());
                             }
                             if (tempData != null) {
                                 // Eğer oyunu ilk defa oynuyorsa ya da sıfır puan almışsa
                                 Level playingGame = new Level();
                                 Level nextLevel = new Level();
-                                playingGame.setLevelId(currentLevel.levelid);
+                                playingGame.setLevelId(currentLevel.getLevelid());
                                 playingGame.setElapsedTime(time);
 
                                 if(gameScore>tmpData)
                                 {
                                     playingGame.setScore(gameScore);
-                                    coinsHandler.setCoins(hesap,1);
+                                    databaseObject.getProfileDB().setCoins(1,hesap);
                                     showScore=gameScore;
                                 }
                                 else
@@ -370,22 +372,23 @@ public class GameView extends View implements Runnable {
                                     playingGame.setScore(tempData.getScore());
                                     showScore=0;
                                 }
-                                dbHandler.updateLevel(playingGame);
-                                if (levelHelper.getLevelSize() == currentLevel.levelid) {
+                                if (databaseObject.getLevelsDB().count() == currentLevel.getLevelid()) {
                                     lastLevel = true;
                                 } else {
-                                    nextLevel.setLevelId(currentLevel.levelid + 1);
-                                    dbHandler.addLevel(nextLevel);
+                                    nextLevel.setLevelId(currentLevel.getLevelid() + 1);
+                                    List<PlayLevelDataResponse> playLevelsDBList = null;
+                                    playLevelsDBList.add(new PlayLevelDataResponse(nextLevel.getLevelId(),nextLevel.getScore(),nextLevel.getElapsedTime()));
+                                    databaseObject.getPlayLevelsDB().create(playLevelsDBList);
                                 }
                             } else {
-                                com.yazilimciakli.oneway.Database.Level playingGame = new com.yazilimciakli.oneway.Database.Level();
-                                com.yazilimciakli.oneway.Database.Level nextLevel = new com.yazilimciakli.oneway.Database.Level();
-                                playingGame.setLevelId(currentLevel.levelid);
+                                Level playingGame = new Level();
+                                Level nextLevel = new Level();
+                                playingGame.setLevelId(currentLevel.getLevelid());
                                 playingGame.setElapsedTime(time);
                                 if(gameScore>tmpData)
                                 {
                                     playingGame.setScore(gameScore);
-                                    coinsHandler.setCoins(hesap,1);
+                                    databaseObject.getProfileDB().setCoins(1,hesap);
                                     showScore=gameScore;
                                 }
                                 else
@@ -393,19 +396,24 @@ public class GameView extends View implements Runnable {
                                     playingGame.setScore(tempData.getScore());
                                     showScore=0;
                                 }
-                                dbHandler.addLevel(playingGame);
 
-                                nextLevel.setLevelId(currentLevel.levelid + 1);
-                                dbHandler.addLevel(nextLevel);
+                                List<PlayLevelDataResponse> playLevelsDBList = null;
+                                playLevelsDBList.add(new PlayLevelDataResponse(playingGame.getLevelId(),playingGame.getScore(),playingGame.getElapsedTime()));
+                                databaseObject.getPlayLevelsDB().create(playLevelsDBList);
+
+                                List<PlayLevelDataResponse> nextLevelsDBList = null;
+                                nextLevelsDBList.add(new PlayLevelDataResponse(currentLevel.getLevelid() + 1,nextLevel.getScore(),nextLevel.getElapsedTime()));
+                                databaseObject.getPlayLevelsDB().create(nextLevelsDBList);
+
                             }
                             if (lastLevel) {
 
-                                FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.levelid);
+                                FinishDialog finishDialog = new FinishDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.getLevelid());
                                 finishDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 finishDialog.setCancelable(false);
                                 finishDialog.show();
                             } else {
-                                WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.levelid);
+                                WinDialog winDialog = new WinDialog(getContext(), levelName, String.valueOf(time), String.valueOf(showScore), currentLevel.getLevelid());
                                 winDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                 winDialog.setCancelable(false);
                                 winDialog.show();
@@ -446,7 +454,7 @@ public class GameView extends View implements Runnable {
             isGameOver = true;
 
 
-            GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.levelid);
+            GameOverDialog gameoverDialog = new GameOverDialog(getContext(), currentLevel.getLevelid());
             gameoverDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             gameoverDialog.setCanceledOnTouchOutside(true);
             gameoverDialog.show();
@@ -458,7 +466,7 @@ public class GameView extends View implements Runnable {
                     Intent openLevelIntent = new Intent();
 
                     openLevelIntent.setClass(getContext(), GameActivity.class);
-                    openLevelIntent.putExtra("levelId", currentLevel.levelid - 1);
+                    openLevelIntent.putExtra("levelId", currentLevel.getLevelid() - 1);
                     getContext().startActivity(openLevelIntent);
 
                     Activity activity = (Activity) getContext();

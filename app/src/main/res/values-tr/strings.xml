@@ -47,12 +47,9 @@
     <string name="r4">Kural 4: Sinirlendiğin zaman oyunu kapat ve belli bir süre sonra tekrar dene :)</string>
     <string name="r5">Kural 5: Ne olursa olsun telefonu kırma! :)</string>
     <string name="p1">Oyun bir internet projesi olan Yazılımcı Aklı tarafından hazırlanmıştır</string>
-    <string name="reklam_kimligi">ca-app-pub-5142565439495272~6125476348</string>
-    <string name="levelArasi">ca-app-pub-5142565439495272/8804114332</string>
     <string name="nonhealt">Üzgünüm, Canın yok, daha fazla can için reklam izleyin yada sürenin dolmasını bekleyin</string>
     <string name="fullHealth">Canın Dolu</string>
     <string name="lowHealth">Canın Azalıyor</string>
     <string name="sorry">Üzgünüm</string>
     <string name="you_have_no_money">Yeterli puanınız yok!</string>
-    <string name="healtAd">ca-app-pub-5142565439495272/8196323218</string>
 </resources>

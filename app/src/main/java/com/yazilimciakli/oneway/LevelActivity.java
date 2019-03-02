@@ -52,34 +52,35 @@ public class LevelActivity extends AppCompatActivity {
 
         MainActivity.isBack = false;
 
-        lblSelectLevel = (TextView) findViewById(R.id.lblSelectLevel);
-        lblTotalPoints = (TextView) findViewById(R.id.lblTotalPoints);
-        lblGo = (TextView) findViewById(R.id.lblGo);
-        lblhealt=(TextView) findViewById(R.id.healt);
-        timer=(TextView) findViewById(R.id.timer);
-        databaseObject=DatabaseObject.newInstance(getApplicationContext());
-        typeface = Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
+        lblSelectLevel  =   findViewById(R.id.lblSelectLevel);
+        lblTotalPoints  =   findViewById(R.id.lblTotalPoints);
+        lblGo           =   findViewById(R.id.lblGo);
+        lblhealt        =   findViewById(R.id.healt);
+        timer           =   findViewById(R.id.timer);
+        databaseObject  =   DatabaseObject.newInstance(getApplicationContext());
+        typeface        =   Typeface.createFromAsset(getResources().getAssets(), "fonts/Atma.ttf");
+
         lblSelectLevel.setTypeface(typeface);
         lblTotalPoints.setTypeface(typeface);
         lblhealt.setTypeface(typeface);
         lblGo.setTypeface(typeface);
-
+        /**ilk kez oyuna giriliyorsa custom profile oluştur*/
+        if(databaseObject.getProfileDB().count()==0)
+        {
+            databaseObject.getProfileDB().create(new ProfileResponse(1,5,0,0,"",""));
+        }
         final Date now = new Date();
 
-        levelPager = (ViewPager) findViewById(R.id.levelPager);
-        indicator = (CircleIndicator) findViewById(R.id.indicator);
+        levelPager  =   findViewById(R.id.levelPager);
+        indicator   =   findViewById(R.id.indicator);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         levelPager.setAdapter(viewPagerAdapter);
 
-        //LevelHelper levelHelper = new LevelHelper(this);
-        //CoinsHandler coinsHandler = new CoinsHandler(this);
-        //final HealthHandler healtHandler = new HealthHandler(this);
-
         //Level textlere değer atamaları yapılıyor
-        int totalCoins=databaseObject.getProfileDB().getAll().get(0).getHealt();
-        final int healt=databaseObject.getProfileDB().getAll().get(0).getHealt();
-        String timeStamp=databaseObject.getProfileDB().getAll().get(0).getTimeStamp();
+        int totalCoins      =       databaseObject.getProfileDB().getAll().get(0).getHealt();
+        final int healt     =       databaseObject.getProfileDB().getAll().get(0).getHealt();
+        String timeStamp    =   databaseObject.getProfileDB().getAll().get(0).getTimeStamp();
         lblTotalPoints.setText(String.valueOf(totalCoins));
         lblhealt.setText(String.valueOf(healt));
 

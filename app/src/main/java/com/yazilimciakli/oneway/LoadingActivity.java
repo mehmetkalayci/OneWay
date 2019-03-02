@@ -10,26 +10,24 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.yazilimciakli.oneway.Database.LevelsDB;
 import com.yazilimciakli.oneway.Database.PointsDB;
 import com.yazilimciakli.oneway.Database.TableResponse.LevelsResponse;
 import com.yazilimciakli.oneway.Database.TableResponse.PointResponse;
-import com.yazilimciakli.oneway.Level.Subpoint;
+import com.yazilimciakli.oneway.LevelRequest.Request.AllLevels;
 import com.yazilimciakli.oneway.LevelRequest.GsonRequest;
 import com.yazilimciakli.oneway.LevelRequest.Request.LevelRequest;
 import com.yazilimciakli.oneway.LevelRequest.Request.Points;
 import com.yazilimciakli.oneway.LevelRequest.Request.Subpoints;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.Utils.FileHelper;
 import com.yazilimciakli.oneway.Utils.LanguageHelper;
 import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,13 +50,13 @@ public class LoadingActivity extends Activity {
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        levelsDB=new LevelsDB(getApplicationContext());
-        pointsDB=new PointsDB(getApplicationContext());
+        DatabaseObject databaseObject=DatabaseObject.newInstance(getBaseContext());
+        levelsDB=databaseObject.getLevelsDB();
+        pointsDB=databaseObject.getPointsDB();
         // Varsayılan dili tespit et
         Locale current = getResources().getConfiguration().locale;
         String language = SharedPreferenceHelper.getSharedPreferenceString(LoadingActivity.this, SettingsActivity.SETTING_LANGUAGE, current.getLanguage());
@@ -67,7 +65,7 @@ public class LoadingActivity extends Activity {
 
         // İnternetten levelleri güncelle
         // Volley için istek oluşturuldu
-        GsonRequest<LevelRequest> gsonRequest=new GsonRequest<>(levelUrl,LevelRequest.class,null,successListener(),errorListener());
+        GsonRequest<AllLevels> gsonRequest=new GsonRequest<>(levelUrl,AllLevels.class,null,successListener(),errorListener());
         // Volley RequestQueue oluşturuldu.
         RequestQueue requestQueue = Volley.newRequestQueue(LoadingActivity.this);
         // İstek RequestQueue 'ya eklendi.
@@ -77,25 +75,26 @@ public class LoadingActivity extends Activity {
     }
     private Response.Listener successListener()
     {
-        return new Response.Listener<LevelRequest>() {
+        return new Response.Listener<AllLevels>() {
             @Override
-            public void onResponse(LevelRequest response) {
-                List<LevelRequest> responseList= Arrays.asList(response);
-                List<LevelsResponse> levelResponse=new ArrayList<>();
-                List<PointResponse> pointReponse=new ArrayList<>();
-                levelsDB.clear();
-                pointsDB.clear();
+            public void onResponse(AllLevels response) {
+                List<AllLevels> allLevels= Arrays.asList(response);
+                List<LevelRequest> responseList= Arrays.asList(allLevels.get(0).getLevels());
+                ArrayList<LevelsResponse> levelResponse=new ArrayList<>();
+                ArrayList<PointResponse> pointReponse=new ArrayList<>();
+                levelsDB.clear(levelsDB.getAll());
+                pointsDB.clear(pointsDB.getAll());
                 for (LevelRequest responses:responseList) {
                     levelResponse.add(new LevelsResponse(
                             responses.getTime(),
                             responses.getMoveNumber(),
-                            responses.getScore(),
+                            Integer.parseInt(responses.getScore()),
                             Integer.valueOf(responses.getLevelid())));
                     if(responses.getPoints().length>0)
                     {
                         int pointID=1;
 
-                        for(Points pointResponses:response.getPoints())
+                        for(Points pointResponses:responses.getPoints())
                         {
                             pointReponse.add(new PointResponse(
                                     Integer.valueOf(responses.getLevelid()),

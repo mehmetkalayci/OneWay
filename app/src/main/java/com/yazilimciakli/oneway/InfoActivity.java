@@ -4,11 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.yazilimciakli.oneway.Controls.ExpandableListviewAdapter;
 
 import java.util.ArrayList;
@@ -28,13 +24,11 @@ public class InfoActivity extends Activity {
     public List<String> gs_list;
     public List<String> fb_list;
     public List<String> tt_list;
-    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        reklam_yukle();
         MainActivity.isBack = false;
 
         expandlist_view = (ExpandableListView) findViewById(R.id.expand_listview);
@@ -74,17 +68,6 @@ public class InfoActivity extends Activity {
 
     }
 
-    private void reklam_yukle() {
-        mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
-        layout.addView(mAdView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 
     @Override
     public void onBackPressed() {

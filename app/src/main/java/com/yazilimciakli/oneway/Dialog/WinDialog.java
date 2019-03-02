@@ -11,10 +11,6 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdSettings;
-import com.facebook.ads.InterstitialAdListener;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.MainActivity;
@@ -93,63 +89,13 @@ public class WinDialog extends Dialog {
             public void onClick(View v) {
                 dismiss();
                 GameActivity.between = false;
-
-
-                if (GameActivity.hideAd) {
-                    AdSettings.addTestDevice("aabd5dc805d08a04df24d73d477d6ee8");
-                    GameActivity.mInterstitialAd.show();
-                    GameActivity.mInterstitialAd.setAdListener(new InterstitialAdListener() {
-                        @Override
-                        public void onInterstitialDisplayed(Ad ad) {
-
-                        }
-
-                        @Override
-                        public void onInterstitialDismissed(Ad ad) {
-                            Intent openLevelIntent = new Intent();
-                            openLevelIntent.setClass(context, GameActivity.class);
-                            openLevelIntent.putExtra("levelId", levelID);
-                            context.startActivity(openLevelIntent);
-                            Activity activity = (Activity) context;
-                            activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                            activity.finish();
-                        }
-
-                        @Override
-                        public void onError(Ad ad, AdError adError) {
-
-                        }
-
-                        @Override
-                        public void onAdLoaded(Ad ad) {
-
-                        }
-
-                        @Override
-                        public void onAdClicked(Ad ad) {
-
-                        }
-
-                        @Override
-                        public void onLoggingImpression(Ad ad) {
-
-                        }
-                    });
-                }
-                else
-                {
-                    Intent openLevelIntent = new Intent();
-                    openLevelIntent.setClass(context, GameActivity.class);
-                    openLevelIntent.putExtra("levelId", levelID);
-                    context.startActivity(openLevelIntent);
-                    Activity activity = (Activity) context;
-                    activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                    activity.finish();
-                }
-
-
-
-
+                Intent openLevelIntent = new Intent();
+                openLevelIntent.setClass(context, GameActivity.class);
+                openLevelIntent.putExtra("levelId", levelID);
+                context.startActivity(openLevelIntent);
+                Activity activity = (Activity) context;
+                activity.overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                activity.finish();
             }
         });
     }
@@ -163,7 +109,6 @@ public class WinDialog extends Dialog {
         Intent openLevelIntent = new Intent();
         openLevelIntent.setClass(getContext(), LevelActivity.class);
         context.startActivity(openLevelIntent);
-
         Activity activity = (Activity) context;
         activity.overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         activity.finish();

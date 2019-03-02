@@ -1,5 +1,7 @@
 package com.yazilimciakli.oneway.Database.TableResponse;
 
+import android.support.annotation.Nullable;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -10,13 +12,14 @@ public class LevelsResponse {
     public final static String MOVE_NUMBER = "moveNumber";
     public final static String TIME = "time";
 
-
+    @DatabaseField(id = true)
+    private Integer id;
     @DatabaseField(columnName = TIME)
     private String time;
     @DatabaseField(columnName = MOVE_NUMBER)
     private String moveNumber;
     @DatabaseField(columnName = SCORE)
-    private String score;
+    private Integer score;
     @DatabaseField(columnName = LEVEL_ID)
     private int levelid;
 
@@ -24,7 +27,7 @@ public class LevelsResponse {
 
     }
 
-    public LevelsResponse(String time, String moveNumber, String score, int levelid) {
+    public LevelsResponse(String time, String moveNumber, Integer score, int levelid) {
         this.levelid = levelid;
         this.moveNumber = moveNumber;
         this.score = score;
@@ -47,11 +50,11 @@ public class LevelsResponse {
         this.moveNumber = moveNumber;
     }
 
-    public String getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

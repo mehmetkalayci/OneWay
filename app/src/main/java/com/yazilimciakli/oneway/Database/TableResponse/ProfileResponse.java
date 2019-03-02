@@ -1,5 +1,7 @@
 package com.yazilimciakli.oneway.Database.TableResponse;
 
+import android.support.annotation.IntegerRes;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -19,12 +21,14 @@ public class ProfileResponse {
     @DatabaseField(columnName = TOTAL_COINS)
     private int totalCoins;
     @DatabaseField(columnName = TOTAL_COEFFICIENT)
-    private String totalCoefficient;
+    private int totalCoefficient;
     @DatabaseField(columnName = TIME_STAMP)
     private String timeStamp;
     @DatabaseField(columnName = ENDED_TIME)
     private String endedTime;
-    public ProfileResponse(int id, int healt, int totalCoins, String totalCoefficient, String timeStamp, String endedTime) {
+
+    public ProfileResponse(){}
+    public ProfileResponse(int id, int healt, int totalCoins, int totalCoefficient, String timeStamp, String endedTime) {
         this.id = id;
         this.healt = healt;
         this.totalCoins = totalCoins;
@@ -57,11 +61,11 @@ public class ProfileResponse {
         this.totalCoins = totalCoins;
     }
 
-    public String getTotalCoefficient() {
+    public int getTotalCoefficient() {
         return totalCoefficient;
     }
 
-    public void setTotalCoefficient(String totalCoefficient) {
+    public void setTotalCoefficient(int totalCoefficient) {
         this.totalCoefficient = totalCoefficient;
     }
 

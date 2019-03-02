@@ -8,12 +8,9 @@ import android.os.Vibrator;
 import android.support.annotation.IdRes;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
+
 import com.yazilimciakli.oneway.Utils.LanguageHelper;
 import com.yazilimciakli.oneway.Utils.SharedPreferenceHelper;
 
@@ -28,7 +25,6 @@ public class SettingsActivity extends Activity {
 
     CheckBox chkVibrationStatus, chkMusicStatus;
     RadioGroup rdgLanguages;
-    private AdView mAdView;
 
     public static boolean getVibrationStatus(Context context) {
         return SharedPreferenceHelper.getSharedPreferenceBoolean(context, SETTING_VIBRATION, true);
@@ -43,7 +39,6 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        reklam_yukle();
         MainActivity.isBack = false;
 
         chkVibrationStatus = (CheckBox) findViewById(R.id.chkVibrationStatus);
@@ -136,18 +131,6 @@ public class SettingsActivity extends Activity {
             }
         });
         /*****Dil Ayarları******/
-    }
-
-    private void reklam_yukle() {
-        mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId(getString(R.string.reklam_kimligi));
-
-        LinearLayout layout = (LinearLayout) findViewById(R.id.reklam);
-        layout.addView(mAdView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     boolean changeVibrationStatus(boolean status) {

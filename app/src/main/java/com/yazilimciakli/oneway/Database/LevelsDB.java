@@ -17,6 +17,7 @@ public class LevelsDB extends CoreDB<LevelsResponse> {
         super(context);
         try {
             dao = getSqLiteDBHelper().getLevelsResponses();
+            setDao(dao);
         } catch (SQLException e) {
             e.printStackTrace();
         }

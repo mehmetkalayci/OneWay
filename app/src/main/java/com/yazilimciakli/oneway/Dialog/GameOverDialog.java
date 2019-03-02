@@ -11,9 +11,11 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.yazilimciakli.oneway.Database.TableResponse.ProfileResponse;
 import com.yazilimciakli.oneway.GameActivity;
 import com.yazilimciakli.oneway.LevelActivity;
 import com.yazilimciakli.oneway.MainActivity;
+import com.yazilimciakli.oneway.Object.DatabaseObject;
 import com.yazilimciakli.oneway.R;
 import com.yazilimciakli.oneway.Utils.MusicHelper;
 
@@ -27,7 +29,7 @@ public class GameOverDialog extends Dialog {
     ImageButton btnRepeat;
     Typeface typeface;
     int levelID;
-
+    DatabaseObject dbObject;
     public GameOverDialog(Context context, int levelID) {
         super(context);
         this.context = context;
@@ -44,9 +46,11 @@ public class GameOverDialog extends Dialog {
 
         typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Atma.ttf");
 
-        lblTitle = (TextView) findViewById(R.id.lblGameOverTitle);
-        lblMessage = (TextView) findViewById(R.id.lblGameOverMessage);
-        btnRepeat = (ImageButton) findViewById(R.id.btnRepeat);
+        lblTitle    = findViewById(R.id.lblGameOverTitle);
+        lblMessage  =  findViewById(R.id.lblGameOverMessage);
+        btnRepeat   =  findViewById(R.id.btnRepeat);
+
+        dbObject=DatabaseObject.newInstance(getContext());
 
         lblTitle.setTypeface(typeface);
         lblMessage.setTypeface(typeface);
@@ -57,18 +61,18 @@ public class GameOverDialog extends Dialog {
                 Intent openLevelIntent = new Intent();
                 GameActivity.between = false;
 
-                HealthHandler healthHandler = new HealthHandler(getContext());
-                int health = Integer.parseInt(healthHandler.getHealth(1).get("health"));
+                int health = dbObject.getProfileDB().get(1).getHealt();
                 Date now = new Date();
-                healthHandler.setHealt(health - 1, now.getTime(), 1);
+                dbObject.getProfileDB().setHealt(1,health-1,now.getTime());
 
-                if (Integer.parseInt(healthHandler.getHealth(1).get("health")) == 0) {
+                if (health == 0) {
 
-                    healthHandler.setHealt(0, (now.getTime() + 10 * 60 * 1000), 1);
-                    CoinsHandler coinsHandler=new CoinsHandler(getContext());
+                    dbObject.getProfileDB().setHealt(1,0,(now.getTime() + 10 * 60 * 1000));
+
                     MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
-                    int a=Integer.parseInt(coinsHandler.getCoins(1).get("totalCoefficient"))+1;
-                     coinsHandler.setCount(a,1);
+
+                    int newTotalCoefficient=dbObject.getProfileDB().get(1).getTotalCoefficient()+1;
+                    dbObject.getProfileDB().setCount(1,newTotalCoefficient);
                     openLevelIntent.setClass(getContext(), LevelActivity.class);
 
                 } else {
@@ -94,13 +98,13 @@ public class GameOverDialog extends Dialog {
         MainActivity.isBack = true;
         MainActivity.musicHelper.prepareMusicPlayer(getContext(), MusicHelper.MUSICS.MainMusic);
 
-        HealthHandler healthHandler = new HealthHandler(getContext());
-        int health = Integer.parseInt(healthHandler.getHealth(1).get("health"));
+        int health = dbObject.getProfileDB().get(1).getHealt();
         Date now = new Date();
-        healthHandler.setHealt(health - 1, now.getTime(), 1);
 
-        if (Integer.parseInt(healthHandler.getHealth(1).get("health")) == 0) {
-            healthHandler.setHealt(0, (now.getTime() + 10 * 60 * 1000), 1);
+        dbObject.getProfileDB().setHealt(1,health-1,now.getTime());
+
+        if (health == 0) {
+            dbObject.getProfileDB().setHealt(1,0,(now.getTime() + 10 * 60 * 1000));
             openLevelIntent.setClass(getContext(), LevelActivity.class);
         } else {
             openLevelIntent.setClass(context, LevelActivity.class);

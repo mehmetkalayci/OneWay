@@ -12,6 +12,8 @@ public class PointResponse {
     public static final String POSX="posX";
     public static final String POSY="posY";
 
+    @DatabaseField(id = true)
+    private Integer id;
     @DatabaseField(columnName = LEVEL_ID)
     private int levelID;
     @DatabaseField(columnName = POINT_ID)
@@ -23,6 +25,10 @@ public class PointResponse {
     @DatabaseField(columnName = POSX)
     private int x;
 
+    public PointResponse()
+    {
+
+    }
     public PointResponse(int levelID, int pointID, int isSubPoint, int posY, int posX) {
         this.levelID = levelID;
         this.pointID = pointID;
@@ -36,11 +42,11 @@ public class PointResponse {
     }
 
     public int getPointID() {
-        return getPointID();
+        return pointID;
     }
 
     public int getIsSubPoint() {
-        return getIsSubPoint();
+        return isSubPoint;
     }
 
     public int getY() {
